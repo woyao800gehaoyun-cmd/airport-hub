@@ -1,65 +1,59 @@
 ---
-// src/pages/brands/index.astro — 品牌库（视觉重制版）
+// src/pages/brands/index.astro — 品牌库 (精选云图与瞬云 2 家实测机场)
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BrandCard from '../../components/BrandCard.astro';
 import { brands } from '../../data/brands';
 
-// 把真实机场（有 url 的）排在前面
-const sortedBrands = [...brands].sort((a, b) => {
-  if (a.url !== '#' && b.url === '#') return -1;
-  if (a.url === '#' && b.url !== '#') return 1;
-  return a.rank - b.rank;
-});
+const sortedBrands = [...brands].sort((a, b) => a.rank - b.rank);
 ---
 
 <BaseLayout
-  title="机场品牌库 2026 — 云图/瞬云等主流机场测评排名 | clash-top"
-  description="clash-top收录10+家主流机场完整测评：云图金融级专线、瞬云ANYCAST高速节点，统一维度评分，速度/解锁/价格全维度对比，帮你找到最适合的机场。"
+  title="机场品牌库 2026 — 云图 / 瞬云实测测评排名 | clash-top"
+  description="clash-top 深度实测精选云图金融级专线与瞬云 ANYCAST 高速节点，统一维度评分，速度/解锁/价格全维度对比，帮你找到最靠谱的代理服务。"
   keywords="机场品牌库,机场推荐,云图机场,瞬云机场,机场测评,机场排行榜,机场对比,Clash机场,ChatGPT机场,Netflix解锁机场"
 >
   <Header slot="header" currentPath="/brands/" />
 
   <!-- ══ Page Hero ══ -->
-  <section style="background:linear-gradient(135deg,#eef2ff 0%,var(--slate-50) 60%);padding-block:3rem 0;border-bottom:1px solid var(--color-border)">
+  <section class="page-hero">
     <div class="container-site">
       <!-- 标题区 -->
-      <div style="max-width:40rem">
-        <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:9999px;background:var(--brand-50);border:1px solid var(--brand-200);font-size:.8125rem;font-weight:700;color:var(--brand-700);margin-bottom:1rem">
-          <span style="width:.5rem;height:.5rem;border-radius:50%;background:var(--brand-500);animation:pulse 2s infinite"></span>
-          每周实测更新
+      <div style="max-width: 44rem">
+        <div class="hero-pill-badge" style="margin-bottom: 1rem">
+          <span class="pulse-dot" style="color: var(--brand-cyan)" aria-hidden="true"></span>
+          <span>独立编辑团队真实自费实测</span>
         </div>
-        <h1 style="font-size:2.25rem;font-weight:900;color:var(--slate-900);line-height:1.25">机场品牌库</h1>
-        <p style="margin-top:.875rem;color:var(--slate-500);font-size:1rem;line-height:1.75">
-          收录 {brands.length}+ 家主流机场的完整测评数据，统一维度评分，帮你快速找到靠谱的代理服务。
+        <h1 class="page-hero-title">机场品牌库</h1>
+        <p class="page-hero-desc">
+          严格精选收录 {brands.length} 家核心主流实测机场，统一维度评分，拒绝广告营销套路，帮你快速找到靠谱服务。
         </p>
       </div>
 
       <!-- 统计行 -->
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem">
+      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem">
         {[
-          { val: `${brands.length}+`, lab: '收录机场' },
+          { val: `${brands.length} 家`, lab: '精选收录' },
           { val: '12 项', lab: '评测维度' },
           { val: '每周', lab: '数据复核' },
           { val: '真实', lab: '自费实测' },
         ].map(s => (
           <div>
-            <span style="font-size:1.375rem;font-weight:900;color:var(--brand-700)">{s.val}</span>
-            <span style="font-size:.875rem;color:var(--slate-400);margin-left:.375rem">{s.lab}</span>
+            <span style="font-size: 1.375rem; font-weight: 900; color: var(--brand-primary)">{s.val}</span>
+            <span style="font-size: 0.875rem; color: var(--text-muted); margin-left: 0.375rem">{s.lab}</span>
           </div>
         ))}
       </div>
 
       <!-- 筛选 Tab -->
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem;padding-bottom:0" id="brand-filters" role="tablist">
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem" id="brand-filters" role="tablist">
         {[
           { label: '全部', filter: 'all', icon: '🏠' },
           { label: '主推', filter: '主推', icon: '🥇' },
           { label: '次推', filter: '次推', icon: '🥈' },
           { label: 'AI 解锁', filter: 'AI 解锁', icon: '🤖' },
           { label: '专线', filter: '专线', icon: '⚡' },
-          { label: '性价比', filter: '性价比', icon: '💰' },
         ].map((tab, i) => (
           <button
             class={`brand-filter-pill${i === 0 ? ' active' : ''}`}
@@ -67,7 +61,7 @@ const sortedBrands = [...brands].sort((a, b) => {
             id={`filter-${tab.filter}`}
             role="tab"
             aria-selected={i === 0 ? 'true' : 'false'}
-            style={`display:inline-flex;align-items:center;gap:.375rem;padding:.5rem 1rem;border-radius:9999px;font-size:.8125rem;font-weight:700;border:1.5px solid;cursor:pointer;transition:all .2s;${i===0?'background:var(--brand-500);color:#fff;border-color:var(--brand-500)':'background:#fff;color:var(--slate-500);border-color:var(--slate-200)'}`}
+            style={`display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.45rem 1rem; border-radius: 9999px; font-size: 0.8125rem; font-weight: 700; border: 1px solid var(--border-color); cursor: pointer; transition: all .2s; ${i===0?'background: var(--brand-primary); color: #fff; border-color: var(--brand-primary)':'background: var(--bg-card); color: var(--text-muted)'}`}
           >
             <span>{tab.icon}</span>
             <span>{tab.label}</span>
@@ -79,56 +73,51 @@ const sortedBrands = [...brands].sort((a, b) => {
 
   <!-- ══ 品牌卡片网格 ══ -->
   <section class="section container-site" aria-label="机场品牌列表">
-
-    <!-- 主推机场标注 -->
-    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem">
-      <div style="height:1px;flex:1;background:var(--color-border)"></div>
-      <span style="font-size:.8125rem;font-weight:700;color:var(--slate-400);white-space:nowrap">共 {brands.length} 家机场</span>
-      <div style="height:1px;flex:1;background:var(--color-border)"></div>
+    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem">
+      <div style="height: 1px; flex: 1; background: var(--border-color)"></div>
+      <span style="font-size: 0.8125rem; font-weight: 700; color: var(--text-sub); white-space: nowrap">精选共 {brands.length} 家实测机场</span>
+      <div style="height: 1px; flex: 1; background: var(--border-color)"></div>
     </div>
 
-    <div style="display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(22rem,1fr))" id="brands-grid">
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr))" id="brands-grid">
       {sortedBrands.map(brand => (
         <div
           data-tags={brand.tags.join(',')}
           data-rank-label={brand.rankLabel}
           class="brand-grid-item"
-          style="position:relative"
+          style="position: relative"
         >
-          {/* 真实机场标注 */}
-          {brand.url !== '#' && (
-            <div style="position:absolute;top:-10px;left:1rem;z-index:1;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;font-size:.65rem;font-weight:800;padding:.2rem .625rem;border-radius:9999px;letter-spacing:.04em;box-shadow:0 2px 6px rgba(22,163,74,.3)">
-              ✓ 已实测可用
-            </div>
-          )}
+          <div style="position: absolute; top: -10px; left: 1rem; z-index: 1; background: linear-gradient(135deg, #16a34a, #15803d); color: #fff; font-size: 0.65rem; font-weight: 800; padding: 0.2rem 0.625rem; border-radius: 9999px; letter-spacing: 0.04em; box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3)">
+            ✓ 已自费实测验证
+          </div>
           <BrandCard {...brand} />
         </div>
       ))}
     </div>
 
     <!-- 空状态 -->
-    <div id="brands-empty" style="display:none; text-align:center; padding:4rem 2rem; color:var(--slate-400)">
-      <div style="font-size:3rem" aria-hidden="true">🔍</div>
-      <p style="margin-top:1rem; font-size:1.125rem; font-weight:700; color:var(--slate-600)">暂无符合条件的机场</p>
-      <p style="margin-top:.5rem;font-size:.875rem">请尝试其他筛选条件</p>
+    <div id="brands-empty" style="display: none; text-align: center; padding: 4rem 2rem; color: var(--text-muted)">
+      <div style="font-size: 3rem" aria-hidden="true">🔍</div>
+      <p style="margin-top: 1rem; font-size: 1.125rem; font-weight: 700; color: var(--text-main)">暂无符合条件的机场</p>
+      <p style="margin-top: 0.5rem; font-size: 0.875rem">请尝试切换为「全部」筛选条件</p>
     </div>
   </section>
 
   <!-- ══ 评测说明 ══ -->
-  <section style="background:var(--slate-50);border-top:1px solid var(--color-border);padding-block:2.5rem">
+  <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding-block: 3.5rem">
     <div class="container-site">
-      <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));max-width:56rem;margin:0 auto">
+      <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); max-width: 56rem; margin: 0 auto">
         {[
-          { icon: '🔬', title: '真实自费购买', desc: '编辑团队自费购买正式套餐，与普通用户相同体验' },
-          { icon: '📡', title: '三网实测数据', desc: '电信 / 联通 / 移动三网实测，晚高峰时段（20-23 点）为准' },
-          { icon: '🔄', title: '每周复核更新', desc: '价格与套餐信息每周手动核实，评分每季度复测' },
-          { icon: '🚫', title: '不接受付费推广', desc: '排名仅基于实测数据与综合判断，不接受机场付费推广' },
+          { icon: '🔬', title: '真实自费购买', desc: '编辑团队自费购买正式套餐，与普通用户相同体验。' },
+          { icon: '📡', title: '三网实测数据', desc: '电信 / 联通 / 移动三网实测，晚高峰时段（20-23 点）为准。' },
+          { icon: '🔄', title: '每周复核更新', desc: '价格与套餐信息每周手动核实，拒绝过期过时数据。' },
+          { icon: '🚫', title: '不接受虚假付费推广', desc: '排名基于真实体验，坚决下架低质跑路跑路盘。' },
         ].map(item => (
-          <div style="display:flex;align-items:flex-start;gap:.875rem;padding:1rem;background:#fff;border-radius:.75rem;border:1px solid var(--color-border)">
-            <span style="font-size:1.5rem;flex-shrink:0">{item.icon}</span>
+          <div style="display: flex; align-items: flex-start; gap: 0.875rem; padding: 1.25rem; background: var(--bg-card); border-radius: var(--radius-md); border: 1px solid var(--border-color)">
+            <span style="font-size: 1.5rem; flex-shrink: 0">{item.icon}</span>
             <div>
-              <p style="font-size:.875rem;font-weight:700;color:var(--slate-800)">{item.title}</p>
-              <p style="font-size:.78rem;color:var(--slate-500);margin-top:.25rem;line-height:1.6">{item.desc}</p>
+              <p style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main)">{item.title}</p>
+              <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.6">{item.desc}</p>
             </div>
           </div>
         ))}
@@ -149,15 +138,15 @@ const sortedBrands = [...brands].sort((a, b) => {
     pill.addEventListener('click', () => {
       pills.forEach(p => {
         p.classList.remove('active');
-        p.style.background = '#fff';
-        p.style.color = 'var(--slate-500)';
-        p.style.borderColor = 'var(--slate-200)';
+        p.style.background = 'var(--bg-card)';
+        p.style.color = 'var(--text-muted)';
+        p.style.borderColor = 'var(--border-color)';
         p.setAttribute('aria-selected', 'false');
       });
       pill.classList.add('active');
-      pill.style.background = 'var(--brand-500)';
+      pill.style.background = 'var(--brand-primary)';
       pill.style.color = '#fff';
-      pill.style.borderColor = 'var(--brand-500)';
+      pill.style.borderColor = 'var(--brand-primary)';
       pill.setAttribute('aria-selected', 'true');
 
       const filter = pill.dataset.filter ?? 'all';
