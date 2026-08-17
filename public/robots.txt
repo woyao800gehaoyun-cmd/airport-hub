@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://clash-top.com/sitemap-index.xml

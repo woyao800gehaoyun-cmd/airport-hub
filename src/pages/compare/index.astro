@@ -1,0 +1,125 @@
+---
+// src/pages/compare/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { brands } from '../../data/brands';
+
+function checkIcon(v: boolean) {
+  return v
+    ? '<span style="color:#16a34a;font-weight:700;font-size:1rem">✓</span>'
+    : '<span style="color:#cbd5e1;font-size:1rem">—</span>';
+}
+
+const dimensions = [
+  { key: 'score', label: '综合评分' },
+  { key: 'priceFrom', label: '起步价' },
+  { key: 'protocol', label: '主要协议' },
+  { key: 'nodeCount', label: '节点数量' },
+  { key: 'streamUnlock', label: '流媒体解锁' },
+  { key: 'aiUnlock', label: 'AI 工具解锁' },
+  { key: 'trialDays', label: '免费试用' },
+  { key: 'rankLabel', label: '推荐级别' },
+];
+---
+
+<BaseLayout
+  title="机场横向对比 2026 — 价格/速度/解锁全维度比较 — Clash顶选"
+  description="统一维度横向对比主流机场：价格、节点数、协议类型、流媒体解锁、AI 工具支持，一张表看清所有差异，快速做出选购决策。"
+>
+  <Header slot="header" currentPath="/compare/" />
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container-site">
+      <h1 class="page-hero-title">横向对比</h1>
+      <p class="page-hero-desc">价格、协议、节点数、流媒体与 AI 解锁能力，统一维度放进同一张表，关键差异一眼看懂。</p>
+    </div>
+  </section>
+
+  <!-- Main Compare Table -->
+  <section class="section container-site" aria-label="机场对比表">
+    <div class="compare-wrapper">
+      <div class="compare-table-head" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem">
+        <div>
+          <h2 style="font-size:1.0625rem; font-weight:700; color:var(--slate-900)">全部机场对比（{brands.length} 家）</h2>
+          <p style="font-size:.8125rem; color:var(--slate-500); margin-top:.25rem">数据来自编辑实测，价格每周复核</p>
+        </div>
+        <span class="badge badge-accent">
+          <span class="pulse-dot" style="color:var(--accent-500); margin-right:.25rem" aria-hidden="true"></span>
+          每周更新
+        </span>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="data-table" style="min-width:48rem">
+          <thead>
+            <tr>
+              <th>排名</th>
+              <th>机场名称</th>
+              {dimensions.map(d => <th>{d.label}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {brands.map(b => (
+              <tr>
+                <td>
+                  <span class={`rank-badge ${b.rank === 1 ? 'rank-1' : b.rank === 2 ? 'rank-2' : b.rank === 3 ? 'rank-3' : 'rank-n'}`}>{b.rank}</span>
+                </td>
+                <td>
+                  <div style="display:flex; flex-direction:column; gap:.125rem">
+                    <span style="font-weight:700; color:var(--slate-900)">{b.name}</span>
+                    <span style="font-size:.75rem; color:var(--slate-400)">{b.tagline}</span>
+                  </div>
+                </td>
+                <td>
+                  <span style="font-weight:700; color:var(--brand-700)">{b.score.toFixed(1)}</span>
+                  <span style="color:var(--slate-400); font-size:.75rem">/10</span>
+                </td>
+                <td style="font-weight:600; white-space:nowrap">{b.priceFrom}</td>
+                <td><span class="badge">{b.protocol.split('+')[0].trim()}</span></td>
+                <td style="font-weight:600">{b.nodeCount}</td>
+                <td set:html={checkIcon(b.streamUnlock)} />
+                <td set:html={checkIcon(b.aiUnlock)} />
+                <td>
+                  {b.trialDays > 0
+                    ? <span class="badge badge-green">{b.trialDays} 天试用</span>
+                    : <span style="color:var(--slate-400); font-size:.875rem">—</span>
+                  }
+                </td>
+                <td>
+                  <span class={`badge ${b.rank === 1 ? 'badge-brand' : b.rank <= 3 ? 'badge-green' : ''}`}>{b.rankLabel}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 选购建议 -->
+  <section style="background:#fff; border-top:1px solid var(--color-border); padding-block:3rem">
+    <div class="container-site">
+      <h2 class="section-title" style="margin-bottom:2rem">按需求选机场</h2>
+      <div style="display:grid; gap:1.25rem; grid-template-columns:repeat(auto-fit, minmax(18rem, 1fr))">
+
+        {[
+          { icon: '🆕', title: '我是新手，首次购买', desc: '建议选月付套餐 + 有免费试用期的机场，试错成本低，确认可用后再考虑长期套餐。主推选项价格实惠且客服响应快。', badge: '主推机场', color: 'var(--brand-50)', border: 'var(--brand-200)' },
+          { icon: '⚡', title: '对速度稳定性要求高', desc: '晚高峰（20–23 点）不能卡，强烈建议选 IEPL 或 IPLC 专线机场，内网专线不走公网，晚高峰几乎不降速。', badge: 'IEPL/IPLC 专线', color: 'var(--slate-50)', border: 'var(--slate-200)' },
+          { icon: '🎬', title: '主要用于流媒体', desc: '需要确认目标平台（Netflix/Disney+/YouTube）是否需要原生 IP。有「流媒体解锁 ✓」标注的机场经过实测验证。', badge: '流媒体解锁', color: '#f0fdf4', border: '#bbf7d0' },
+          { icon: '🤖', title: '需要访问 AI 工具', desc: 'ChatGPT 和 Claude 对 IP 质量要求严格，需要原生住宅 IP 或干净数据中心 IP。选「AI 解锁 ✓」标注的专线机场。', badge: 'AI 解锁', color: '#ecfeff', border: '#a5f3fc' },
+        ].map(card => (
+          <div class="card" style={`padding:1.5rem; background:${card.color}; border-color:${card.border}`}>
+            <span style="font-size:1.75rem" aria-hidden="true">{card.icon}</span>
+            <h3 style="margin-top:.75rem; font-size:1rem; font-weight:700; color:var(--slate-900)">{card.title}</h3>
+            <p style="margin-top:.5rem; font-size:.875rem; line-height:1.75; color:var(--slate-600)">{card.desc}</p>
+            <span class="badge" style="margin-top:1rem">{card.badge}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

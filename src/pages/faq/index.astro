@@ -1,0 +1,132 @@
+---
+// src/pages/faq/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { faqs, faqCategories } from '../../data/faqs';
+---
+
+<BaseLayout
+  title="机场问题库 — 180+ 高频问题全解答 — Clash顶选"
+  description="Clash顶选问题库：「机场是什么」「晚高峰卡怎么办」「IPLC 和 IEPL 的区别」等 180+ 个机场相关高频问题的详细解答。"
+>
+  <Header slot="header" currentPath="/faq/" />
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container-site">
+      <h1 class="page-hero-title">机场问题库</h1>
+      <p class="page-hero-desc">整理了 180+ 个关于机场选购、使用、排障的高频问题，持续扩充中。</p>
+
+      <!-- 分类筛选 -->
+      <div class="filter-tabs" style="margin-top:1.5rem" id="faq-filters" role="tablist">
+        {faqCategories.map((cat, i) => (
+          <button
+            class={`filter-tab${i === 0 ? ' active' : ''}`}
+            data-category={cat === '全部' ? 'all' : cat}
+            id={`faq-cat-${i}`}
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="section container-site" aria-label="常见问题列表">
+    <div style="max-width:52rem; margin:0 auto">
+      <div class="card" style="padding:0 2rem" id="faq-list">
+        {faqs.map((faq, i) => (
+          <div class="accordion-item" id={`faq-page-item-${i}`} data-category={faq.category}>
+            <button
+              class="accordion-trigger"
+              id={`faq-page-trigger-${i}`}
+              aria-controls={`faq-page-content-${i}`}
+              aria-expanded="false"
+              type="button"
+            >
+              <span style="display:flex; align-items:flex-start; gap:.625rem; text-align:left">
+                <span class="badge badge-brand" style="flex-shrink:0; margin-top:.125rem; font-size:.65rem">{faq.category}</span>
+                {faq.question}
+              </span>
+              <svg class="accordion-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div
+              class="accordion-content"
+              id={`faq-page-content-${i}`}
+              role="region"
+              aria-labelledby={`faq-page-trigger-${i}`}
+            >
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div id="faq-empty" style="display:none; text-align:center; padding:3rem; color:var(--slate-400)">
+        <p style="font-size:2.5rem" aria-hidden="true">💡</p>
+        <p style="margin-top:.75rem; font-weight:600">该分类暂无问题，持续补充中</p>
+      </div>
+
+      <!-- 提问入口 -->
+      <div class="card" style="margin-top:1.5rem; padding:1.5rem; text-align:center; background:var(--brand-50); border-color:var(--brand-200)">
+        <p style="font-size:1rem; font-weight:700; color:var(--brand-800)">没找到你想问的问题？</p>
+        <p style="margin-top:.5rem; font-size:.875rem; color:var(--slate-600)">加入 TG 频道提问，编辑团队会定期整理纳入问题库。</p>
+        <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:1rem; display:inline-flex" id="faq-tg-ask-btn">
+          📢 去 TG 频道提问
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  // 手风琴
+  document.querySelectorAll('#faq-list .accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.accordion-item');
+      const isOpen = item?.classList.contains('open');
+      document.querySelectorAll('#faq-list .accordion-item.open').forEach(openItem => {
+        if (openItem !== item) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+      if (item) {
+        item.classList.toggle('open', !isOpen);
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+      }
+    });
+  });
+
+  // 分类筛选
+  const tabs = document.querySelectorAll('#faq-filters .filter-tab');
+  const items = document.querySelectorAll<HTMLElement>('#faq-list .accordion-item');
+  const empty = document.getElementById('faq-empty');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+
+      const cat = (tab as HTMLElement).dataset.category ?? 'all';
+      let visible = 0;
+
+      items.forEach(item => {
+        const show = cat === 'all' || item.dataset.category === cat;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
+</script>

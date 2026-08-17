@@ -1,0 +1,114 @@
+---
+// src/components/HeroSection.astro
+---
+<section class="hero-section" aria-label="站点介绍">
+  <!-- 背景光晕 -->
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="container-site" style="position:relative">
+    <div class="hero-grid">
+      <!-- 左侧文案 -->
+      <div>
+        <span class="hero-eyebrow">
+          <span class="pulse-dot" style="color: var(--accent-500)" aria-hidden="true"></span>
+          2026 年持续实测更新
+        </span>
+
+        <h1 class="hero-title">
+          2026 机场推荐
+          <span class="hero-subtitle">云图 · 瞬云 · 专线一榜看全</span>
+        </h1>
+
+        <p class="hero-desc">
+          clash-top 用统一维度实测主流机场：晚高峰速度、ChatGPT / Netflix 解锁、
+          线路架构与真实价格，云图金融级专线 / 瞬云 ANYCAST 节点均已收录，每周复核更新。
+        </p>
+
+        <div class="hero-cta">
+          <a href="/brands/" class="btn btn-primary" id="hero-cta-primary">
+            查看机场排行榜
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="/compare/" class="btn btn-secondary" id="hero-cta-secondary">横向对比</a>
+        </div>
+
+        <!-- 信任标签 -->
+        <div style="margin-top:1.75rem; display:flex; flex-wrap:wrap; gap:.5rem">
+          <span class="badge badge-green">✓ 真实实测</span>
+          <span class="badge badge-accent">✓ 每周更新</span>
+          <span class="badge">✓ 无利益干扰</span>
+          <span class="badge">✓ 跑路预警</span>
+        </div>
+      </div>
+
+      <!-- 右侧日更资产面板 -->
+      <div class="card hero-panel">
+        <div class="hero-panel-header">
+          <span class="hero-panel-title">实时资产面板</span>
+          <span class="live-badge">
+            <span class="pulse-dot" style="color:var(--accent-500)" aria-hidden="true"></span>
+            运行中
+          </span>
+        </div>
+
+        <ul class="panel-list">
+          <li class="panel-item">
+            <span class="panel-dot" style="background:var(--accent-500)" aria-hidden="true"></span>
+            <div class="panel-item-info">
+              <span class="panel-item-title">每日免费节点</span>
+              <span class="panel-item-sub">每天 0 点刷新 · TG 每早 9 点推送</span>
+            </div>
+            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </li>
+          <li class="panel-item">
+            <span class="panel-dot" style="background:#f59e0b" aria-hidden="true"></span>
+            <div class="panel-item-info">
+              <span class="panel-item-title">跑路预警监控</span>
+              <span class="panel-item-sub">名单一变，TG 频道立刻推送</span>
+            </div>
+            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </li>
+          <li class="panel-item">
+            <span class="panel-dot" style="background:#f43f5e" aria-hidden="true"></span>
+            <div class="panel-item-info">
+              <span class="panel-item-title">品牌测评数据库</span>
+              <span class="panel-item-sub">10+ 家实测 · 12 项维度 · 价格每周复核</span>
+            </div>
+            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </li>
+          <li class="panel-item" style="border-bottom:none">
+            <span class="panel-dot" style="background:var(--brand-500)" aria-hidden="true"></span>
+            <div class="panel-item-info">
+              <span class="panel-item-title">问题库 180+ 条</span>
+              <span class="panel-item-sub">常见疑问全覆盖 · 持续扩充中</span>
+            </div>
+            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </li>
+        </ul>
+
+        <p class="panel-footer">
+          10+ 家机场统一实测（持续收录中）· 180 题问题库 · 价格与优惠码每周复核
+        </p>
+
+        <div class="panel-actions">
+          <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; justify-content:center; padding:.625rem; font-size:.8125rem" id="panel-tg-btn">
+            📢 订阅 TG 频道
+          </a>
+          <a href="/brands/" class="btn btn-secondary" style="flex:1; justify-content:center; padding:.625rem; font-size:.8125rem" id="panel-brands-btn">
+            查看排行榜
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

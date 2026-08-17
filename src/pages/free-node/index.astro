@@ -1,0 +1,45 @@
+---
+// src/pages/free-node/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="每日免费节点 — 每天 0 点更新 — Clash顶选"
+  description="Clash顶选每日免费节点：每天 0 点自动刷新，涵盖主流协议节点，订阅 TG 频道每早 9 点自动推送。"
+>
+  <Header slot="header" currentPath="/free-node/" />
+
+  <section class="page-hero">
+    <div class="container-site">
+      <span class="badge badge-accent" style="margin-bottom:.75rem">
+        <span class="pulse-dot" style="color:var(--accent-500); margin-right:.375rem" aria-hidden="true"></span>
+        每天 0 点自动更新
+      </span>
+      <h1 class="page-hero-title">每日免费节点</h1>
+      <p class="page-hero-desc">每天零点自动刷新，TG 频道每早 9 点推送。内容仅供学习测试，请勿用于违法活动。</p>
+    </div>
+  </section>
+
+  <section class="section container-site" style="max-width:44rem; margin:0 auto">
+    <div class="card" style="padding:2.5rem; text-align:center">
+      <span style="font-size:3rem" aria-hidden="true">📡</span>
+      <h2 style="margin-top:1rem; font-size:1.25rem; font-weight:800; color:var(--slate-900)">订阅 TG 频道获取最新节点</h2>
+      <p style="margin-top:.75rem; color:var(--slate-600); line-height:1.8; font-size:.9375rem">
+        每日免费节点通过 TG 频道推送，订阅后每早 9 点自动收到最新节点信息。
+        此页面为内容预留位，后续将展示当日节点（需配合后端或 GitHub Actions）。
+      </p>
+      <div style="margin-top:1.75rem; display:flex; justify-content:center; gap:.75rem; flex-wrap:wrap">
+        <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" id="free-node-tg-btn">
+          📢 订阅 TG 频道
+        </a>
+        <a href="/brands/" class="btn btn-secondary" id="free-node-brands-btn">
+          选个稳定机场
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

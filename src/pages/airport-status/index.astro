@@ -1,0 +1,94 @@
+---
+// src/pages/airport-status/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// 模拟跑路预警数据（占位）
+const warningList = [
+  { name: '某某云（已跑路）', date: '2025-06-10', status: '跑路', reason: '官网无法访问，TG 群组关闭，退款无响应。' },
+  { name: '某速VPN（风险警示）', date: '2025-09-22', status: '风险', reason: '连续三天大面积故障，客服不响应，谨慎续费。' },
+  { name: '某通云（正常运营）', date: '2025-12-01', status: '解除', reason: '曾列风险，目前恢复正常运营，降级为持续观察。' },
+];
+
+const statusColors: Record<string, string> = {
+  '跑路': 'badge-rose',
+  '风险': 'badge-amber',
+  '解除': 'badge-green',
+};
+---
+
+<BaseLayout
+  title="机场跑路预警 — 跑路名单与风险机场监控 — Clash顶选"
+  description="Clash顶选机场跑路预警：实时监控机场运营状态，收录跑路名单与风险机场警示，帮你提前避开跑路风险，保护代理资金安全。"
+>
+  <Header slot="header" currentPath="/airport-status/" />
+
+  <section class="page-hero">
+    <div class="container-site">
+      <span class="badge badge-rose" style="margin-bottom:.75rem">
+        <span class="pulse-dot" style="color:#f43f5e; margin-right:.375rem" aria-hidden="true"></span>
+        实时监控中
+      </span>
+      <h1 class="page-hero-title">机场跑路预警</h1>
+      <p class="page-hero-desc">收录已跑路与高风险机场名单，名单更新时 TG 频道立即推送，帮你提前规避风险。</p>
+    </div>
+  </section>
+
+  <section class="section container-site">
+    <!-- 预警指南 -->
+    <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit, minmax(15rem, 1fr)); margin-bottom:2.5rem">
+      {[
+        { icon: '🚨', title: '跑路信号识别', items: ['官网突然无法访问', '客服长时间不响应', '论坛/TG 群组关闭', '节点大面积故障 24h+'] },
+        { icon: '🛡️', title: '规避风险技巧', items: ['尽量选月付套餐', '分散使用 2-3 家机场', '不要大额充值', '关注本站预警栏目'] },
+        { icon: '📋', title: '遭遇跑路怎么办', items: ['截图保存付款记录', '尝试信用卡拒付', '向相关平台举报', '及时切换备用机场'] },
+      ].map(card => (
+        <div class="card" style="padding:1.5rem">
+          <span style="font-size:1.5rem" aria-hidden="true">{card.icon}</span>
+          <h2 style="margin-top:.75rem; font-size:.9375rem; font-weight:700; color:var(--slate-900)">{card.title}</h2>
+          <ul style="margin-top:.75rem; list-style:disc; padding-left:1.125rem; color:var(--slate-600); font-size:.8125rem; line-height:2">
+            {card.items.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- 预警名单表格 -->
+    <div class="compare-wrapper">
+      <div class="compare-table-head">
+        <h2 style="font-size:1rem; font-weight:700; color:var(--slate-900)">预警名单（示例占位数据）</h2>
+        <p style="font-size:.8rem; color:var(--slate-400); margin-top:.25rem">真实名单持续补充，以 TG 频道实时推送为准</p>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>机场名称</th>
+              <th>更新日期</th>
+              <th>状态</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {warningList.map(w => (
+              <tr>
+                <td style="font-weight:600">{w.name}</td>
+                <td style="color:var(--slate-400); font-size:.8125rem">{w.date}</td>
+                <td><span class={`badge ${statusColors[w.status]}`}>{w.status}</span></td>
+                <td style="font-size:.8125rem; color:var(--slate-600)">{w.reason}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem; text-align:center">
+      <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" id="status-tg-btn">
+        📢 订阅预警推送
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

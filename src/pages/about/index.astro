@@ -1,0 +1,122 @@
+---
+// src/pages/about/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const values = [
+  { icon: '🔬', title: '真实实测', desc: '所有评分均来自编辑团队亲自测试，不接受机场付费推广，不写虚假评测。' },
+  { icon: '⏱️', title: '持续更新', desc: '机场行业变化快，我们每周复核价格与数据，确保读者看到的信息保持时效性。' },
+  { icon: '🧭', title: '立场中立', desc: '评测结果如实呈现，包括缺点。不为「合作关系」掩盖真实体验。' },
+  { icon: '👥', title: '服务读者', desc: '内容以帮助读者做出正确决策为核心目标，不以流量和变现为优先。' },
+];
+
+const milestones = [
+  { year: '2024', event: '站点创建，开始收录第一批机场测评' },
+  { year: '2025', event: '问题库上线，覆盖 100+ 高频问题' },
+  { year: '2026', event: '收录机场扩展至 10+，新增专题与横向对比功能' },
+];
+---
+
+<BaseLayout
+  title="关于 Clash顶选 — 中文机场测评站介绍"
+  description="Clash顶选是一个专注于机场推荐与测评的中文内容站，由编辑团队独立运营，不接受付费推广，以真实测评帮助用户做出正确的代理服务选择。"
+>
+  <Header slot="header" currentPath="/about/" />
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container-site">
+      <h1 class="page-hero-title">关于 Clash顶选</h1>
+      <p class="page-hero-desc">一个专注于机场推荐与测评的中文内容站，由独立编辑团队运营。</p>
+    </div>
+  </section>
+
+  <section class="section container-site" aria-label="关于页正文">
+    <div style="max-width:48rem; margin:0 auto; display:flex; flex-direction:column; gap:3rem">
+
+      <!-- 站点定位 -->
+      <div>
+        <h2 class="section-title">我们是谁？</h2>
+        <div style="margin-top:1.5rem; color:var(--slate-600); font-size:.9375rem; line-height:1.9; display:flex; flex-direction:column; gap:1rem">
+          <p>
+            Clash顶选 是一个专注于机场推荐与测评的中文内容站。我们的目标很简单：
+            <strong style="color:var(--slate-900)">帮助中文用户从海量机场选项中，快速找到真正靠谱的代理服务</strong>。
+          </p>
+          <p>
+            机场市场鱼龙混杂——虚标速度、跑路风险、付费软文泛滥。我们决定做一件事：
+            用统一的测评标准、真实的实测数据，给每家机场一个公平的评价。
+          </p>
+        </div>
+      </div>
+
+      <!-- 价值观 -->
+      <div>
+        <h2 class="section-title">我们的原则</h2>
+        <div style="margin-top:1.5rem; display:grid; gap:1rem; grid-template-columns:repeat(auto-fit, minmax(18rem, 1fr))">
+          {values.map(v => (
+            <div class="card" style="padding:1.5rem">
+              <span style="font-size:1.75rem" aria-hidden="true">{v.icon}</span>
+              <h3 style="margin-top:.75rem; font-size:1rem; font-weight:700; color:var(--slate-900)">{v.title}</h3>
+              <p style="margin-top:.5rem; font-size:.875rem; line-height:1.75; color:var(--slate-600)">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 测评方法论 -->
+      <div>
+        <h2 class="section-title">测评方法论</h2>
+        <div class="card" style="margin-top:1.5rem; padding:1.75rem">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:1rem">
+            {[
+              { step: '01', title: '购买正式套餐', desc: '自费购买，与普通用户相同体验，不使用机场提供的测试账号。' },
+              { step: '02', title: '统一测试环境', desc: '国内三网（电信/联通/移动），固定测试节点（北京+上海+广州），晚高峰与白天分别测速。' },
+              { step: '03', title: '标准化指标', desc: '12 项指标包括：延迟、丢包率、晚高峰速度、解锁覆盖、价格、套餐灵活性、售后响应等。' },
+              { step: '04', title: '定期复测', desc: '每季度对在榜机场进行复测，价格与套餐信息每周手动核实一次。' },
+            ].map(item => (
+              <li style="display:flex; gap:1rem; align-items:flex-start">
+                <span style="display:flex; align-items:center; justify-content:center; width:2.25rem; height:2.25rem; border-radius:50%; background:var(--brand-50); border:1px solid var(--brand-200); color:var(--brand-700); font-size:.75rem; font-weight:800; flex-shrink:0">{item.step}</span>
+                <div>
+                  <p style="font-weight:700; color:var(--slate-900)">{item.title}</p>
+                  <p style="font-size:.875rem; color:var(--slate-600); margin-top:.25rem; line-height:1.7">{item.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- 里程碑 -->
+      <div>
+        <h2 class="section-title">发展历程</h2>
+        <div style="margin-top:1.5rem; position:relative; padding-left:2rem">
+          <div style="position:absolute; left:.625rem; top:0; bottom:0; width:2px; background:var(--color-border)"></div>
+          {milestones.map(m => (
+            <div style="position:relative; margin-bottom:1.75rem">
+              <span style="position:absolute; left:-1.925rem; top:.25rem; width:.75rem; height:.75rem; border-radius:50%; background:var(--brand-500); border:2px solid var(--brand-200)" aria-hidden="true"></span>
+              <p style="font-size:.75rem; font-weight:700; color:var(--brand-600); letter-spacing:.06em">{m.year}</p>
+              <p style="font-size:.9375rem; color:var(--slate-700); margin-top:.25rem">{m.event}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 联系 -->
+      <div class="card" style="padding:2rem; text-align:center; background:var(--brand-50); border-color:var(--brand-200)">
+        <p style="font-size:1.125rem; font-weight:800; color:var(--brand-800)">联系我们</p>
+        <p style="margin-top:.75rem; font-size:.9rem; color:var(--slate-600); line-height:1.75">
+          问题反馈、内容纠错、合作洽谈，欢迎通过 TG 频道联系我们。
+          我们不接受机场付费推广，但欢迎提供真实体验反馈。
+        </p>
+        <div style="margin-top:1.25rem; display:flex; justify-content:center; gap:.75rem; flex-wrap:wrap">
+          <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" id="about-tg-btn">📢 TG 频道</a>
+          <a href="/faq/" class="btn btn-secondary" id="about-faq-btn">问题库</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

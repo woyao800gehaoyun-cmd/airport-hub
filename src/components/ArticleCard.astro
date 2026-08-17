@@ -1,0 +1,52 @@
+---
+// src/components/ArticleCard.astro
+export interface Props {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  categorySlug: string;
+  tags: string[];
+  publishDate: string;
+  updateDate: string;
+  readTime: number;
+}
+
+const { slug, title, excerpt, category, categorySlug, tags, publishDate, updateDate, readTime } = Astro.props;
+
+function formatDate(d: string) {
+  const date = new Date(d);
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+}
+---
+
+<article class="card card-hover article-card" itemscope itemtype="https://schema.org/Article">
+  <div class="article-meta">
+    <a href={`/category/${categorySlug}/`} class="badge badge-brand" style="text-decoration:none">
+      {category}
+    </a>
+    {tags.slice(0, 2).map(tag => (
+      <span class="badge">{tag}</span>
+    ))}
+  </div>
+
+  <h3 class="article-title" itemprop="headline">
+    <a href={`/blog/${slug}/`} style="text-decoration:none; color:inherit; display:block" itemprop="url">
+      {title}
+    </a>
+  </h3>
+
+  <p class="article-excerpt line-clamp-2" itemprop="description">{excerpt}</p>
+
+  <div class="article-footer">
+    <span itemprop="datePublished" content={publishDate}>
+      {formatDate(publishDate)}
+    </span>
+    <span style="display:flex; align-items:center; gap:.25rem">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      约 {readTime} 分钟
+    </span>
+  </div>
+</article>

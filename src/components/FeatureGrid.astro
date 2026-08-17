@@ -1,0 +1,71 @@
+---
+// src/components/FeatureGrid.astro
+const features = [
+  {
+    href: '/brands/',
+    icon: '🏆',
+    title: '机场排行榜',
+    desc: '主流机场按线路、速度、解锁与性价比综合排序，主推次推一目了然。',
+    id: 'feature-brands',
+  },
+  {
+    href: '/category/review/',
+    icon: '🔍',
+    title: '深度评测',
+    desc: '单家机场完整测评：测速图、解锁实测、线路拓扑与编辑结论。',
+    id: 'feature-review',
+  },
+  {
+    href: '/category/tutorial/',
+    icon: '📘',
+    title: '新手教程',
+    desc: 'Clash、小火箭、v2rayN、sing-box 订阅导入与配置，跟着做 5 分钟用上。',
+    id: 'feature-tutorial',
+  },
+  {
+    href: '/compare/',
+    icon: '⚖️',
+    title: '横向对比',
+    desc: '价格、流量、线路、解锁放进同一张表，关键差异一眼看懂。',
+    id: 'feature-compare',
+  },
+  {
+    href: '/faq/',
+    icon: '💡',
+    title: '长尾问题库',
+    desc: '「机场是什么」「晚高峰卡怎么办」，180+ 个高频问题逐条解答。',
+    id: 'feature-faq',
+  },
+  {
+    href: '/topics/',
+    icon: '📚',
+    title: '专题聚合',
+    desc: '新手入门、客户端教程、进阶选购，按专题系统阅读效率更高。',
+    id: 'feature-topics',
+  },
+];
+---
+
+<section class="section container-site" aria-labelledby="features-title">
+  <div style="max-width:42rem">
+    <p class="section-eyebrow">核心栏目</p>
+    <h2 class="section-title" id="features-title">从入门到选择，一站式内容体系</h2>
+    <p class="section-desc">教程、评测、对比、品牌库互相配合，覆盖从了解到决策的完整路径。</p>
+  </div>
+
+  <div class="feature-grid" style="margin-top:2.5rem">
+    {features.map(f => (
+      <a href={f.href} class="card card-hover feature-card" id={f.id}>
+        <span class="feature-icon" aria-hidden="true">{f.icon}</span>
+        <h3 class="feature-title">{f.title}</h3>
+        <p class="feature-desc">{f.desc}</p>
+        <span class="feature-more">
+          查看更多
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

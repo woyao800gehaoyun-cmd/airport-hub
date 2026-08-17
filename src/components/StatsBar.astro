@@ -1,0 +1,24 @@
+---
+// src/components/StatsBar.astro
+const stats = [
+  { value: '10+', label: '收录机场', sub: '进品牌库逐家看', href: '/brands/' },
+  { value: '12 项', label: '评测维度', sub: '对比表一览', href: '/compare/' },
+  { value: '180+', label: '长尾问题', sub: '进问题库查答案', href: '/faq/' },
+  { value: '每周', label: '更新频率', sub: '看最新文章', href: '/blog/' },
+];
+---
+
+<section class="container-site" style="padding-top:0; padding-bottom:2rem" aria-label="数据统计">
+  <div class="card stats-bar" style="margin-top:-1.5rem">
+    {stats.map(s => (
+      <a href={s.href} class="stats-item" style="text-decoration:none; cursor:pointer">
+        <p class="stats-value">{s.value}</p>
+        <p class="stats-label">{s.label}</p>
+        <p class="stats-sub">
+          {s.sub}
+          <span style="display:inline-block; transition:transform .2s" aria-hidden="true"> →</span>
+        </p>
+      </a>
+    ))}
+  </div>
+</section>

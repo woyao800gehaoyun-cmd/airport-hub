@@ -1,0 +1,89 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+
+const navCols = [
+  {
+    title: '内容导航',
+    links: [
+      { href: '/', label: '首页' },
+      { href: '/brands/', label: '品牌库' },
+      { href: '/blog/', label: '博客文章' },
+      { href: '/topics/', label: '专题聚合' },
+      { href: '/compare/', label: '横向对比' },
+      { href: '/faq/', label: '问题库' },
+    ],
+  },
+  {
+    title: '快速访问',
+    links: [
+      { href: '/free-node/', label: '每日免费节点' },
+      { href: '/airport-status/', label: '跑路预警' },
+      { href: '/category/tutorial/', label: '使用教程' },
+      { href: '/category/review/', label: '深度评测' },
+      { href: '/category/compare/', label: '对比文章' },
+      { href: '/about/', label: '关于本站' },
+    ],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="container-site">
+    <div class="footer-grid">
+      <!-- 品牌简介 -->
+      <div>
+        <div class="footer-logo-icon" aria-hidden="true">C</div>
+        <div class="footer-brand-name">clash-top</div>
+        <p class="footer-desc">
+          专注机场推荐的中文测评站。统一维度实测，每周复核更新，
+          帮你从海量选项中快速找到稳定、靠谱的代理服务。云图·瞬云·机场对比一站全搞定。
+        </p>
+        <div style="margin-top:1.25rem; display:flex; gap:.75rem; flex-wrap:wrap">
+          <a
+            href="/tg/"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-secondary"
+            style="padding:.5rem 1rem; font-size:.8rem; color:#94a3b8; border-color:#334155; background:#1e293b"
+            aria-label="前往 Telegram 频道"
+          >
+            📢 TG 频道
+          </a>
+          <a
+            href="/rss.xml"
+            class="btn btn-secondary"
+            style="padding:.5rem 1rem; font-size:.8rem; color:#94a3b8; border-color:#334155; background:#1e293b"
+            aria-label="RSS 订阅"
+          >
+            🔔 RSS 订阅
+          </a>
+        </div>
+      </div>
+
+      <!-- 导航链接 -->
+      {navCols.map(col => (
+        <div>
+          <p class="footer-col-title">{col.title}</p>
+          <ul class="footer-links">
+            {col.links.map(link => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- 底部版权 -->
+    <div class="footer-bottom">
+      <span>© {year} clash-top · 内容仅供参考，请遵守当地法律法规</span>
+      <div style="display:flex; gap:1.25rem">
+        <a href="/about/" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">关于</a>
+        <a href="/disclaimer/" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">免责声明</a>
+        <a href="/sitemap-index.xml" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">站点地图</a>
+      </div>
+    </div>
+  </div>
+</footer>
