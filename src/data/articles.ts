@@ -1,4 +1,4 @@
-// src/data/articles.ts — 4000字真正深度教程与测评长文数据库
+// src/data/articles.ts — 4000字级别超级深度长文数据库
 
 export interface Article {
   slug: string;
@@ -36,9 +36,9 @@ export const articles: Article[] = [
     content: `
 # Clash 使用教程 2026：订阅导入 + TUN模式 + 规则分流完全指南 (含 Clash Verge / Meta)
 
-在科学上网与网络代理领域，**Clash** 无疑是功能最强大、使用人数最广、规则分流最精细的开源代理框架。凭借其基于 YAML 的灵活配置文件架构、策略组自由组合以及强大的 TUN 模式，Clash 成为了无数极客与普通用户的首选工具。
+在科学上网与网络代理领域，**Clash** 无疑是功能最强大、使用人数最广、规则分流最精细的开源代理框架。凭借其基于 YAML 的自由配置文件架构、策略组自由组合以及强大的 TUN 模式，Clash 成为了无数极客与普通用户的首选工具。
 
-然而，随着原版 Clash 及其 GUI 客户端陆续停止更新维护，2026 年的 Clash 生态已经迎来了全面革新。目前基于 **Mihomo 内核 (原 Clash Meta 内核)** 的分支客户端（如 **Clash Verge Rev**、**Clash Nyanpasu** 以及 **Flclash**）成为了绝对的主流。
+然而，随着原版 Clash 及其经典 GUI 客户端陆续停止更新维护，2026 年的 Clash 生态已经迎来了全面革新。目前基于 **Mihomo 内核 (原 Clash Meta 内核)** 的开源分支客户端（如 **Clash Verge Rev**、**Clash Nyanpasu** 以及 **Flclash**）成为了绝对的主流。
 
 本文将为您提供一份超过 4000 字的超详细全平台 Clash 使用与配置实战教程。无论您使用的是 Windows、macOS 还是 Android，跟随本教程都能在 5 分钟内完成配置并获得流畅的网络体验。
 
@@ -49,7 +49,7 @@ export const articles: Article[] = [
 由于不同操作系统的特性差异，选择一款稳定、无广告、易于维护的客户端至关重要。
 
 ### 1. Windows 平台：推荐 Clash Verge Rev
-- **内核驱动**：采用 Mihomo (Clash Meta) 官方开源内核，完美支持 VLESS、Hysteria2、TUIC v5、Shadowsocks 等全套新一代加密协议。
+- **内核驱动**：采用 Mihomo (Clash Meta) 官方开源内核，完美支持 VLESS (Reality)、Hysteria2、TUIC v5、Shadowsocks、Trojan 等全套新一代加密协议。
 - **技术优势**：基于 Tauri 框架重构，相比老旧的 Electron 架构，内存占用降低了 60% 以上，界面支持现代高分屏渲染与暗黑主题。
 - **内置功能**：原生集成一键安装 Service Mode (服务模式)、一键开关 TUN 模式以及可视化规则编辑器。
 
@@ -62,7 +62,7 @@ export const articles: Article[] = [
 - **后台省电**：优化了前台服务通知与打瞌睡 (Doze) 模式下的内存保留。
 
 ### 4. iOS 平台
-iOS 系统限制了通用二进制文件的后台守护，推荐直接使用 [Shadowrocket 小火箭](/blog/shadowrocket-jiaocheng/) 或 **Stash**。
+iOS 系统限制了通用二进制文件的后台守护，推荐直接使用 [Shadowrocket 小火箭教程](/blog/shadowrocket-jiaocheng/) 或 **Stash**。
 
 ---
 
@@ -120,7 +120,7 @@ iOS 系统限制了通用二进制文件的后台守护，推荐直接使用 [Sh
 1. 打开 Clash Verge，点击左侧菜单的 **Settings (设置)**。
 2. 找到 **Service Mode (服务模式)**，点击右侧的 **Install (安装)** 按钮。安装成功后，应用会自动重启并显示安装成功状态。
 3. 找到 **TUN Mode (TUN 模式)** 切换开关，将其调整为 **开启 (On)** 状态。
-4. 开启后，您可以打开系统的网卡设置，会看到新建了一个名为 'Clash' 或 'Mihomo' 的虚拟网络适配器，此时 TUN 模式已全盘生效。
+4. 开启后，您可以打开系统的网卡设置，会看到新建了一个名为 Clash 或 Mihomo 的虚拟网络适配器，此时 TUN 模式已全盘生效。
 
 ---
 
