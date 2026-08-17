@@ -14,10 +14,10 @@
   --bg-main: #090d16;
   --bg-card: #111827;
   --bg-card-hover: #1f2937;
-  --bg-header: rgba(9, 13, 22, 0.82);
+  --bg-header: rgba(9, 13, 22, 0.85);
   --bg-secondary: #131b2e;
   
-  --border-color: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.1);
   --border-hover: rgba(139, 92, 246, 0.4);
   --glow-primary: rgba(139, 92, 246, 0.2);
 
@@ -25,11 +25,11 @@
   --text-muted: #9ca3af;
   --text-sub: #6b7280;
   
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
   --bg-radial: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 70%);
 }
 
-/* 浅色模式 (Light Theme) */
+/* 浅色模式 (Light Theme) — 优化高对比度文本与卡片 */
 [data-theme="light"] {
   --brand-primary: #6d28d9;
   --brand-primary-hover: #5b21b6;
@@ -41,18 +41,18 @@
   --bg-main: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-hover: #f1f5f9;
-  --bg-header: rgba(248, 250, 252, 0.85);
+  --bg-header: rgba(255, 255, 255, 0.9);
   --bg-secondary: #f1f5f9;
   
-  --border-color: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(109, 40, 217, 0.3);
-  --glow-primary: rgba(109, 40, 217, 0.1);
+  --border-color: rgba(0, 0, 0, 0.12);
+  --border-hover: rgba(109, 40, 217, 0.4);
+  --glow-primary: rgba(109, 40, 217, 0.15);
 
-  --text-main: #0f172a;
-  --text-muted: #475569;
-  --text-sub: #64748b;
+  --text-main: #0f172a;   /* 极高对比度纯深黑蓝色 */
+  --text-muted: #334155;  /* 清楚易读的灰黑色 */
+  --text-sub: #475569;    /* 次级文字 */
   
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
   --bg-radial: radial-gradient(circle at 50% 0%, #ede9fe 0%, #f8fafc 70%);
 }
 
@@ -78,7 +78,7 @@ body {
   background: var(--bg-radial);
   background-attachment: fixed;
   line-height: 1.65;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 main {
@@ -151,7 +151,7 @@ a {
 
 .btn-primary {
   background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
-  color: #ffffff;
+  color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
 }
@@ -163,13 +163,14 @@ a {
 }
 
 .btn-secondary {
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   color: var(--text-main);
   border-color: var(--border-color);
 }
 
 .btn-secondary:hover {
   border-color: var(--border-hover);
+  background: var(--bg-card-hover);
   transform: translateY(-2px);
 }
 
@@ -203,8 +204,9 @@ a {
 }
 
 [data-theme="light"] .badge-brand {
-  background: rgba(109, 40, 217, 0.1);
+  background: rgba(109, 40, 217, 0.12);
   color: #6d28d9;
+  border-color: rgba(109, 40, 217, 0.25);
 }
 
 .badge-cyan {
@@ -214,8 +216,9 @@ a {
 }
 
 [data-theme="light"] .badge-cyan {
-  background: rgba(2, 132, 199, 0.1);
+  background: rgba(2, 132, 199, 0.12);
   color: #0284c7;
+  border-color: rgba(2, 132, 199, 0.25);
 }
 
 .badge-green {
@@ -225,14 +228,21 @@ a {
 }
 
 [data-theme="light"] .badge-green {
-  background: rgba(5, 150, 105, 0.1);
+  background: rgba(5, 150, 105, 0.12);
   color: #059669;
+  border-color: rgba(5, 150, 105, 0.25);
 }
 
 .badge-rose {
   background: rgba(244, 63, 94, 0.15);
   color: #fb7185;
   border-color: rgba(244, 63, 94, 0.3);
+}
+
+[data-theme="light"] .badge-rose {
+  background: rgba(225, 29, 72, 0.12);
+  color: #e11d48;
+  border-color: rgba(225, 29, 72, 0.25);
 }
 
 /* 脉冲发光点 */
@@ -281,7 +291,7 @@ a {
   padding: 1rem 1.25rem;
   background: var(--bg-secondary);
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -351,6 +361,11 @@ a {
 .nav-link.active {
   color: var(--brand-primary);
   background: rgba(139, 92, 246, 0.12);
+}
+
+[data-theme="light"] .nav-link.active {
+  background: rgba(109, 40, 217, 0.1);
+  color: #6d28d9;
 }
 
 /* 主题切换 Toggle 按钮 */
@@ -436,6 +451,7 @@ a {
   border-radius: 0 0.5rem 0.5rem 0;
   margin-block: 1.5rem;
   font-style: italic;
+  color: var(--text-muted);
 }
 
 .prose a {
@@ -451,14 +467,16 @@ a {
 
 .prose code {
   background: var(--bg-secondary);
-  color: #38bdf8;
+  color: var(--brand-primary);
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
+  font-weight: 600;
 }
 
 .prose pre {
   background: #0d1117;
+  color: #e6edf3;
   padding: 1.25rem;
   border-radius: 0.75rem;
   overflow-x: auto;
