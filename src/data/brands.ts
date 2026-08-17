@@ -132,26 +132,7 @@ export const brands: Brand[] = [
     ],
   },
 
-  // ─── 占位机场（后续填入真实数据）─────────────────────────────
-  {
-    id: 'speedcat',
-    name: '速猫云',
-    avatar: '猫',
-    tagline: 'IEPL 专线 · 流媒体 AI 全解锁',
-    desc: 'IEPL 内网专线架构，晚高峰实测 200 Mbps+，流媒体与主流 AI 工具全解锁，自研客户端对新手极为友好。',
-    tags: ['推荐', 'IEPL 专线', '¥9/月起', 'AI 解锁'],
-    rank: 3,
-    rankLabel: '推荐',
-    priceFrom: '¥9/月',
-    protocol: 'VLESS + Reality',
-    nodeCount: '80+',
-    streamUnlock: true,
-    aiUnlock: true,
-    trialDays: 3,
-    score: 8.9,
-    url: '#',
-    slug: 'speedcat',
-  },
+
   {
     id: 'starway',
     name: '星途云',
