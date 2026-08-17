@@ -1,0 +1,167 @@
+---
+// src/pages/blog/[slug].astro — 文章详情页 (带 Markdown 渲染与内链)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { articles, getArticleBySlug } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map(article => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const article = getArticleBySlug(slug as string);
+
+if (!article) {
+  return Astro.redirect('/blog/');
+}
+
+function formatDate(d: string) {
+  const date = new Date(d);
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+}
+
+// 将普通的 Markdown 链接与标题转换为带有样式的 HTML
+function renderMarkdown(md: string) {
+  let html = md
+    // H1, H2, H3
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    // 粗体
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    // 列表项
+    .replace(/^\- (.*$)/gim, '<li>$1</li>')
+    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+    // 代码块与内联代码
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // 站内与站外链接
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+  // 将连续的 <li> 裹在 <ul> 中
+  html = html.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+  
+  // 分段
+  return html.split('\n\n').map(p => {
+    p = p.trim();
+    if (!p) return '';
+    if (p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<table') || p.startsWith('<blockquote') || p.startsWith('<hr')) {
+      return p;
+    }
+    return `<p>${p}</p>`;
+  }).join('\n');
+}
+
+const htmlContent = renderMarkdown(article.content);
+---
+
+<BaseLayout
+  title={`${article.title} | clash-top`}
+  description={article.excerpt}
+  keywords={article.tags.join(',')}
+>
+  <Header slot="header" currentPath="/blog/" />
+
+  <!-- 顶部面包屑与文章 Banner -->
+  <section style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding-block: 2.5rem 2rem">
+    <div class="container-site">
+      <!-- 面包屑导航 -->
+      <nav aria-label="面包屑" style="font-size: 0.8125rem; color: var(--text-sub); margin-bottom: 1rem">
+        <a href="/" style="color: var(--text-sub)">首页</a>
+        <span style="margin: 0 0.5rem">›</span>
+        <a href="/blog/" style="color: var(--text-sub)">博客</a>
+        <span style="margin: 0 0.5rem">›</span>
+        <span style="color: var(--text-main); font-weight: 600">{article.category}</span>
+      </nav>
+
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem">
+        <span class="badge badge-brand">{article.category}</span>
+        {article.tags.map(t => <span class="badge">{t}</span>)}
+      </div>
+
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 900; color: var(--text-main); line-height: 1.25; max-width: 52rem">
+        {article.title}
+      </h1>
+
+      <div style="display: flex; align-items: center; gap: 1.25rem; margin-top: 1.25rem; font-size: 0.8125rem; color: var(--text-sub); flex-wrap: wrap">
+        <span>📅 发布于：{formatDate(article.publishDate)}</span>
+        <span>🔄 更新于：{formatDate(article.updateDate)}</span>
+        <span>⏱️ 阅读时间：约 {article.readTime} 分钟</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 文章正文与侧边栏结构 -->
+  <div class="container-site section" style="padding-block: 3rem">
+    <div style="display: grid; gap: 2.5rem; grid-template-columns: 1fr min(20rem, 100%); align-items: start" class="article-layout">
+      
+      <!-- 正文区 -->
+      <article class="prose card" style="padding: 2.25rem">
+        <div set:html={htmlContent} />
+
+        <!-- 底部分享与推荐专区 -->
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color)">
+          <div style="background: var(--bg-secondary); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-color)">
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem">💡 选购提示与快捷内链</h4>
+            <p style="font-size: 0.8125rem; color: var(--text-sub); line-height: 1.7">
+              如果不确定选择哪家机场，推荐查阅 <a href="/brands/yuntu/">云图机场（金融级专线）</a> 或 <a href="/brands/shunyun/">瞬云机场（ANYCAST 高速）</a> 的实测数据，或者使用本站的 <a href="/compare/">全维度横向对比表</a> 进行筛选。
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 右侧导航与推荐边栏 -->
+      <aside style="position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.25rem">
+        <!-- 实测推荐入口 -->
+        <div class="card" style="padding: 1.25rem">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            🥇 推荐机场实测
+          </h3>
+          
+          <div style="display: flex; flex-direction: column; gap: 0.875rem">
+            <a href="/brands/yuntu/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+              <div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">金融级专线 · ChatGPT 解锁</span>
+              </div>
+              <span class="badge badge-brand">¥25起</span>
+            </a>
+
+            <a href="/brands/shunyun/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+              <div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">瞬云机场</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">ANYCAST 高速 · 不限速</span>
+              </div>
+              <span class="badge badge-cyan">¥20起</span>
+            </a>
+          </div>
+
+          <a href="/compare/" class="btn btn-secondary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
+            查看完整对比表 →
+          </a>
+        </div>
+
+        <!-- 官方 TG 入口 -->
+        <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.15)); text-align: center">
+          <p style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">订阅 TG 频道获取更多教程</p>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">每日免费节点与跑路预警随时掌握</p>
+          <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
+            📢 订阅 TG 频道
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  @media (max-width: 840px) {
+    .article-layout {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

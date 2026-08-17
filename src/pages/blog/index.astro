@@ -1,5 +1,5 @@
 ---
-// src/pages/blog/index.astro
+// src/pages/blog/index.astro — 博客列表页
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -8,26 +8,27 @@ import { articles, categories } from '../../data/articles';
 ---
 
 <BaseLayout
-  title="博客 — 机场使用教程与测评文章 — Clash顶选"
-  description="Clash顶选博客：机场使用教程、深度评测、横向对比、新手入门指南，帮助用户从入门到精通地使用代理服务。"
+  title="博客教程与测评 — Clash / Shadowrocket / v2rayN 完全指南 | clash-top"
+  description="clash-top 博客：Clash、Shadowrocket 小火箭、v2rayN 使用教程与全平台配置，专线原理与机场跑路防坑避雷完全指南。"
 >
   <Header slot="header" currentPath="/blog/" />
 
   <!-- Page Hero -->
-  <section class="page-hero">
+  <section class="section" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding-block: 3.5rem 2.5rem">
     <div class="container-site">
-      <h1 class="page-hero-title">博客文章</h1>
-      <p class="page-hero-desc">机场教程、深度评测、使用技巧，持续更新，内容保持高度时效性。</p>
+      <span class="badge badge-brand">全平台指南</span>
+      <h1 class="section-title" style="margin-top: 0.5rem">博客教程 & 深度测评</h1>
+      <p class="section-desc">全平台科学上网配置教程、专线架构深度拆解与机场跑路避坑完全指南。</p>
 
       <!-- 分类 Tab -->
-      <div class="filter-tabs" style="margin-top:1.5rem" id="blog-category-tabs" role="tablist">
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem" id="blog-category-tabs" role="tablist">
         {categories.map((cat, i) => (
           <button
-            class={`filter-tab${i === 0 ? ' active' : ''}`}
+            class={`btn ${i === 0 ? 'btn-primary' : 'btn-secondary'}`}
             data-category={cat.slug}
             id={`cat-tab-${cat.slug}`}
             role="tab"
-            aria-selected={i === 0 ? 'true' : 'false'}
+            style="padding: 0.45rem 1rem; font-size: 0.8125rem"
           >
             {cat.name}
           </button>
@@ -38,7 +39,7 @@ import { articles, categories } from '../../data/articles';
 
   <!-- Articles Grid -->
   <section class="section container-site" aria-label="文章列表">
-    <div class="articles-grid" id="blog-grid">
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr))" id="blog-grid">
       {articles.map(article => (
         <div data-category={article.categorySlug} class="blog-item">
           <ArticleCard {...article} />
@@ -46,22 +47,22 @@ import { articles, categories } from '../../data/articles';
       ))}
     </div>
 
-    <div id="blog-empty" style="display:none; text-align:center; padding:3rem; color:var(--slate-400)">
-      <p style="font-size:2.5rem" aria-hidden="true">📝</p>
-      <p style="margin-top:.75rem; font-weight:600">该分类暂无文章，内容持续补充中</p>
+    <div id="blog-empty" style="display: none; text-align: center; padding: 4rem; color: var(--text-sub)">
+      <p style="font-size: 2.5rem" aria-hidden="true">📝</p>
+      <p style="margin-top: 0.75rem; font-weight: 700; color: var(--text-main)">该分类暂无文章，内容持续补充中</p>
     </div>
   </section>
 
-  <!-- 写作说明 -->
-  <section style="background:var(--brand-50); border-top:1px solid var(--brand-100); padding-block:2.5rem">
-    <div class="container-site" style="max-width:48rem; text-align:center">
-      <h2 style="font-size:1.125rem; font-weight:700; color:var(--brand-800)">📌 内容更新说明</h2>
-      <p style="margin-top:.75rem; color:var(--slate-600); font-size:.9rem; line-height:1.75">
-        本站文章均由编辑团队撰写，不接受付费软文。每篇文章在发布后定期复核，
-        确保内容与当前实际情况保持一致。如发现内容有误，欢迎通过 TG 频道反馈。
+  <!-- 写作与独立说明 -->
+  <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding-block: 3rem">
+    <div class="container-site" style="max-width: 48rem; text-align: center">
+      <h2 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main)">📌 内容实测与内链说明</h2>
+      <p style="margin-top: 0.75rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.8">
+        本站文章均由编辑团队自费测试撰写，教程中包含全套内链跳转与实测对标。
+        选购机场推荐查阅 <a href="/brands/yuntu/" style="color: var(--brand-primary); font-weight: 700">云图机场</a> 或 <a href="/brands/shunyun/" style="color: var(--brand-primary); font-weight: 700">瞬云机场</a>，或使用 <a href="/compare/" style="color: var(--brand-primary); font-weight: 700">横向对比表</a> 进行筛选。
       </p>
-      <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:1.25rem; display:inline-flex" id="blog-tg-btn">
-        📢 订阅更新推送
+      <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1.25rem; inline-flex" id="blog-tg-btn">
+        📢 订阅 TG 频道推送
       </a>
     </div>
   </section>
@@ -70,15 +71,16 @@ import { articles, categories } from '../../data/articles';
 </BaseLayout>
 
 <script>
-  const tabs = document.querySelectorAll('#blog-category-tabs .filter-tab');
+  const tabs = document.querySelectorAll('#blog-category-tabs button');
   const items = document.querySelectorAll<HTMLElement>('.blog-item');
   const empty = document.getElementById('blog-empty');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected','true');
+      tabs.forEach(t => {
+        t.className = 'btn btn-secondary';
+      });
+      tab.className = 'btn btn-primary';
 
       const cat = (tab as HTMLElement).dataset.category ?? 'all';
       let visible = 0;

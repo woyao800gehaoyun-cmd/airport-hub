@@ -50,7 +50,7 @@ const schemaOrg = JSON.stringify({
 });
 ---
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,10 +60,19 @@ const schemaOrg = JSON.stringify({
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonical} />
 
+    <!-- 防闪烁初始化 Theme 脚本 -->
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
@@ -81,7 +90,6 @@ const schemaOrg = JSON.stringify({
     <!-- SEO Extras -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="clash-top" />
-    <meta name="theme-color" content="#6366f1" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
