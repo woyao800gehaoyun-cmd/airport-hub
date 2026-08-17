@@ -1,5 +1,5 @@
 ---
-// src/components/Header.astro — 极客科技风 Header (支持 Dark/Light 切换)
+// src/components/Header.astro — 单行极致工整美化 Header
 export interface Props {
   currentPath?: string;
 }
@@ -18,7 +18,7 @@ const navLinks = [
 
 <header class="site-header">
   <div class="container-site header-inner">
-    <!-- Logo -->
+    <!-- 1. 左侧 Logo -->
     <a href="/" class="logo" aria-label="clash-top 科学上网导航首页">
       <div class="logo-icon" aria-hidden="true">C</div>
       <div style="display: flex; flex-direction: column">
@@ -27,33 +27,32 @@ const navLinks = [
       </div>
     </a>
 
-    <!-- 桌面导航 -->
+    <!-- 2. 中间单行平铺导航 (Flex 单行不换行) -->
     <nav class="desktop-nav" aria-label="主导航">
       {navLinks.map(link => (
         <a
           href={link.href}
-          class={`nav-link${currentPath === link.href ? ' active' : ''}`}
+          class={`nav-item-single${currentPath === link.href ? ' active' : ''}`}
           aria-current={currentPath === link.href ? 'page' : undefined}
         >
           {link.label}
         </a>
       ))}
 
-      <!-- 特殊发光标签组 -->
-      <div style="display: flex; gap: 0.375rem; margin-left: 0.5rem">
-        <a href="/free-node/" class="badge badge-cyan" style="padding: 0.35rem 0.75rem; text-decoration: none">
-          <span>免费节点</span>
-          <span class="pulse-dot" style="color: var(--brand-cyan)" aria-hidden="true"></span>
-        </a>
-        <a href="/airport-status/" class="badge badge-rose" style="padding: 0.35rem 0.75rem; text-decoration: none">
-          <span>跑路预警</span>
-          <span class="pulse-dot" style="color: var(--brand-rose)" aria-hidden="true"></span>
-        </a>
-      </div>
+      <!-- 免费节点与跑路预警直接单行平铺 -->
+      <a href="/free-node/" class={`nav-item-single nav-item-cyan${currentPath === '/free-node/' ? ' active' : ''}`}>
+        <span>免费节点</span>
+        <span class="pulse-dot" style="color: var(--brand-cyan)" aria-hidden="true"></span>
+      </a>
+
+      <a href="/airport-status/" class={`nav-item-single nav-item-rose${currentPath === '/airport-status/' ? ' active' : ''}`}>
+        <span>跑路预警</span>
+        <span class="pulse-dot" style="color: var(--brand-rose)" aria-hidden="true"></span>
+      </a>
     </nav>
 
-    <!-- 右侧操作区：主题切换按钮 + TG 按钮 -->
-    <div style="display: flex; align-items: center; gap: 0.625rem">
+    <!-- 3. 右侧操作区：主题 Toggle + TG 按钮 -->
+    <div class="header-actions-single">
       <!-- 深浅模式 Toggle 按钮 -->
       <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="切换深色/浅色主题">
         <span id="theme-toggle-icon">🌙</span>
@@ -86,15 +85,15 @@ const navLinks = [
   <div id="mobile-menu" style="display: none; background: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 1rem 1.25rem">
     <nav style="display: flex; flex-direction: column; gap: 0.5rem">
       {navLinks.map(link => (
-        <a href={link.href} class={`nav-link${currentPath === link.href ? ' active' : ''}`}>
+        <a href={link.href} class={`nav-item-single${currentPath === link.href ? ' active' : ''}`}>
           {link.label}
         </a>
       ))}
       <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem">
-        <a href="/free-node/" class="badge badge-cyan" style="flex: 1; justify-content: center; padding: 0.5rem">
+        <a href="/free-node/" class="badge badge-cyan" style="flex: 1; justify-content: center; padding: 0.5rem; text-decoration: none">
           免费节点 📡
         </a>
-        <a href="/airport-status/" class="badge badge-rose" style="flex: 1; justify-content: center; padding: 0.5rem">
+        <a href="/airport-status/" class="badge badge-rose" style="flex: 1; justify-content: center; padding: 0.5rem; text-decoration: none">
           跑路预警 🚨
         </a>
       </div>
@@ -103,7 +102,71 @@ const navLinks = [
 </header>
 
 <style>
-  @media (max-width: 840px) {
+  /* 强制单行水平对齐，绝对不换行 */
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+
+  .nav-item-single {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-item-single:hover {
+    color: var(--text-main);
+    background: var(--bg-secondary);
+  }
+
+  .nav-item-single.active {
+    color: var(--brand-primary);
+    background: rgba(139, 92, 246, 0.12);
+    font-weight: 700;
+  }
+
+  [data-theme="light"] .nav-item-single.active {
+    background: rgba(109, 40, 217, 0.1);
+    color: #6d28d9;
+  }
+
+  .nav-item-cyan {
+    color: var(--brand-cyan);
+    background: rgba(6, 182, 212, 0.08);
+  }
+
+  .nav-item-cyan:hover {
+    background: rgba(6, 182, 212, 0.18);
+  }
+
+  .nav-item-rose {
+    color: var(--brand-rose);
+    background: rgba(244, 63, 94, 0.08);
+  }
+
+  .nav-item-rose:hover {
+    background: rgba(244, 63, 94, 0.18);
+  }
+
+  .header-actions-single {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1060px) {
     .desktop-nav {
       display: none !important;
     }
