@@ -60,12 +60,35 @@ const schemaOrg = JSON.stringify({
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonical} />
 
-    <!-- 防闪烁初始化 Theme 脚本 -->
+    <!-- 防闪烁初始化 Theme 脚本 + 本地 file:// 路径 100% 修复跳转脚本 -->
     <script is:inline>
       (function() {
         var saved = localStorage.getItem('theme');
         var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.setAttribute('data-theme', theme);
+
+        // 如果用户是在本地用 file:// 协议直接双击打开 HTML，自动修正所有超链接跳转
+        if (window.location.protocol === 'file:') {
+          document.addEventListener('DOMContentLoaded', function() {
+            var hrefParts = window.location.href.split('/dist/');
+            if (hrefParts.length > 1) {
+              var distRoot = hrefParts[0] + '/dist';
+              document.querySelectorAll('a[href^="/"]').forEach(function(a) {
+                var rawHref = a.getAttribute('href');
+                if (!rawHref) return;
+                // 如果是外链（如代理注册链接，http/https），保持不动
+                if (rawHref.indexOf('http') === 0 || rawHref.indexOf('//') === 0) return;
+
+                if (rawHref === '/') {
+                  a.setAttribute('href', distRoot + '/index.html');
+                } else {
+                  var clean = rawHref.replace(/\/$/, '');
+                  a.setAttribute('href', distRoot + clean + '/index.html');
+                }
+              });
+            }
+          });
+        }
       })();
     </script>
 
