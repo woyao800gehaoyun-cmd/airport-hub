@@ -1,0 +1,135 @@
+---
+// src/pages/topics/[slug].astro — 专题详情页 (包含专题路线指引与关联文章)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { topics, getTopicBySlug } from '../../data/topics';
+import { articles } from '../../data/articles';
+
+export function getStaticPaths() {
+  return topics.map(topic => ({
+    params: { slug: topic.slug },
+    props: { topic },
+  }));
+}
+
+const { topic } = Astro.props;
+
+// 根据专题类型过滤对应的文章列表
+let relatedArticles = articles;
+if (topic.slug === 'xinshou-rumen') {
+  relatedArticles = articles.filter(a => a.categorySlug === 'beginner' || a.categorySlug === 'compare');
+} else if (topic.slug === 'kehuduan-jiaocheng') {
+  relatedArticles = articles.filter(a => a.categorySlug === 'tutorial');
+} else if (topic.slug === 'jinjie-xuangou') {
+  relatedArticles = articles.filter(a => a.categorySlug === 'advanced' || a.categorySlug === 'compare');
+} else if (topic.slug === 'ceping-heji') {
+  relatedArticles = articles.filter(a => a.categorySlug === 'review' || a.categorySlug === 'compare');
+} else {
+  relatedArticles = articles.slice(0, 4);
+}
+---
+
+<BaseLayout
+  title={`${topic.title} | clash-top 科学上网导航`}
+  description={topic.desc}
+>
+  <Header slot="header" currentPath="/topics/" />
+
+  <!-- 专题 Hero 顶部 Banner -->
+  <section style="padding-block: 4rem 2.5rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color)">
+    <div class="container-site">
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem">
+        <a href="/topics/" style="color: var(--brand-primary); text-decoration: none; font-size: 0.875rem; font-weight: 700">← 返回全部专题</a>
+      </div>
+
+      <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap">
+        <div style="font-size: 3.5rem; line-height: 1; padding: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem">
+          {topic.emoji}
+        </div>
+        <div style="flex: 1; min-width: 18rem">
+          <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem">
+            <span class="badge badge-brand">{topic.articleCount} 篇极客精选文章</span>
+            {topic.tags.map(t => (
+              <span class="badge">{t}</span>
+            ))}
+          </div>
+          <h1 style="font-size: 2.25rem; font-weight: 900; color: var(--text-main); line-height: 1.2">
+            {topic.title}
+          </h1>
+          <p style="font-size: 1.0625rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.7; max-width: 48rem">
+            {topic.desc}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 专题推荐系统学习路线 (去除 AI 腔调，极致接地气干货) -->
+  <section class="section container-site">
+    <div class="card" style="padding: 1.75rem; margin-bottom: 3rem; background: var(--bg-card); border-left: 4px solid var(--brand-primary)">
+      <h2 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem">
+        🗺️ 【{topic.title}】推荐学习与实操避坑路线图
+      </h2>
+      <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.7">
+        老玩家建议你按以下步骤循序渐进阅读。不走弯路、不踩坑、30 分钟搞定全套配置：
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin-top: 1.25rem">
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 0.75rem">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--brand-cyan)">STEP 01</span>
+          <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.25rem">懂原理与做选择</h3>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">理清专线与中转区别，认准月付与全节点 1 倍率。</p>
+        </div>
+
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 0.75rem">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--brand-primary)">STEP 02</span>
+          <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.25rem">客户端下载与订阅</h3>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">根据 Win / Mac / iOS / Android 挑选最省心的客户端。</p>
+        </div>
+
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 0.75rem">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--brand-rose)">STEP 03</span>
+          <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.25rem">开启 TUN 与规则分流</h3>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">全盘接管命令行与游戏流量，指定 ChatGPT 原生节点。</p>
+        </div>
+
+        <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 0.75rem">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--brand-green)">STEP 04</span>
+          <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.25rem">故障排障与防跑路</h3>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">掌握时间同步排障技巧，关注跑路预警雷达。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 专题包含的深度长文文章列表 -->
+    <div style="margin-bottom: 1.5rem">
+      <h2 class="section-title">本专题包含的深度实操长文</h2>
+      <p class="section-desc">点击卡片即可阅读 4000 字全流程手把手图文指南：</p>
+    </div>
+
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))">
+      {relatedArticles.map(article => (
+        <ArticleCard {...article} />
+      ))}
+    </div>
+  </section>
+
+  <!-- 底部快捷推荐 -->
+  <section style="padding-block: 3.5rem; background: var(--bg-secondary); border-top: 1px solid var(--border-color)">
+    <div class="container-site" style="text-align: center; max-width: 42rem; margin-inline: auto">
+      <span class="badge badge-brand" style="margin-bottom: 1rem">🏆 独立编辑团队自费实测</span>
+      <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--text-main)">还没选好靠谱的服务商？</h2>
+      <p style="margin-top: 0.75rem; color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7">
+        推荐试用全节点内网专线接入的 <a href="/brands/yuntu/" style="color: var(--brand-primary); font-weight: 700; text-decoration: none">云图机场</a> 或高性价比的 <a href="/brands/shunyun/" style="color: var(--brand-cyan); font-weight: 700; text-decoration: none">瞬云机场</a>，均支持月付与全节点 1 倍率。
+      </p>
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 0.875rem; flex-wrap: wrap">
+        <a href="/brands/" class="btn btn-primary">查看 2026 机场排行榜 →</a>
+        <a href="/compare/" class="btn btn-secondary">全维度参数对比</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,5 +1,5 @@
 ---
-// src/pages/topics/index.astro
+// src/pages/topics/index.astro — 专题聚合列表页 (支持极客 Dark/Light 双模式)
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -7,59 +7,65 @@ import { topics } from '../../data/topics';
 ---
 
 <BaseLayout
-  title="专题聚合 — 系统阅读机场教程与评测 — Clash顶选"
-  description="Clash顶选专题合集：新手入门、客户端教程、进阶选购、流媒体解锁、AI 工具使用，同主题文章聚合，按推荐顺序阅读效率更高。"
+  title="按专题系统阅读 — 科学上网导航与测评专题 | clash-top"
+  description="clash-top 专题合集：新手入门、客户端教程、进阶选购、流媒体解锁、AI 工具使用，同主题文章聚合，按推荐顺序阅读效率更高。"
 >
   <Header slot="header" currentPath="/topics/" />
 
   <!-- Page Hero -->
   <section class="page-hero">
     <div class="container-site">
-      <h1 class="page-hero-title">专题聚合</h1>
-      <p class="page-hero-desc">同一主题的文章整合成专题，按推荐顺序系统阅读，比随机浏览效率高 3 倍以上。</p>
+      <span class="badge badge-brand" style="margin-bottom: 1rem">系统学习路线</span>
+      <h1 class="page-hero-title">按专题系统阅读</h1>
+      <p class="page-hero-desc">同主题内容聚合成专题，小白入门到高手进阶循序渐进，避开营销套路与跑路陷阱。</p>
     </div>
   </section>
 
   <!-- Topics Grid -->
   <section class="section container-site" aria-label="专题列表">
-    <div class="topics-grid" style="grid-template-columns:repeat(auto-fit, minmax(20rem, 1fr))">
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr))">
       {topics.map(topic => (
-        <a href={`/topics/${topic.slug}/`} class="card card-hover topic-card" id={`topic-page-${topic.slug}`}>
-          <div class="topic-orb" aria-hidden="true"></div>
-          <span class="badge badge-brand topic-count">{topic.articleCount} 篇内容</span>
-          <h2 class="topic-title">
-            {topic.emoji} {topic.title}
-          </h2>
-          <p class="topic-desc">{topic.desc}</p>
-          <div style="margin-top:.75rem; display:flex; flex-wrap:wrap; gap:.375rem">
-            {topic.tags.map(tag => <span class="tag">{tag}</span>)}
+        <a href={`/topics/${topic.slug}/`} class="card card-hover topic-card" id={`topic-page-${topic.slug}`} style="padding: 1.75rem; text-decoration: none; display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem">
+            <span class="badge badge-brand">{topic.articleCount} 篇精选长文</span>
+            <span style="font-size: 2.25rem">{topic.emoji}</span>
           </div>
-          <span class="topic-more" style="margin-top:1rem">
-            进入专题
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </span>
+
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main)">
+            {topic.title}
+          </h2>
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.625rem; line-height: 1.7; flex: 1">
+            {topic.desc}
+          </p>
+
+          <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.375rem">
+            {topic.tags.map(tag => <span class="badge">{tag}</span>)}
+          </div>
+
+          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; color: var(--brand-primary); font-size: 0.875rem; font-weight: 700">
+            <span>进入专题学习路线 →</span>
+          </div>
         </a>
       ))}
     </div>
   </section>
 
-  <!-- 专题说明 -->
-  <section style="background:var(--brand-50); border-top:1px solid var(--brand-100); padding-block:2.5rem">
-    <div class="container-site" style="max-width:48rem">
-      <h2 style="font-size:1.125rem; font-weight:700; color:var(--brand-800)">📚 如何使用专题？</h2>
-      <div style="margin-top:1rem; display:grid; gap:.875rem; grid-template-columns:repeat(auto-fit, minmax(14rem, 1fr))">
+  <!-- 专题使用指导 -->
+  <section style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding-block: 3.5rem">
+    <div class="container-site" style="max-width: 48rem">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); text-align: center">📚 如何最高效地利用本站专题？</h2>
+      <div style="margin-top: 1.75rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))">
         {[
-          { step: '01', text: '根据你的需求（新手/进阶/特定场景）选择对应专题' },
-          { step: '02', text: '按专题内推荐的阅读顺序依次阅读，知识体系更完整' },
-          { step: '03', text: '结合「品牌库」与「横向对比」做出最终选购决策' },
+          { step: '01', title: '选对专题', text: '根据你的基础（新手入门/软件配置/进阶选购）选择对应专题。' },
+          { step: '02', title: '按顺序实操', text: '按专题内标明的 STEP 学习路线依次操作，30 分钟搞定全套配置。' },
+          { step: '03', title: '横向避坑', text: '结合「品牌库」与「横向对比大表」做出绝不踩坑的理性选购决策。' },
         ].map(item => (
-          <div style="display:flex; gap:.875rem; align-items:flex-start">
-            <span style="display:flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:50%; background:var(--brand-500); color:#fff; font-size:.75rem; font-weight:800; flex-shrink:0">
+          <div style="padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md)">
+            <span style="display: inline-block; padding: 0.2rem 0.6rem; border-radius: 0.25rem; background: var(--brand-primary); color: #fff; font-size: 0.75rem; font-weight: 900">
               {item.step}
             </span>
-            <p style="font-size:.875rem; color:var(--slate-700); line-height:1.6; margin-top:.25rem">{item.text}</p>
+            <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.5rem">{item.title}</h3>
+            <p style="font-size: 0.8125rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.25rem">{item.text}</p>
           </div>
         ))}
       </div>
