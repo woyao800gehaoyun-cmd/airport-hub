@@ -100,7 +100,7 @@ export const brands: Brand[] = [
     protocol: 'ANYCAST',
     nodeCount: '主流国家',
     streamUnlock: true,
-    aiUnlock: false,
+    aiUnlock: true,
     trialDays: 0,
     score: 8.8,
     url: 'https://aaa.jichang.best/#/register?code=SWAVvMOV',
