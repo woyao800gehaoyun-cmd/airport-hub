@@ -1,5 +1,5 @@
 ---
-// src/components/BrandCard.astro — 视觉化品牌卡片（重制版）
+// src/components/BrandCard.astro — 极客深色品牌卡片
 export interface Props {
   id: string;
   name: string;
@@ -23,312 +23,244 @@ export interface Props {
 const { id, name, avatar, tagline, desc, tags, rank, rankLabel, priceFrom, score, slug, url, streamUnlock, aiUnlock, trialDays, protocol, nodeCount } = Astro.props;
 
 const rankColors: Record<number, { bg: string; text: string; label: string }> = {
-  1: { bg: 'linear-gradient(135deg,#fbbf24,#f59e0b)', text: '#78350f', label: '🥇 主推' },
-  2: { bg: 'linear-gradient(135deg,#94a3b8,#64748b)', text: '#fff', label: '🥈 次推' },
-  3: { bg: 'linear-gradient(135deg,#fb923c,#f97316)', text: '#fff', label: '🥉 次推' },
+  1: { bg: 'linear-gradient(135deg, #f59e0b, #d97706)', text: '#ffffff', label: '🥇 主推' },
+  2: { bg: 'linear-gradient(135deg, #06b6d4, #0891b2)', text: '#ffffff', label: '🥈 次推' },
+  3: { bg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)', text: '#ffffff', label: '🥉 推荐' },
 };
-const rankStyle = rankColors[rank] ?? { bg: 'var(--slate-100)', text: 'var(--slate-500)', label: `#${rank}` };
+const rankStyle = rankColors[rank] ?? { bg: 'rgba(255,255,255,0.08)', text: 'var(--text-muted)', label: `#${rank}` };
 
 const scorePercent = score * 10;
-const scoreColor = score >= 9 ? '#16a34a' : score >= 8.5 ? '#2563eb' : '#d97706';
+const scoreColor = score >= 9 ? '#34d399' : score >= 8.5 ? '#38bdf8' : '#fbbf24';
 ---
 
-<div class="bcard" id={`brand-${id}`} itemscope itemtype="https://schema.org/Product">
-  <!-- 顶部排名 + 名称行 -->
-  <div class="bcard-header">
-    <div class="bcard-rank" style={`background:${rankStyle.bg}; color:${rankStyle.text}`}>
+<div class="cyber-brand-card card card-hover" id={`brand-${id}`} itemscope itemtype="https://schema.org/Product">
+  <!-- 卡片顶栏 -->
+  <div class="cyber-card-header">
+    <span class="cyber-rank-badge" style={`background: ${rankStyle.bg}; color: ${rankStyle.text}`}>
       {rankStyle.label}
-    </div>
-    <div class="bcard-name-row">
-      <span class="bcard-avatar" aria-hidden="true">{avatar}</span>
-      <div>
-        <h3 class="bcard-name" itemprop="name">{name}</h3>
-        <p class="bcard-tagline">{tagline}</p>
-      </div>
+    </span>
+    <span class="badge badge-brand">{rankLabel}</span>
+  </div>
+
+  <!-- 品牌 Logo 行 -->
+  <div class="cyber-brand-identity">
+    <div class="cyber-avatar" aria-hidden="true">{avatar}</div>
+    <div style="min-width: 0">
+      <h3 class="cyber-brand-name" itemprop="name">{name}</h3>
+      <p class="cyber-brand-tagline">{tagline}</p>
     </div>
   </div>
 
   <!-- 评分条 -->
-  <div class="bcard-score-row">
-    <span class="bcard-score-label">综合评分</span>
-    <div class="bcard-score-bar-wrap">
-      <div class="bcard-score-bar" style={`width:${scorePercent}%; background:${scoreColor}`}></div>
+  <div class="cyber-score-block">
+    <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.375rem">
+      <span>综合实测得分</span>
+      <span style={`font-weight:700; color:${scoreColor}`}>{score.toFixed(1)} / 10</span>
     </div>
-    <span class="bcard-score-num" style={`color:${scoreColor}`}>{score.toFixed(1)}</span>
-  </div>
-
-  <!-- 描述 -->
-  <p class="bcard-desc line-clamp-2">{desc}</p>
-
-  <!-- 指标网格 -->
-  <div class="bcard-metrics">
-    <div class="bcard-metric">
-      <span class="bcard-metric-icon">💰</span>
-      <span class="bcard-metric-val">{priceFrom}</span>
-      <span class="bcard-metric-lab">起步价</span>
-    </div>
-    <div class="bcard-metric">
-      <span class="bcard-metric-icon">🔗</span>
-      <span class="bcard-metric-val" style="font-size:.7rem">{protocol.split('+')[0].trim()}</span>
-      <span class="bcard-metric-lab">协议</span>
-    </div>
-    <div class="bcard-metric">
-      <span class="bcard-metric-icon">🌐</span>
-      <span class="bcard-metric-val">{nodeCount}</span>
-      <span class="bcard-metric-lab">节点</span>
-    </div>
-    <div class="bcard-metric">
-      <span class="bcard-metric-icon">{trialDays > 0 ? '✅' : '—'}</span>
-      <span class="bcard-metric-val" style="font-size:.75rem">{trialDays > 0 ? `${trialDays}天` : '无试用'}</span>
-      <span class="bcard-metric-lab">试用</span>
+    <div class="cyber-score-track">
+      <div class="cyber-score-fill" style={`width:${scorePercent}%; background:${scoreColor}`}></div>
     </div>
   </div>
 
-  <!-- 解锁标签行 -->
-  <div class="bcard-unlock-row">
-    <span class={`bcard-unlock ${streamUnlock ? 'on' : 'off'}`}>
+  <!-- 描述简述 -->
+  <p class="cyber-brand-desc line-clamp-2">{desc}</p>
+
+  <!-- 参数极客矩阵 -->
+  <div class="cyber-metrics-grid">
+    <div class="cyber-metric-item">
+      <span class="metric-val">{priceFrom}</span>
+      <span class="metric-lab">起步价</span>
+    </div>
+    <div class="cyber-metric-item">
+      <span class="metric-val" style="font-size:0.75rem">{protocol.split('+')[0].trim()}</span>
+      <span class="metric-lab">协议</span>
+    </div>
+    <div class="cyber-metric-item">
+      <span class="metric-val">{nodeCount}</span>
+      <span class="metric-lab">节点数</span>
+    </div>
+    <div class="cyber-metric-item">
+      <span class="metric-val">{trialDays > 0 ? `${trialDays}天` : '无试用'}</span>
+      <span class="metric-lab">免费试用</span>
+    </div>
+  </div>
+
+  <!-- 解锁状态标签 -->
+  <div class="cyber-unlock-tags">
+    <span class={`unlock-pill ${streamUnlock ? 'on' : 'off'}`}>
       {streamUnlock ? '✓' : '✗'} Netflix
     </span>
-    <span class={`bcard-unlock ${aiUnlock ? 'on' : 'off'}`}>
+    <span class={`unlock-pill ${aiUnlock ? 'on' : 'off'}`}>
       {aiUnlock ? '✓' : '✗'} ChatGPT
     </span>
-    <span class={`bcard-unlock ${streamUnlock ? 'on' : 'off'}`}>
-      {streamUnlock ? '✓' : '✗'} YouTube
-    </span>
-    <span class={`bcard-unlock ${aiUnlock ? 'on' : 'off'}`}>
-      {aiUnlock ? '✓' : '✗'} TikTok
+    <span class={`unlock-pill ${streamUnlock ? 'on' : 'off'}`}>
+      {streamUnlock ? '✓' : '✗'} YouTube 4K
     </span>
   </div>
 
-  <!-- 操作按钮 -->
-  <div class="bcard-actions">
-    <a href={`/brands/${slug}/`} class="bcard-btn-outline" id={`brand-detail-${id}`}>
-      查看测评
+  <!-- 底部双按钮 -->
+  <div class="cyber-card-actions">
+    <a href={`/brands/${slug}/`} class="btn btn-secondary" style="flex: 1; padding: 0.5rem" id={`brand-detail-${id}`}>
+      测评详情
     </a>
     {url !== '#' ? (
       <a
         href={url}
         target="_blank"
         rel="noopener nofollow sponsored"
-        class="bcard-btn-solid"
+        class="btn btn-primary"
+        style="flex: 1; padding: 0.5rem"
         id={`brand-goto-${id}`}
-        title={`前往${name}官网注册`}
       >
-        立即注册 →
+        官网注册 →
       </a>
     ) : (
-      <span class="bcard-btn-disabled">暂未合作</span>
+      <span class="btn" style="flex: 1; padding: 0.5rem; background: rgba(255,255,255,0.04); color: var(--text-sub); border: 1px solid var(--border-color); cursor: not-allowed">
+        暂未收录
+      </span>
     )}
   </div>
 </div>
 
 <style>
-  .bcard {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    overflow: hidden;
+  .cyber-brand-card {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .bcard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(99,102,241,.12);
-    border-color: var(--brand-300);
   }
 
-  .bcard-header {
-    padding: 1.25rem 1.25rem 0;
-  }
-  .bcard-rank {
-    display: inline-flex;
-    align-items: center;
-    padding: .25rem .875rem;
-    border-radius: 9999px;
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: .04em;
-    margin-bottom: .875rem;
-  }
-  .bcard-name-row {
+  .cyber-card-header {
     display: flex;
     align-items: center;
-    gap: .875rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
   }
-  .bcard-avatar {
+
+  .cyber-rank-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .cyber-brand-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .cyber-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+    border: 1px solid rgba(139, 92, 246, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: .875rem;
-    background: linear-gradient(135deg, var(--brand-50), var(--brand-100));
-    border: 1px solid var(--brand-200);
     font-size: 1.25rem;
     font-weight: 800;
-    color: var(--brand-700);
+    color: #c084fc;
     flex-shrink: 0;
-  }
-  .bcard-name {
-    font-size: 1.125rem;
-    font-weight: 800;
-    color: var(--slate-900);
-    line-height: 1.3;
-  }
-  .bcard-tagline {
-    font-size: .75rem;
-    color: var(--slate-400);
-    margin-top: .25rem;
-    line-height: 1.4;
   }
 
-  .bcard-score-row {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    padding: 1rem 1.25rem .5rem;
+  .cyber-brand-name {
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--text-main);
   }
-  .bcard-score-label {
-    font-size: .75rem;
-    color: var(--slate-400);
-    flex-shrink: 0;
-    font-weight: 500;
+
+  .cyber-brand-tagline {
+    font-size: 0.75rem;
+    color: var(--text-sub);
+    margin-top: 0.125rem;
   }
-  .bcard-score-bar-wrap {
-    flex: 1;
-    height: 6px;
-    background: var(--slate-100);
+
+  .cyber-score-block {
+    margin-top: 1rem;
+  }
+
+  .cyber-score-track {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 3px;
     overflow: hidden;
   }
-  .bcard-score-bar {
+
+  .cyber-score-fill {
     height: 100%;
     border-radius: 3px;
-    transition: width 1s ease;
-  }
-  .bcard-score-num {
-    font-size: .9375rem;
-    font-weight: 800;
-    flex-shrink: 0;
-    min-width: 2.5rem;
-    text-align: right;
   }
 
-  .bcard-desc {
-    padding: .5rem 1.25rem;
-    font-size: .8125rem;
-    color: var(--slate-500);
-    line-height: 1.75;
+  .cyber-brand-desc {
+    margin-top: 0.875rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: 1.7;
   }
 
-  .bcard-metrics {
+  .cyber-metrics-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--slate-100);
-    border-bottom: 1px solid var(--slate-100);
-    margin-top: .75rem;
+    gap: 0.375rem;
+    margin-top: 1rem;
+    padding: 0.625rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
   }
-  .bcard-metric {
+
+  .cyber-metric-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: .875rem .5rem;
-    text-align: center;
-    border-right: 1px solid var(--slate-100);
-    transition: background .2s;
-  }
-  .bcard-metric:last-child { border-right: none; }
-  .bcard:hover .bcard-metric { background: var(--slate-50); }
-  .bcard-metric-icon {
-    font-size: 1rem;
-    line-height: 1;
-  }
-  .bcard-metric-val {
-    font-size: .8125rem;
-    font-weight: 700;
-    color: var(--slate-800);
-    margin-top: .25rem;
-    line-height: 1.2;
-  }
-  .bcard-metric-lab {
-    font-size: .65rem;
-    color: var(--slate-400);
-    margin-top: .125rem;
   }
 
-  .bcard-unlock-row {
+  .metric-val {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .metric-lab {
+    font-size: 0.65rem;
+    color: var(--text-sub);
+    margin-top: 0.125rem;
+  }
+
+  .cyber-unlock-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: .375rem;
-    padding: .875rem 1.25rem;
+    gap: 0.375rem;
+    margin-top: 0.875rem;
   }
-  .bcard-unlock {
-    display: inline-flex;
-    align-items: center;
-    gap: .25rem;
-    padding: .2rem .625rem;
-    border-radius: 9999px;
-    font-size: .7rem;
+
+  .unlock-pill {
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
     font-weight: 600;
-    border: 1px solid;
+    border: 1px solid transparent;
   }
-  .bcard-unlock.on {
-    background: #f0fdf4;
-    color: #15803d;
-    border-color: #bbf7d0;
+
+  .unlock-pill.on {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.25);
   }
-  .bcard-unlock.off {
-    background: var(--slate-50);
-    color: var(--slate-400);
-    border-color: var(--slate-200);
+
+  .unlock-pill.off {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-sub);
+    border-color: rgba(255, 255, 255, 0.05);
     text-decoration: line-through;
   }
 
-  .bcard-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .75rem;
-    padding: .875rem 1.25rem 1.25rem;
-    margin-top: auto;
-  }
-  .bcard-btn-outline, .bcard-btn-solid, .bcard-btn-disabled {
+  .cyber-card-actions {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: .5625rem;
-    border-radius: .5rem;
-    font-size: .8125rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all .2s;
-    cursor: pointer;
-  }
-  .bcard-btn-outline {
-    border: 1.5px solid var(--brand-300);
-    color: var(--brand-600);
-    background: var(--brand-50);
-  }
-  .bcard-btn-outline:hover {
-    background: var(--brand-100);
-    border-color: var(--brand-400);
-  }
-  .bcard-btn-solid {
-    background: linear-gradient(135deg, var(--brand-500), var(--brand-600));
-    color: #fff;
-    border: none;
-    box-shadow: 0 2px 8px rgba(99,102,241,.3);
-  }
-  .bcard-btn-solid:hover {
-    background: linear-gradient(135deg, var(--brand-600), var(--brand-700));
-    box-shadow: 0 4px 16px rgba(99,102,241,.4);
-    transform: translateY(-1px);
-  }
-  .bcard-btn-disabled {
-    background: var(--slate-100);
-    color: var(--slate-400);
-    border: 1.5px solid var(--slate-200);
-    cursor: not-allowed;
+    gap: 0.625rem;
+    margin-top: 1.25rem;
   }
 </style>

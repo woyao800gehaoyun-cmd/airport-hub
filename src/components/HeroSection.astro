@@ -1,114 +1,230 @@
 ---
-// src/components/HeroSection.astro
+// src/components/HeroSection.astro — 极客科技风全新 Hero
 ---
-<section class="hero-section" aria-label="站点介绍">
-  <!-- 背景光晕 -->
-  <div class="hero-glow" aria-hidden="true"></div>
+<section class="hero-cyber" aria-label="站点介绍">
+  <!-- 发光背景球与背景网格 -->
+  <div class="cyber-grid-bg" aria-hidden="true"></div>
+  <div class="glow-orb orb-1" aria-hidden="true"></div>
+  <div class="glow-orb orb-2" aria-hidden="true"></div>
 
-  <div class="container-site" style="position:relative">
-    <div class="hero-grid">
-      <!-- 左侧文案 -->
-      <div>
-        <span class="hero-eyebrow">
-          <span class="pulse-dot" style="color: var(--accent-500)" aria-hidden="true"></span>
-          2026 年持续实测更新
-        </span>
-
-        <h1 class="hero-title">
-          2026 机场推荐
-          <span class="hero-subtitle">科学上网导航</span>
-        </h1>
-
-        <p class="hero-desc">
-          clash-top 用统一维度实测主流机场：晚高峰速度、ChatGPT / Netflix 解锁、
-          线路架构与真实价格，提供 Clash, Shadowrocket 全平台配置教程 完美解锁 Netflix & ChatGPT 流媒体限制。
-        </p>
-
-        <div class="hero-cta">
-          <a href="/brands/" class="btn btn-primary" id="hero-cta-primary">
-            查看机场排行榜
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="/compare/" class="btn btn-secondary" id="hero-cta-secondary">横向对比</a>
-        </div>
-
-        <!-- 信任标签 -->
-        <div style="margin-top:1.75rem; display:flex; flex-wrap:wrap; gap:.5rem">
-          <span class="badge badge-green">✓ 真实实测</span>
-          <span class="badge badge-accent">✓ 每周更新</span>
-          <span class="badge">✓ 无利益干扰</span>
-          <span class="badge">✓ 跑路预警</span>
-        </div>
+  <div class="container-site style-relative">
+    <div class="hero-center-content">
+      <!-- 极客 Tag -->
+      <div class="hero-pill-badge">
+        <span class="pulse-dot" style="color: #38bdf8" aria-hidden="true"></span>
+        <span>2026 机场测评 & 状态极客实时监控中</span>
       </div>
 
-      <!-- 右侧日更资产面板 -->
-      <div class="card hero-panel">
-        <div class="hero-panel-header">
-          <span class="hero-panel-title">实时资产面板</span>
-          <span class="live-badge">
-            <span class="pulse-dot" style="color:var(--accent-500)" aria-hidden="true"></span>
-            运行中
-          </span>
-        </div>
+      <!-- 核心大标题 -->
+      <h1 class="hero-cyber-title">
+        2026 机场推荐
+        <span class="gradient-text-neon hero-cyber-subtitle">科学上网导航</span>
+      </h1>
 
-        <ul class="panel-list">
-          <li class="panel-item">
-            <span class="panel-dot" style="background:var(--accent-500)" aria-hidden="true"></span>
-            <div class="panel-item-info">
-              <span class="panel-item-title">每日免费节点</span>
-              <span class="panel-item-sub">每天 0 点刷新 · TG 每早 9 点推送</span>
-            </div>
-            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </li>
-          <li class="panel-item">
-            <span class="panel-dot" style="background:#f59e0b" aria-hidden="true"></span>
-            <div class="panel-item-info">
-              <span class="panel-item-title">跑路预警监控</span>
-              <span class="panel-item-sub">名单一变，TG 频道立刻推送</span>
-            </div>
-            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </li>
-          <li class="panel-item">
-            <span class="panel-dot" style="background:#f43f5e" aria-hidden="true"></span>
-            <div class="panel-item-info">
-              <span class="panel-item-title">品牌测评数据库</span>
-              <span class="panel-item-sub">10+ 家实测 · 12 项维度 · 价格每周复核</span>
-            </div>
-            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </li>
-          <li class="panel-item" style="border-bottom:none">
-            <span class="panel-dot" style="background:var(--brand-500)" aria-hidden="true"></span>
-            <div class="panel-item-info">
-              <span class="panel-item-title">问题库 180+ 条</span>
-              <span class="panel-item-sub">常见疑问全覆盖 · 持续扩充中</span>
-            </div>
-            <svg class="panel-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </li>
-        </ul>
+      <!-- 小字描述段落 (按用户准确要求) -->
+      <p class="hero-cyber-desc">
+        clash-top 用统一维度实测主流机场：晚高峰速度、ChatGPT / Netflix 解锁、线路架构与真实价格，提供 Clash, Shadowrocket 全平台配置教程 完美解锁 Netflix & ChatGPT 流媒体限制。
+      </p>
 
-        <p class="panel-footer">
-          10+ 家机场统一实测（持续收录中）· 180 题问题库 · 价格与优惠码每周复核
-        </p>
-
-        <div class="panel-actions">
-          <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; justify-content:center; padding:.625rem; font-size:.8125rem" id="panel-tg-btn">
-            📢 订阅 TG 频道
-          </a>
-          <a href="/brands/" class="btn btn-secondary" style="flex:1; justify-content:center; padding:.625rem; font-size:.8125rem" id="panel-brands-btn">
-            查看排行榜
-          </a>
-        </div>
+      <!-- 操作按钮组 -->
+      <div class="hero-cyber-cta">
+        <a href="/brands/" class="btn btn-primary btn-lg" id="hero-cta-primary">
+          🏆 查看 2026 机场排行榜
+        </a>
+        <a href="/compare/" class="btn btn-secondary btn-lg" id="hero-cta-secondary">
+          ⚖️ 横向参数对比
+        </a>
+        <a href="/tg/" target="_blank" rel="noopener" class="btn btn-ghost btn-lg" id="hero-cta-tg">
+          📢 订阅 TG 频道
+        </a>
       </div>
+
+      <!-- 标签点阵 -->
+      <div class="hero-tags-row">
+        <span class="badge badge-green">✓ 真实自费实测</span>
+        <span class="badge badge-cyan">✓ 每周价格复核</span>
+        <span class="badge badge-brand">✓ 专线/ANYCAST 收录</span>
+        <span class="badge badge-rose">✓ 跑路实时预警</span>
+      </div>
+    </div>
+
+    <!-- 底部极客雷达网格 (Radar Grid) -->
+    <div class="radar-grid">
+      <a href="/free-node/" class="card card-hover radar-card">
+        <div class="radar-card-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8">📡</div>
+        <div>
+          <h3 class="radar-card-title">每日免费节点</h3>
+          <p class="radar-card-desc">每天 0 点刷新 · TG 频道推送</p>
+        </div>
+      </a>
+
+      <a href="/airport-status/" class="card card-hover radar-card">
+        <div class="radar-card-icon" style="background: rgba(244, 63, 94, 0.15); color: #fb7185">🚨</div>
+        <div>
+          <h3 class="radar-card-title">跑路预警监控</h3>
+          <p class="radar-card-desc">状态异动第一时间安全提醒</p>
+        </div>
+      </a>
+
+      <a href="/brands/" class="card card-hover radar-card">
+        <div class="radar-card-icon" style="background: rgba(167, 139, 250, 0.15); color: #c084fc">⚡</div>
+        <div>
+          <h3 class="radar-card-title">实测数据库</h3>
+          <p class="radar-card-desc">10+ 品牌 · 12 项维度横向考核</p>
+        </div>
+      </a>
+
+      <a href="/faq/" class="card card-hover radar-card">
+        <div class="radar-card-icon" style="background: rgba(52, 211, 153, 0.15); color: #34d399">💡</div>
+        <div>
+          <h3 class="radar-card-title">180+ 问题解答</h3>
+          <p class="radar-card-desc">排障全覆盖 · 进阶答疑</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-cyber {
+    position: relative;
+    padding-block: 5.5rem 3.5rem;
+    overflow: hidden;
+  }
+
+  .cyber-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  .orb-1 {
+    top: -100px;
+    left: 20%;
+    width: 350px;
+    height: 350px;
+    background: #8b5cf6;
+  }
+  .orb-2 {
+    top: -50px;
+    right: 20%;
+    width: 300px;
+    height: 300px;
+    background: #06b6d4;
+  }
+
+  .hero-center-content {
+    max-width: 52rem;
+    margin-inline: auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    color: #c084fc;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-cyber-title {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #ffffff;
+  }
+
+  .hero-cyber-subtitle {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .hero-cyber-desc {
+    margin-top: 1.5rem;
+    font-size: 1.0625rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  .hero-cyber-cta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 2.25rem;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-tags-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  /* 底部雷达网格 */
+  .radar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+    margin-top: 4rem;
+  }
+
+  .radar-card {
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(17, 24, 39, 0.6);
+  }
+
+  .radar-card-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .radar-card-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .radar-card-desc {
+    font-size: 0.75rem;
+    color: var(--text-sub);
+    margin-top: 0.125rem;
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-// src/pages/index.astro
+// src/pages/index.astro — 首页 (Cyber-Tech 全新架构)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -20,120 +20,112 @@ const featuredTopics = getFeaturedTopics(3);
 ---
 
 <BaseLayout
-  title="机场推荐 2026 — 稳定/便宜/专线机场排行榜 | clash-top"
-  description="clash-top 是专注机场推荐的中文测评站：2026机场排行榜、稳定机场推荐、便宜机场、专线机场测评，云图/瞬云等主流机场对比，Clash节点订阅教程，帮你快速找到靠谱机场。"
-  keywords="机场推荐,机场推荐2026,2026机场推荐,稳定机场,便宜机场,专线机场,机场排行榜,Clash机场,机场对比,云图机场,瞬云机场,科学上网,翻墙工具,VPN推荐,梯子推荐,IEPL机场,IPLC机场,ChatGPT机场,Netflix解锁,流媒体机场,机场测评,机场购买,机场注册,clash-top,Clash节点,订阅链接"
+  title="2026 机场推荐 科学上网导航 | clash-top"
+  description="clash-top 用统一维度实测主流机场：晚高峰速度、ChatGPT / Netflix 解锁、线路架构与真实价格，提供 Clash, Shadowrocket 全平台配置教程 完美解锁 Netflix & ChatGPT 流媒体限制。"
 >
   <Header slot="header" currentPath="/" />
 
-  <!-- 1. Hero -->
+  <!-- 1. Hero 极客中心通栏 -->
   <HeroSection />
 
-  <!-- 2. Stats Bar -->
+  <!-- 2. 数据统计指标 -->
   <StatsBar />
 
-  <!-- 3. 核心栏目 -->
+  <!-- 3. 核心栏目导航网格 -->
   <FeatureGrid />
 
-  <!-- 4. 最新文章 -->
-  <section class="section" style="background:#fff; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border)" aria-labelledby="latest-title">
+  <!-- 4. 热门品牌（云图、瞬云等）实测展示 -->
+  <section class="section" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: rgba(17, 24, 39, 0.4)">
     <div class="container-site">
-      <div class="section-row-header">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem">
         <div>
-          <p class="section-eyebrow">最新内容</p>
-          <h2 class="section-title" id="latest-title">推荐文章</h2>
-          <p class="section-desc">最近发布与更新的文章，内容持续补充中。</p>
+          <span class="badge badge-brand">精选实测</span>
+          <h2 class="section-title" style="margin-top: 0.5rem">热门机场排行榜</h2>
+          <p class="section-desc">包含云图金融级专线、瞬云 ANYCAST 等热门服务，套餐与链接实时对齐。</p>
         </div>
-        <a href="/blog/" class="btn btn-ghost" id="latest-more-btn">查看全部 →</a>
+        <a href="/brands/" class="btn btn-secondary">查看完整品牌库 →</a>
       </div>
 
-      <div class="articles-grid">
-        {recentArticles.map(article => (
-          <ArticleCard {...article} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. 专题聚合 -->
-  <section class="section container-site" aria-labelledby="topics-title">
-    <div class="section-row-header">
-      <div>
-        <p class="section-eyebrow">专题聚合</p>
-        <h2 class="section-title" id="topics-title">按专题系统阅读</h2>
-        <p class="section-desc">同一主题的文章聚合成专题，按推荐顺序阅读效率更高。</p>
-      </div>
-      <a href="/topics/" class="btn btn-ghost" id="topics-more-btn">全部专题 →</a>
-    </div>
-
-    <div class="topics-grid">
-      {featuredTopics.map(topic => (
-        <a href={`/topics/${topic.slug}/`} class="card card-hover topic-card" id={`topic-${topic.slug}`}>
-          <div class="topic-orb" aria-hidden="true"></div>
-          <span class="badge badge-brand topic-count">{topic.articleCount} 篇内容</span>
-          <h3 class="topic-title">
-            {topic.emoji} {topic.title}
-          </h3>
-          <p class="topic-desc">{topic.desc}</p>
-          <span class="topic-more">
-            进入专题
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- 6. 品牌展示 -->
-  <section class="section" style="background:#fff; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border)" aria-labelledby="brands-title">
-    <div class="container-site">
-      <div class="section-row-header">
-        <div>
-          <p class="section-eyebrow">品牌库</p>
-          <h2 class="section-title" id="brands-title">热门机场一览</h2>
-          <p class="section-desc">品牌基础信息、特点与评分集中在一页，方便快速了解。</p>
-        </div>
-        <a href="/brands/" class="btn btn-ghost" id="brands-more-btn">进入品牌库 →</a>
-      </div>
-
-      <div class="brands-grid">
+      <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr))">
         {topBrands.map(brand => (
           <BrandCard {...brand} />
         ))}
       </div>
+    </div>
+  </section>
 
-      <div style="margin-top:1.5rem; text-align:center">
-        <a href="/brands/" class="btn btn-secondary" id="brands-full-btn">查看全部 10+ 家品牌</a>
+  <!-- 5. 推荐教程与文章 -->
+  <section class="section container-site">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem">
+      <div>
+        <span class="badge badge-cyan">全平台教程</span>
+        <h2 class="section-title" style="margin-top: 0.5rem">Clash & Shadowrocket 配置教程</h2>
+        <p class="section-desc">手把手教你订阅导入、分流规则配置，完美解锁 Netflix 与 ChatGPT 限制。</p>
+      </div>
+      <a href="/blog/" class="btn btn-ghost">全部文章 →</a>
+    </div>
+
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))">
+      {recentArticles.map(article => (
+        <ArticleCard {...article} />
+      ))}
+    </div>
+  </section>
+
+  <!-- 6. 专题聚合 -->
+  <section class="section" style="background: rgba(17, 24, 39, 0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
+    <div class="container-site">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem">
+        <div>
+          <span class="badge badge-brand">系统学习</span>
+          <h2 class="section-title" style="margin-top: 0.5rem">按专题系统阅读</h2>
+          <p class="section-desc">同主题内容聚合成专题，小白入门到高手进阶循序渐进。</p>
+        </div>
+        <a href="/topics/" class="btn btn-secondary">全部专题 →</a>
+      </div>
+
+      <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))">
+        {featuredTopics.map(topic => (
+          <a href={`/topics/${topic.slug}/`} class="card card-hover" style="padding: 1.75rem; text-decoration: none">
+            <span class="badge badge-cyan">{topic.articleCount} 篇精选</span>
+            <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin-top: 1rem">
+              {topic.emoji} {topic.title}
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.7">
+              {topic.desc}
+            </p>
+            <div style="margin-top: 1.25rem; font-size: 0.8125rem; font-weight: 700; color: #c084fc">
+              进入专题 →
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- 7. 横向对比 -->
+  <!-- 7. 横向对比表格组件 -->
   <CompareTable />
 
-  <!-- 8. FAQ -->
+  <!-- 8. 高频问题 FAQ 展区 -->
   <FaqAccordion />
 
-  <!-- 9. CTA Banner -->
-  <section style="background:linear-gradient(135deg, var(--brand-600), var(--brand-800)); padding-block:3.5rem" aria-labelledby="cta-title">
-    <div class="container-site" style="text-align:center">
-      <span style="display:inline-flex; align-items:center; gap:.5rem; padding:.3rem .875rem; border-radius:9999px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25); font-size:.8125rem; font-weight:600; color:rgba(255,255,255,.9); margin-bottom:1.25rem">
-        <span class="pulse-dot" style="color:#fff" aria-hidden="true"></span>
-        TG 频道每日更新
+  <!-- 9. 极客 CTA 终极 Banner -->
+  <section style="padding-block: 4rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.2)); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
+    <div class="container-site" style="text-align: center; max-width: 44rem; margin-inline: auto">
+      <span class="badge badge-cyan" style="margin-bottom: 1rem">
+        📢 实时情报接收
       </span>
-      <h2 class="section-title" id="cta-title" style="color:#fff; margin-top:0">
-        第一时间获取机场情报
+      <h2 style="font-size: 2rem; font-weight: 900; color: #ffffff">
+        订阅 Telegram 官方频道
       </h2>
-      <p style="color:rgba(255,255,255,.75); max-width:32rem; margin:1rem auto 0; font-size:1rem; line-height:1.75">
-        订阅 TG 频道，免费节点每早推送、跑路预警即时通知、优惠码第一时间分享。
+      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem; line-height: 1.8">
+        每日零点更新免费节点、跑路预警即时通知、各大机场限时优惠码第一时间发布。
       </p>
-      <div style="margin-top:2rem; display:flex; justify-content:center; flex-wrap:wrap; gap:.75rem">
-        <a href="/tg/" target="_blank" rel="noopener" class="btn" style="background:#fff; color:var(--brand-700); border-color:#fff; font-weight:700; padding:.75rem 1.75rem" id="cta-tg-btn">
-          📢 订阅 TG 频道
+      <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap">
+        <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem">
+          📢 立即订阅 TG 频道
         </a>
-        <a href="/brands/" class="btn" style="background:transparent; color:#fff; border-color:rgba(255,255,255,.4); padding:.75rem 1.75rem" id="cta-brands-btn">
+        <a href="/brands/" class="btn btn-secondary" style="padding: 0.75rem 2rem; font-size: 1rem">
           查看机场排行榜
         </a>
       </div>

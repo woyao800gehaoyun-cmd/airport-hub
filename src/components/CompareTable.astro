@@ -1,80 +1,64 @@
 ---
-// src/components/CompareTable.astro
-// 首页对比预览表，显示前 5 家
+// src/components/CompareTable.astro — 极客风横向对比表
 import { brands } from '../data/brands';
 
 const previewBrands = brands.slice(0, 5);
 
 function checkIcon(v: boolean) {
   return v
-    ? '<span style="color:#16a34a; font-weight:700">✓</span>'
-    : '<span style="color:#94a3b8">—</span>';
+    ? '<span style="color:#34d399; font-weight:700">✓ 解锁</span>'
+    : '<span style="color:var(--text-sub)">—</span>';
 }
 ---
 
 <section class="section container-site" aria-labelledby="compare-title">
-  <div class="section-row-header">
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem">
     <div>
-      <p class="section-eyebrow">横向对比</p>
-      <h2 class="section-title" id="compare-title">关键差异一张表看懂</h2>
-      <p class="section-desc">统一维度横向对比，价格、线路、解锁支持一目了然。</p>
+      <span class="badge badge-cyan">横向评测</span>
+      <h2 class="section-title" id="compare-title" style="margin-top: 0.5rem">头部机场关键参数对比</h2>
+      <p class="section-desc">价格、节点架构、流媒体与 AI 解锁能力一表速查。</p>
     </div>
-    <a href="/compare/" class="btn btn-ghost" id="compare-more-btn">完整对比 →</a>
+    <a href="/compare/" class="btn btn-secondary">查看完整 10+ 家对比表 →</a>
   </div>
 
-  <div class="compare-wrapper">
-    <div class="compare-table-head">
-      <h3 style="font-size:.9375rem; font-weight:700; color:var(--slate-900)">头部机场速览</h3>
-      <p style="font-size:.8125rem; color:var(--slate-500); margin-top:.25rem">完整对比请前往对比页</p>
-    </div>
-    <div style="overflow-x:auto">
-      <table class="data-table" style="min-width:36rem">
-        <thead>
+  <div class="card" style="overflow-x: auto">
+    <table class="data-table" style="min-width: 40rem">
+      <thead>
+        <tr>
+          <th>机场名称</th>
+          <th>实测评分</th>
+          <th>起步价</th>
+          <th>协议架构</th>
+          <th>流媒体解锁</th>
+          <th>AI 工具支持</th>
+          <th>推荐级别</th>
+        </tr>
+      </thead>
+      <tbody>
+        {previewBrands.map(b => (
           <tr>
-            <th>机场名称</th>
-            <th>综合评分</th>
-            <th>起步价</th>
-            <th>线路类型</th>
-            <th>流媒体</th>
-            <th>AI 解锁</th>
-            <th>推荐级别</th>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem">
+                <span class="badge badge-brand">{b.rank}</span>
+                <span style="font-weight: 700; color: var(--text-main)">{b.name}</span>
+              </div>
+            </td>
+            <td>
+              <span style="font-weight: 800; color: #34d399">{b.score.toFixed(1)}</span>
+              <span style="color: var(--text-sub); font-size: 0.75rem"> / 10</span>
+            </td>
+            <td style="font-weight: 700">{b.priceFrom}</td>
+            <td>
+              <span class="badge">{b.protocol.split('+')[0].trim()}</span>
+            </td>
+            <td set:html={checkIcon(b.streamUnlock)} />
+            <td set:html={checkIcon(b.aiUnlock)} />
+            <td>
+              <span class={`badge ${b.rank === 1 ? 'badge-amber' : 'badge-green'}`}>{b.rankLabel}</span>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {previewBrands.map(b => (
-            <tr>
-              <td>
-                <div style="display:flex; align-items:center; gap:.625rem">
-                  <span class={`rank-badge ${b.rank === 1 ? 'rank-1' : b.rank === 2 ? 'rank-2' : b.rank === 3 ? 'rank-3' : 'rank-n'}`}>{b.rank}</span>
-                  <span style="font-weight:600; color:var(--slate-900)">{b.name}</span>
-                </div>
-              </td>
-              <td>
-                <span style="font-weight:700; color:var(--brand-700)">{b.score.toFixed(1)}</span>
-                <span style="color:var(--slate-400); font-size:.75rem">/10</span>
-              </td>
-              <td style="font-weight:600">{b.priceFrom}</td>
-              <td>
-                <span class="badge">{b.protocol.split('+')[0].trim()}</span>
-              </td>
-              <td set:html={checkIcon(b.streamUnlock)} />
-              <td set:html={checkIcon(b.aiUnlock)} />
-              <td>
-                <span class={`badge ${b.rank === 1 ? 'badge-brand' : 'badge-green'}`}>{b.rankLabel}</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div style="margin-top:1.25rem; text-align:center">
-    <a href="/compare/" class="btn btn-secondary" id="compare-full-btn">
-      查看完整 10 家对比表
-      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-      </svg>
-    </a>
+        ))}
+      </tbody>
+    </table>
   </div>
 </section>

@@ -1,22 +1,25 @@
 ---
-// src/components/StatsBar.astro
+// src/components/StatsBar.astro — 极客风数据统计条
 const stats = [
-  { value: '10+', label: '收录机场', sub: '进品牌库逐家看', href: '/brands/' },
-  { value: '12 项', label: '评测维度', sub: '对比表一览', href: '/compare/' },
-  { value: '180+', label: '长尾问题', sub: '进问题库查答案', href: '/faq/' },
-  { value: '每周', label: '更新频率', sub: '看最新文章', href: '/blog/' },
+  { value: '10+', label: '收录机场品牌', sub: '云图/瞬云等实测', href: '/brands/' },
+  { value: '12 项', label: '测评维度', sub: '晚高峰速度与解锁', href: '/compare/' },
+  { value: '180+', label: '高频问题解答', sub: '排障与选购指南', href: '/faq/' },
+  { value: '每周', label: '数据复核更新', sub: '价格优惠及时对齐', href: '/blog/' },
 ];
 ---
 
-<section class="container-site" style="padding-top:0; padding-bottom:2rem" aria-label="数据统计">
-  <div class="card stats-bar" style="margin-top:-1.5rem">
+<section class="container-site" style="padding-block: 0 2rem" aria-label="核心指标">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem">
     {stats.map(s => (
-      <a href={s.href} class="stats-item" style="text-decoration:none; cursor:pointer">
-        <p class="stats-value">{s.value}</p>
-        <p class="stats-label">{s.label}</p>
-        <p class="stats-sub">
-          {s.sub}
-          <span style="display:inline-block; transition:transform .2s" aria-hidden="true"> →</span>
+      <a href={s.href} class="card card-hover" style="padding: 1.5rem; text-align: center; text-decoration: none">
+        <p style="font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #a78bfa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1">
+          {s.value}
+        </p>
+        <p style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-top: 0.5rem">
+          {s.label}
+        </p>
+        <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">
+          {s.sub} →
         </p>
       </a>
     ))}

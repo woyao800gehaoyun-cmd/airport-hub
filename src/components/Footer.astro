@@ -1,28 +1,33 @@
 ---
-// src/components/Footer.astro
+// src/components/Footer.astro — 极客深色 Footer
 const year = new Date().getFullYear();
 
 const navCols = [
   {
-    title: '内容导航',
+    title: '核心导航',
     links: [
-      { href: '/', label: '首页' },
-      { href: '/brands/', label: '品牌库' },
-      { href: '/blog/', label: '博客文章' },
+      { href: '/', label: '首页推荐' },
+      { href: '/brands/', label: '机场品牌库' },
+      { href: '/compare/', label: '横向对比表' },
       { href: '/topics/', label: '专题聚合' },
-      { href: '/compare/', label: '横向对比' },
-      { href: '/faq/', label: '问题库' },
     ],
   },
   {
-    title: '快速访问',
+    title: '内容分类',
     links: [
-      { href: '/free-node/', label: '每日免费节点' },
-      { href: '/airport-status/', label: '跑路预警' },
+      { href: '/blog/', label: '全部文章' },
       { href: '/category/tutorial/', label: '使用教程' },
       { href: '/category/review/', label: '深度评测' },
-      { href: '/category/compare/', label: '对比文章' },
-      { href: '/about/', label: '关于本站' },
+      { href: '/faq/', label: '高频问题库' },
+    ],
+  },
+  {
+    title: '动态资产',
+    links: [
+      { href: '/free-node/', label: '每日免费节点' },
+      { href: '/airport-status/', label: '跑路预警监控' },
+      { href: '/tg/', label: '官方 Telegram 频道' },
+      { href: '/about/', label: '关于本站方法论' },
     ],
   },
 ];
@@ -30,45 +35,32 @@ const navCols = [
 
 <footer class="site-footer">
   <div class="container-site">
-    <div class="footer-grid">
-      <!-- 品牌简介 -->
+    <div style="display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))">
+      <!-- 品牌列 -->
       <div>
-        <div class="footer-logo-icon" aria-hidden="true">C</div>
-        <div class="footer-brand-name">clash-top</div>
-        <p class="footer-desc">
-          专注机场推荐的中文测评站。统一维度实测，每周复核更新，
-          帮你从海量选项中快速找到稳定、靠谱的代理服务。云图·瞬云·机场对比一站全搞定。
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem">
+          <div class="logo-icon" style="width: 2rem; height: 2rem; font-size: 1rem">C</div>
+          <span class="gradient-text-neon" style="font-size: 1.25rem; font-weight: 900">clash-top</span>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; max-width: 22rem">
+          专注机场推荐与科学上网导航的极客测评站。提供 Clash、Shadowrocket 全平台教程与云图/瞬云实测数据。
         </p>
-        <div style="margin-top:1.25rem; display:flex; gap:.75rem; flex-wrap:wrap">
-          <a
-            href="/tg/"
-            target="_blank"
-            rel="noopener"
-            class="btn btn-secondary"
-            style="padding:.5rem 1rem; font-size:.8rem; color:#94a3b8; border-color:#334155; background:#1e293b"
-            aria-label="前往 Telegram 频道"
-          >
-            📢 TG 频道
-          </a>
-          <a
-            href="/rss.xml"
-            class="btn btn-secondary"
-            style="padding:.5rem 1rem; font-size:.8rem; color:#94a3b8; border-color:#334155; background:#1e293b"
-            aria-label="RSS 订阅"
-          >
-            🔔 RSS 订阅
-          </a>
+        <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem">
+          <span class="badge badge-brand">✓ 自费实测</span>
+          <span class="badge badge-cyan">✓ 价格每周复核</span>
         </div>
       </div>
 
-      <!-- 导航链接 -->
+      <!-- 导航列 -->
       {navCols.map(col => (
         <div>
-          <p class="footer-col-title">{col.title}</p>
-          <ul class="footer-links">
+          <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem">{col.title}</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.625rem">
             {col.links.map(link => (
               <li>
-                <a href={link.href}>{link.label}</a>
+                <a href={link.href} style="font-size: 0.8125rem; color: var(--text-muted); transition: color 0.2s" onmouseover="this.style.color='#c084fc'" onmouseout="this.style.color='var(--text-muted)'">
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
@@ -77,12 +69,12 @@ const navCols = [
     </div>
 
     <!-- 底部版权 -->
-    <div class="footer-bottom">
-      <span>© {year} clash-top · 内容仅供参考，请遵守当地法律法规</span>
-      <div style="display:flex; gap:1.25rem">
-        <a href="/about/" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">关于</a>
-        <a href="/disclaimer/" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">免责声明</a>
-        <a href="/sitemap-index.xml" style="color:var(--slate-500); transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--slate-500)'">站点地图</a>
+    <div style="border-top: 1px solid var(--border-color); margin-top: 3rem; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--text-sub)">
+      <span>© {year} clash-top · 2026 机场推荐 科学上网导航</span>
+      <div style="display: flex; gap: 1rem">
+        <a href="/about/" style="color: var(--text-sub)">关于本站</a>
+        <a href="/faq/" style="color: var(--text-sub)">常见问题</a>
+        <a href="/tg/" style="color: var(--text-sub)">TG 频道</a>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 ---
-// src/components/Header.astro
+// src/components/Header.astro — 极客深色 Header
 export interface Props {
   currentPath?: string;
 }
@@ -8,25 +8,20 @@ const { currentPath = '/' } = Astro.props;
 const navLinks = [
   { href: '/', label: '首页' },
   { href: '/brands/', label: '品牌库' },
-  { href: '/blog/', label: '博客' },
-  { href: '/topics/', label: '专题' },
+  { href: '/blog/', label: '博客文章' },
+  { href: '/topics/', label: '专题聚合' },
   { href: '/compare/', label: '横向对比' },
   { href: '/faq/', label: '问题库' },
-  { href: '/about/', label: '关于' },
-];
-
-const specialLinks = [
-  { href: '/free-node/', label: '免费节点', color: '#06b6d4' },
-  { href: '/airport-status/', label: '跑路预警', color: '#f43f5e' },
+  { href: '/about/', label: '关于本站' },
 ];
 ---
 
 <header class="site-header">
   <div class="container-site header-inner">
     <!-- Logo -->
-    <a href="/" class="logo" aria-label="clash-top 机场推荐首页">
-      <span class="logo-icon" aria-hidden="true">C</span>
-      <span class="logo-name">clash-top</span>
+    <a href="/" class="logo" aria-label="clash-top 科学上网导航首页">
+      <div class="logo-icon" aria-hidden="true">C</div>
+      <span class="gradient-text-neon" style="font-weight: 900; font-size: 1.25rem;">clash-top</span>
     </a>
 
     <!-- 桌面导航 -->
@@ -41,94 +36,51 @@ const specialLinks = [
         </a>
       ))}
 
-      <!-- 特殊标签组 -->
-      <div class="nav-special-group">
-        {specialLinks.map(link => (
-          <a href={link.href} class="nav-special-link">
-            {link.label}
-            <span
-              class="pulse-dot"
-              style={`color: ${link.color}`}
-              aria-hidden="true"
-            ></span>
-          </a>
-        ))}
+      <!-- 特殊发光标签组 -->
+      <div style="display: flex; gap: 0.375rem; margin-left: 0.5rem">
+        <a href="/free-node/" class="badge badge-cyan" style="padding: 0.35rem 0.75rem; text-decoration: none">
+          <span>免费节点</span>
+          <span class="pulse-dot" style="color: #38bdf8" aria-hidden="true"></span>
+        </a>
+        <a href="/airport-status/" class="badge badge-rose" style="padding: 0.35rem 0.75rem; text-decoration: none">
+          <span>跑路预警</span>
+          <span class="pulse-dot" style="color: #fb7185" aria-hidden="true"></span>
+        </a>
       </div>
     </nav>
 
     <!-- 操作区 -->
-    <div class="header-actions">
-      <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" id="header-tg-btn" title="订阅 TG 频道，获取每日更新推送" style="padding: 0.5rem 1rem; font-size: 0.8125rem; display: none;" aria-label="订阅 Telegram 频道">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-        </svg>
-        TG 频道
-        <span class="pulse-dot" style="color:#fff; width:.375rem; height:.375rem;" aria-hidden="true"></span>
+    <div style="display: flex; align-items: center; gap: 0.75rem">
+      <a
+        href="/tg/"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-primary"
+        id="header-tg-btn"
+        style="padding: 0.45rem 1rem; font-size: 0.8125rem"
+      >
+        <span>📢 官方 TG 频道</span>
       </a>
 
-      <!-- 移动端汉堡菜单按钮 -->
+      <!-- 移动端菜单切换按钮 -->
       <button
         id="mobile-menu-toggle"
-        class="mobile-menu-btn"
-        type="button"
-        aria-label="打开导航菜单"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
+        style="background: transparent; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; display: none"
+        aria-label="切换导航菜单"
       >
-        <svg id="menu-icon-open" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg id="menu-icon-close" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:none">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        ≡
       </button>
     </div>
   </div>
-
-  <!-- 移动端菜单 -->
-  <nav id="mobile-menu" class="mobile-nav" aria-label="移动端导航">
-    <div class="container-site mobile-nav-inner">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class={`mobile-nav-link${currentPath === link.href ? ' active' : ''}`}
-          aria-current={currentPath === link.href ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      ))}
-      {specialLinks.map(link => (
-        <a href={link.href} class="mobile-nav-link" style="font-weight:600">
-          {link.label}
-          <span class="pulse-dot" style={`color: ${link.color}; margin-left:.25rem`} aria-hidden="true"></span>
-        </a>
-      ))}
-      <a href="/tg/" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:.5rem; justify-content:center">
-        订阅 TG 频道
-      </a>
-    </div>
-  </nav>
 </header>
 
-<script>
-  // 汉堡菜单切换
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('menu-icon-open');
-  const iconClose = document.getElementById('menu-icon-close');
-
-  toggle?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    if (iconOpen) iconOpen.style.display = isOpen ? 'none' : 'block';
-    if (iconClose) iconClose.style.display = isOpen ? 'block' : 'none';
-  });
-
-  // 在 sm 以上显示 TG 按钮
-  function updateTgBtn() {
-    const btn = document.getElementById('header-tg-btn');
-    if (btn) btn.style.display = window.innerWidth >= 640 ? 'inline-flex' : 'none';
+<style>
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none !important;
+    }
+    #mobile-menu-toggle {
+      display: block !important;
+    }
   }
-  updateTgBtn();
-  window.addEventListener('resize', updateTgBtn);
-</script>
+</style>

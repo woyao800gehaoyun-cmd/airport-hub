@@ -1,70 +1,78 @@
 ---
-// src/components/FeatureGrid.astro
+// src/components/FeatureGrid.astro — 极客科技风 核心栏目网格
 const features = [
   {
     href: '/brands/',
     icon: '🏆',
     title: '机场排行榜',
-    desc: '主流机场按线路、速度、解锁与性价比综合排序，主推次推一目了然。',
-    id: 'feature-brands',
+    desc: '云图、瞬云等主流机场按线路、速度、解锁与性价比综合排序，主推次推一目了然。',
+    color: '#8b5cf6',
   },
   {
-    href: '/category/review/',
-    icon: '🔍',
-    title: '深度评测',
-    desc: '单家机场完整测评：测速图、解锁实测、线路拓扑与编辑结论。',
-    id: 'feature-review',
-  },
-  {
-    href: '/category/tutorial/',
+    href: '/blog/',
     icon: '📘',
-    title: '新手教程',
-    desc: 'Clash、小火箭、v2rayN、sing-box 订阅导入与配置，跟着做 5 分钟用上。',
-    id: 'feature-tutorial',
+    title: '全平台配置教程',
+    desc: '提供 Clash, Shadowrocket, v2rayN, sing-box 订阅导入与配置指南，跟着做 5 分钟上手。',
+    color: '#06b6d4',
   },
   {
     href: '/compare/',
     icon: '⚖️',
-    title: '横向对比',
-    desc: '价格、流量、线路、解锁放进同一张表，关键差异一眼看懂。',
-    id: 'feature-compare',
-  },
-  {
-    href: '/faq/',
-    icon: '💡',
-    title: '长尾问题库',
-    desc: '「机场是什么」「晚高峰卡怎么办」，180+ 个高频问题逐条解答。',
-    id: 'feature-faq',
+    title: '横向数据对比',
+    desc: '价格、流量、专线类型、流媒体与 AI 解锁能力一张大表统一对标，清晰透明。',
+    color: '#10b981',
   },
   {
     href: '/topics/',
     icon: '📚',
-    title: '专题聚合',
-    desc: '新手入门、客户端教程、进阶选购，按专题系统阅读效率更高。',
-    id: 'feature-topics',
+    title: '专题聚合目录',
+    desc: '新手入门、客户端教程、进阶选购，按专题系统化阅读，提升效率 3 倍。',
+    color: '#f59e0b',
+  },
+  {
+    href: '/faq/',
+    icon: '💡',
+    title: '180+ 高频问题库',
+    desc: '「晚高峰卡顿」「IPLC/IEPL 区别」「Netflix/ChatGPT 限制解封」等常见疑问解答。',
+    color: '#ec4899',
+  },
+  {
+    href: '/airport-status/',
+    icon: '🚨',
+    title: '跑路预警与雷达',
+    desc: '全天候监控机场运营状态，避免卷款风险，保障代理服务与资金安全。',
+    color: '#f43f5e',
   },
 ];
 ---
 
 <section class="section container-site" aria-labelledby="features-title">
-  <div style="max-width:42rem">
-    <p class="section-eyebrow">核心栏目</p>
-    <h2 class="section-title" id="features-title">从入门到选择，一站式内容体系</h2>
-    <p class="section-desc">教程、评测、对比、品牌库互相配合，覆盖从了解到决策的完整路径。</p>
+  <div style="text-align: center; max-width: 40rem; margin-inline: auto">
+    <span class="badge badge-brand">全方位导航体系</span>
+    <h2 class="section-title" id="features-title" style="margin-top: 0.75rem">
+      从新手教程到精细对比，一站式导航
+    </h2>
+    <p class="section-desc" style="margin-inline: auto; margin-top: 0.75rem">
+      精选测评与全平台教程配合，帮你在复杂的选择中快速做出最正确的决策。
+    </p>
   </div>
 
-  <div class="feature-grid" style="margin-top:2.5rem">
+  <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-top: 3rem">
     {features.map(f => (
-      <a href={f.href} class="card card-hover feature-card" id={f.id}>
-        <span class="feature-icon" aria-hidden="true">{f.icon}</span>
-        <h3 class="feature-title">{f.title}</h3>
-        <p class="feature-desc">{f.desc}</p>
-        <span class="feature-more">
-          查看更多
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </span>
+      <a href={f.href} class="card card-hover" style="padding: 1.75rem; text-decoration: none">
+        <div style={`width: 3rem; height: 3rem; border-radius: var(--radius-md); background: ${f.color}1f; border: 1px solid ${f.color}40; color: ${f.color}; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem`}>
+          {f.icon}
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); line-height: 1.3">
+          {f.title}
+        </h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.625rem; line-height: 1.7">
+          {f.desc}
+        </p>
+        <div style="margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.8125rem; font-weight: 700; color: #a78bfa">
+          <span>进入栏目</span>
+          <span>→</span>
+        </div>
       </a>
     ))}
   </div>
