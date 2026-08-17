@@ -35,7 +35,7 @@ const featuredTopics = getFeaturedTopics(3);
   <FeatureGrid />
 
   <!-- 4. 热门品牌（云图、瞬云等）实测展示 -->
-  <section class="section" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: rgba(17, 24, 39, 0.4)">
+  <section class="section" style="border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: var(--bg-secondary)">
     <div class="container-site">
       <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem">
         <div>
@@ -73,7 +73,7 @@ const featuredTopics = getFeaturedTopics(3);
   </section>
 
   <!-- 6. 专题聚合 -->
-  <section class="section" style="background: rgba(17, 24, 39, 0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
+  <section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
     <div class="container-site">
       <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem">
         <div>
@@ -94,7 +94,7 @@ const featuredTopics = getFeaturedTopics(3);
             <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.7">
               {topic.desc}
             </p>
-            <div style="margin-top: 1.25rem; font-size: 0.8125rem; font-weight: 700; color: #c084fc">
+            <div style="margin-top: 1.25rem; font-size: 0.8125rem; font-weight: 700; color: var(--brand-primary)">
               进入专题 →
             </div>
           </a>
@@ -110,12 +110,12 @@ const featuredTopics = getFeaturedTopics(3);
   <FaqAccordion />
 
   <!-- 9. 极客 CTA 终极 Banner -->
-  <section style="padding-block: 4rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.2)); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
+  <section style="padding-block: 4rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(6, 182, 212, 0.12)); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color)">
     <div class="container-site" style="text-align: center; max-width: 44rem; margin-inline: auto">
       <span class="badge badge-cyan" style="margin-bottom: 1rem">
         📢 实时情报接收
       </span>
-      <h2 style="font-size: 2rem; font-weight: 900; color: #ffffff">
+      <h2 style="font-size: 2rem; font-weight: 900; color: var(--text-main)">
         订阅 Telegram 官方频道
       </h2>
       <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem; line-height: 1.8">
