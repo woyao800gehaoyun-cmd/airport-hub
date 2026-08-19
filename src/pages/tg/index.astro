@@ -1,39 +1,43 @@
 ---
-// src/pages/tg/index.astro — TG 频道跳转页（占位）
+// src/pages/tg/index.astro — TG 频道直达跳转页 (@rumors6688)
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
 <BaseLayout
-  title="TG 频道 — 订阅 Clash顶选推送"
-  description="订阅 Clash顶选 Telegram 频道，获取每日免费节点、跑路预警与机场优惠码第一时间推送。"
+  title="TG 频道 — 订阅 clash-top 官方频道 (@rumors6688)"
+  description="订阅 clash-top 官方 Telegram 频道 @rumors6688，获取每日免费节点、跑路预警与机场优惠码第一时间推送。"
 >
   <Header slot="header" currentPath="/tg/" />
 
-  <section class="section container-site" style="max-width:36rem; margin:0 auto; text-align:center">
-    <div class="card" style="padding:3rem 2rem">
-      <span style="font-size:3.5rem" aria-hidden="true">📢</span>
-      <h1 style="margin-top:1rem; font-size:1.5rem; font-weight:800; color:var(--slate-900)">
-        订阅 Clash顶选 TG 频道
+  <!-- 自动重定向 JavaScript 与 Meta 标签 -->
+  <script is:inline>
+    window.location.href = "https://t.me/rumors6688";
+  </script>
+
+  <section class="section container-site" style="max-width: 36rem; margin: 3rem auto; text-align: center">
+    <div class="card" style="padding: 3rem 2rem; background: var(--bg-card)">
+      <span style="font-size: 3.5rem" aria-hidden="true">📢</span>
+      <h1 style="margin-top: 1rem; font-size: 1.5rem; font-weight: 800; color: var(--text-main)">
+        正在跳转至 Telegram 官方频道
       </h1>
-      <p style="margin-top:.875rem; color:var(--slate-600); line-height:1.8">
-        加入 TG 频道，享受每早 9 点免费节点推送、跑路预警即时提醒、
-        机场限时优惠码分享。
+      <p style="margin-top: 0.875rem; color: var(--text-muted); line-height: 1.8">
+        频道 Telegram 账号：<strong style="color: var(--brand-primary)">@rumors6688</strong><br />
+        如果浏览器没有自动打开，请点击下方按钮直接跳转：
       </p>
-      <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem; align-items:center">
-        <!-- 此处替换为真实 TG 频道链接 -->
+      <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; align-items: center">
         <a
-          href="#"
+          href="https://t.me/rumors6688"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           class="btn btn-primary"
-          style="width:100%; max-width:16rem; justify-content:center; padding:.875rem"
+          style="width: 100%; max-width: 18rem; justify-content: center; padding: 0.875rem"
           id="tg-join-btn"
         >
-          📢 前往 Telegram 频道
+          📢 立即打开 Telegram 频道 (@rumors6688)
         </a>
-        <a href="/" class="btn btn-secondary" style="width:100%; max-width:16rem; justify-content:center" id="tg-back-home-btn">
+        <a href="/" class="btn btn-secondary" style="width: 100%; max-width: 18rem; justify-content: center" id="tg-back-home-btn">
           返回首页
         </a>
       </div>
