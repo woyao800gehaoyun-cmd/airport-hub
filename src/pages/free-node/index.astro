@@ -1,44 +1,127 @@
 ---
-// src/pages/free-node/index.astro
+// src/pages/free-node/index.astro — 免费共享 Apple ID 账号获取与安全教程页面
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+
+const accountCategories = [
+  { region: '🇺🇸 美区共享 Apple ID', app: '已购买 Shadowrocket (小火箭)', status: '实时可用', color: 'badge-cyan' },
+  { region: '🇭🇰 港区共享 Apple ID', app: '已购买 Shadowrocket (小火箭)', status: '实时可用', color: 'badge-brand' },
+  { region: '🇯🇵 日区共享 Apple ID', app: '已包含热门日区应用与游戏', status: '实时可用', color: 'badge-green' },
+];
 ---
 
 <BaseLayout
-  title="每日免费节点 — 每天 0 点更新 — Clash顶选"
-  description="Clash顶选每日免费节点：每天 0 点自动刷新，涵盖主流协议节点，订阅 TG 频道每早 9 点自动推送。"
+  title="免费共享 Apple ID — 美区/港区/日区小火箭账号获取与避坑教程 | clash-top"
+  description="clash-top 提供免费美区、港区、日区共享 Apple ID 账号，已已内置购买 Shadowrocket 小火箭。附带极其严谨的 App Store 登录避坑图文教程。"
+  keywords="共享Apple ID,美区Apple ID共享,小火箭账号共享,Shadowrocket账号,免费美区ID,AppStore账号避坑"
 >
   <Header slot="header" currentPath="/free-node/" />
 
+  <!-- Page Hero 顶部标题 -->
   <section class="page-hero">
-    <div class="container-site">
-      <span class="badge badge-accent" style="margin-bottom:.75rem">
-        <span class="pulse-dot" style="color:var(--accent-500); margin-right:.375rem" aria-hidden="true"></span>
-        每天 0 点自动更新
+    <div class="container-site" style="max-width: 52rem">
+      <span class="badge badge-cyan" style="margin-bottom: 0.75rem">
+        <span class="pulse-dot" style="color: #06b6d4; margin-right: 0.375rem" aria-hidden="true"></span>
+        每日自动刷新维护
       </span>
-      <h1 class="page-hero-title">每日免费节点</h1>
-      <p class="page-hero-desc">每天零点自动刷新，TG 频道每早 9 点推送。内容仅供学习测试，请勿用于违法活动。</p>
+      <h1 class="page-hero-title">免费共享 Apple ID 账号</h1>
+      <p class="page-hero-desc">免费提供海外美区、港区、日区 Apple ID 账号，已预先购买 Shadowrocket (小火箭)。配合 Telegram 频道即时获取解锁密码。</p>
     </div>
   </section>
 
-  <section class="section container-site" style="max-width:44rem; margin:0 auto">
-    <div class="card" style="padding:2.5rem; text-align:center">
-      <span style="font-size:3rem" aria-hidden="true">📡</span>
-      <h2 style="margin-top:1rem; font-size:1.25rem; font-weight:800; color:var(--slate-900)">订阅 TG 频道获取最新节点</h2>
-      <p style="margin-top:.75rem; color:var(--slate-600); line-height:1.8; font-size:.9375rem">
-        每日免费节点通过 TG 频道推送，订阅后每早 9 点自动收到最新节点信息。
-        此页面为内容预留位，后续将展示当日节点（需配合后端或 GitHub Actions）。
+  <section class="section container-site" style="max-width: 54rem">
+    
+    <!-- ⚠️ 最高级别安全保命警示卡片 (防止用户锁手机) -->
+    <div class="card" style="padding: 2rem; background: rgba(225, 29, 72, 0.08); border: 2px solid #e11d48; margin-bottom: 3rem">
+      <div style="display: flex; align-items: center; gap: 0.75rem; color: #e11d48">
+        <span style="font-size: 2.25rem">⚠️</span>
+        <h2 style="font-size: 1.25rem; font-weight: 900">使用共享 Apple ID 绝对安全铁律（防锁手机）</h2>
+      </div>
+      <div style="margin-top: 1rem; color: var(--text-main); font-size: 0.9375rem; line-height: 1.8">
+        <p style="font-weight: 800; color: #e11d48">🔴 警告：绝对禁止在手机「设置 (Settings) -> iCloud」中登录共享账号！</p>
+        <p style="margin-top: 0.5rem; color: var(--text-muted)">
+          如果在系统的 iCloud 里登录共享账号，手机通讯录、照片等隐私会自动同步给他人，甚至容易被不良分子远程开启“查找我的 iPhone”直接锁死变砖并敲诈！
+        </p>
+        <p style="margin-top: 0.75rem; font-weight: 800; color: #059669">
+          🟢 正确登录位置：必须且只能在蓝色的「App Store 应用商店」软件内部登录！
+        </p>
+      </div>
+    </div>
+
+    <!-- App Store 正确登录 4 步流程 -->
+    <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 1.25rem">📱 App Store 正确登录 4 步指引</h2>
+    <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); margin-bottom: 3rem">
+      <div class="card" style="padding: 1.25rem; text-align: center">
+        <span class="badge badge-brand" style="margin-bottom: 0.5rem">第 1 步</span>
+        <h3 style="font-size: 0.9375rem; font-weight: 800; color: var(--text-main)">打开 App Store</h3>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.35rem">点击右上角个人头像图标</p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem; text-align: center">
+        <span class="badge badge-brand" style="margin-bottom: 0.5rem">第 2 步</span>
+        <h3 style="font-size: 0.9375rem; font-weight: 800; color: var(--text-main)">滑到最底部退出</h3>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.35rem">划到页面最下方点击「退出登录」</p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem; text-align: center">
+        <span class="badge badge-brand" style="margin-bottom: 0.5rem">第 3 步</span>
+        <h3 style="font-size: 0.9375rem; font-weight: 800; color: var(--text-main)">填共享 ID 登录</h3>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.35rem">输入获取到的共享账号与密码</p>
+      </div>
+
+      <div class="card" style="padding: 1.25rem; text-align: center">
+        <span class="badge badge-brand" style="margin-bottom: 0.5rem">第 4 步</span>
+        <h3 style="font-size: 0.9375rem; font-weight: 800; color: var(--text-main)">选双重认证其他选项</h3>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.35rem">若提示升级，点「其他选项 -> 不升级」</p>
+      </div>
+    </div>
+
+    <!-- 共享 ID 列表展示 -->
+    <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 1.25rem">🔑 免费共享 Apple ID 资源卡片</h2>
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-bottom: 3rem">
+      {accountCategories.map(acc => (
+        <div class="card" style="padding: 1.75rem; background: var(--bg-card)">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <h3 style="font-size: 1.0625rem; font-weight: 800; color: var(--text-main)">{acc.region}</h3>
+            <span class={`badge ${acc.color}`} style="font-size: 0.75rem">{acc.status}</span>
+          </div>
+          <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-muted)">
+            包含应用：<strong style="color: var(--brand-primary)">{acc.app}</strong>
+          </p>
+          <div style="margin-top: 1.25rem; padding: 0.875rem; background: var(--bg-secondary); border-radius: var(--radius-md); font-size: 0.8125rem">
+            <p style="color: var(--text-muted)">账号与密码更新：</p>
+            <p style="font-weight: 700; color: var(--text-main); margin-top: 0.25rem">通过 Telegram 频道获取即时实时密码</p>
+          </div>
+          <a
+            href="https://t.me/rumors6688"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 1.25rem; justify-content: center; font-size: 0.875rem"
+          >
+            📢 去 TG 频道获取解锁密码 (@rumors6688)
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- 选购稳定机场 Banner -->
+    <div class="card" style="padding: 2rem; background: var(--bg-card); border-top: 3px solid var(--brand-primary); text-align: center">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main)">已有小火箭软件？搭配稳定专线机场即可科学上网</h3>
+      <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.875rem; max-width: 34rem; margin-inline: auto; line-height: 1.7">
+        查阅经过自费实测的高评价机场。全节点 1.0 倍率扣费，金融级物理 IEPL 专线，晚高峰流畅跑满千兆带宽。
       </p>
-      <div style="margin-top:1.75rem; display:flex; justify-content:center; gap:.75rem; flex-wrap:wrap">
-        <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="free-node-tg-btn">
-          📢 订阅 TG 频道
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap">
+        <a href="/brands/yuntu/" class="btn btn-primary" style="padding: 0.65rem 1.5rem">
+          查看云图机场 (金融级专线) →
         </a>
-        <a href="/brands/" class="btn btn-secondary" id="free-node-brands-btn">
-          选个稳定机场
+        <a href="/brands/shunyun/" class="btn btn-secondary" style="padding: 0.65rem 1.5rem">
+          查看瞬云机场 (高速大带宽) →
         </a>
       </div>
     </div>
+
   </section>
 
   <Footer slot="footer" />
