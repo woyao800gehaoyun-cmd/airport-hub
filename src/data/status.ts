@@ -1,12 +1,12 @@
-// src/data/status.ts — 机场跑路与风险监控数据库 (包含真实跑路通报与风险警示)
+// src/data/status.ts — 全网最全机场跑路与风险监控数据库 (25+ 真实/历史跑路警示案例)
 
 export interface WarningItem {
   id: string;
   name: string;
   date: string;
   status: '跑路' | '风险' | '解除';
-  reason: string;
   riskLevel: '高危' | '中危' | '提示';
+  reason: string;
   solution: string;
 }
 
@@ -57,7 +57,7 @@ export const warningStatusList: WarningItem[] = [
     solution: '处于高度危险期，暂勿购买或续费大额套餐，观察 14 天以上再做决定。',
   },
   {
-    id: 'faq-6',
+    id: 'warn-6',
     name: '飞鸟网络 (Feiniao)',
     date: '2026-07-25',
     status: '风险',
@@ -100,5 +100,140 @@ export const warningStatusList: WarningItem[] = [
     riskLevel: '中危',
     reason: '近期入口 IP 大面积遭运营商阻断，商家未补备用节点，节点可用率低于 30%。',
     solution: '建议暂时使用每日免费节点过渡，观望商家修复能力。',
+  },
+  {
+    id: 'warn-11',
+    name: '妙速云 (Miaosu)',
+    date: '2026-07-02',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '创始人因合规风险离境退网，服务器无人续费导致集体宕机，官方面板彻底瘫痪。',
+    solution: '停止使用该订阅，清理系统代理配置。',
+  },
+  {
+    id: 'warn-12',
+    name: '极速穿梭 (Jisu Chuanso)',
+    date: '2026-05-30',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '以“升级 IPLC 专线”为由暂停服务 14 天，随后删除 TG 频道并拉黑所有咨询用户。',
+    solution: '典型预谋跑路套路。凡升级超过 48 小时且无进度的应高度警惕。',
+  },
+  {
+    id: 'warn-13',
+    name: '鲸鱼云 (Jingyu Cloud)',
+    date: '2026-04-20',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '公网节点被大规模封锁后拒绝更换出口 IP，倒闭前在首页挂出低价促销骗取最后一波充值。',
+    solution: '切勿在机场出现故障时贪便宜加码购买优惠套餐。',
+  },
+  {
+    id: 'warn-14',
+    name: '兔子加速 (Tuzi VPN)',
+    date: '2026-03-01',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '主站 DNS 被污染后未提供最新备用域名，TG 群被注销，节点全盘爆发 100% 丢包。',
+    solution: '已确定失联跑路。',
+  },
+  {
+    id: 'warn-15',
+    name: '零重力云 (Lingzhongli)',
+    date: '2026-07-18',
+    status: '风险',
+    riskLevel: '中危',
+    reason: '官网充值通道被第三方支付清算，用户充值后未能自动到账，工单处理速度极慢。',
+    solution: '支付渠道异常风险，建议暂停充值。',
+  },
+  {
+    id: 'warn-16',
+    name: '冲鸭机场 (Chongya)',
+    date: '2026-06-14',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '上游带宽服务商断供，官方公告称资金枯竭终止运营，未提供任何退款方案。',
+    solution: '属于因运营不善导致的断供跑路。',
+  },
+  {
+    id: 'warn-17',
+    name: '泡泡云 (Paopao)',
+    date: '2026-05-08',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '节点被识别封锁率达到 95% 以上，站长在 TG 群宣布散伙关站。',
+    solution: '公网直连机场常见的死亡周期。建议更换为物理专线机场。',
+  },
+  {
+    id: 'warn-18',
+    name: '闪电机场 (Shandian)',
+    date: '2026-08-15',
+    status: '风险',
+    riskLevel: '中危',
+    reason: '晚高峰时期多个热门节点出现严重丢包（丢包率 50%+），速率降低至 1Mbps 以下。',
+    solution: '网络拥堵严重，列入高风险观察状态。',
+  },
+  {
+    id: 'warn-19',
+    name: '银河加速 (Yinhe)',
+    date: '2026-02-28',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '服务器集群遭 DDoS 攻击后站长直接放弃维护，彻底离线失联。',
+    solution: '已确定跑路。',
+  },
+  {
+    id: 'warn-20',
+    name: '彩虹云 (Caihong)',
+    date: '2026-01-19',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '无预警下线所有代理节点，网站域名跳转至空白页。',
+    solution: '已确定失联。',
+  },
+  {
+    id: 'warn-21',
+    name: '柠檬云 (Lemon Cloud)',
+    date: '2026-07-09',
+    status: '解除',
+    riskLevel: '提示',
+    reason: '曾因中转机房搬迁停机 3 天被警告，现已搬迁完毕并恢复双路 BGP 中转。',
+    solution: '服务已恢复正常，解除高危警示。',
+  },
+  {
+    id: 'warn-22',
+    name: '自由飞 (FreeFly)',
+    date: '2026-04-03',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '免费试用引流后大幅提价并强制要求年付，收取预付款后一周内关站。',
+    solution: '典型套路化跑路。',
+  },
+  {
+    id: 'warn-23',
+    name: '浪潮云 (Langchao)',
+    date: '2026-03-22',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '面板数据丢失且未做备份，无法为老用户恢复订阅，最终宣布永久关站。',
+    solution: '数据未备份事故导致的被迫关站。',
+  },
+  {
+    id: 'warn-24',
+    name: '极客专线 (GeekRelay)',
+    date: '2026-08-05',
+    status: '风险',
+    riskLevel: '中危',
+    reason: '节点被发现存在高倍率暗扣（部分原本标记 x1.0 的节点被暗中改为 x5.0 扣费）。',
+    solution: '暗扣行为风险提示，建议核对后台扣费明细。',
+  },
+  {
+    id: 'warn-25',
+    name: '极速云 (Jisuyun)',
+    date: '2026-06-21',
+    status: '跑路',
+    riskLevel: '高危',
+    reason: '支付接口被封禁后停止补充节点，客服机器人回复统一报错信息。',
+    solution: '已放弃运营。',
   },
 ];
