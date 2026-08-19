@@ -1,94 +1,209 @@
 ---
-// src/pages/airport-status/index.astro
+// src/pages/airport-status/index.astro — 跑路预警雷达与高风险监控页面
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { warningStatusList } from '../../data/status';
 
-// 模拟跑路预警数据（占位）
-const warningList = [
-  { name: '某某云（已跑路）', date: '2025-06-10', status: '跑路', reason: '官网无法访问，TG 群组关闭，退款无响应。' },
-  { name: '某速VPN（风险警示）', date: '2025-09-22', status: '风险', reason: '连续三天大面积故障，客服不响应，谨慎续费。' },
-  { name: '某通云（正常运营）', date: '2025-12-01', status: '解除', reason: '曾列风险，目前恢复正常运营，降级为持续观察。' },
-];
-
-const statusColors: Record<string, string> = {
-  '跑路': 'badge-rose',
-  '风险': 'badge-amber',
-  '解除': 'badge-green',
+const statusBadges: Record<string, { badge: string; icon: string }> = {
+  '跑路': { badge: 'badge-rose', icon: '🔴' },
+  '风险': { badge: 'badge-amber', icon: '🟡' },
+  '解除': { badge: 'badge-green', icon: '🟢' },
 };
 ---
 
 <BaseLayout
-  title="机场跑路预警 — 跑路名单与风险机场监控 — Clash顶选"
-  description="Clash顶选机场跑路预警：实时监控机场运营状态，收录跑路名单与风险机场警示，帮你提前避开跑路风险，保护代理资金安全。"
+  title="机场跑路预警雷达 2026 — 跑路名单与高风险机场实时监控 | clash-top"
+  description="clash-top 机场跑路预警雷达：全天候监控机场运营动态，公开已跑路与高风险失联机场名单，提供跑路前 5 大征兆识别与资金避坑指南。"
+  keywords="机场跑路预警,跑路机场名单,风险机场列表,机场黑榜,科学上网避坑,跑路信号识别"
 >
   <Header slot="header" currentPath="/airport-status/" />
 
+  <!-- Page Hero 顶部说明 -->
   <section class="page-hero">
-    <div class="container-site">
-      <span class="badge badge-rose" style="margin-bottom:.75rem">
-        <span class="pulse-dot" style="color:#f43f5e; margin-right:.375rem" aria-hidden="true"></span>
-        实时监控中
+    <div class="container-site" style="max-width: 52rem">
+      <span class="badge badge-rose" style="margin-bottom: 0.75rem">
+        <span class="pulse-dot" style="color: #f43f5e; margin-right: 0.375rem" aria-hidden="true"></span>
+        实时雷达监控中
       </span>
-      <h1 class="page-hero-title">机场跑路预警</h1>
-      <p class="page-hero-desc">收录已跑路与高风险机场名单，名单更新时 TG 频道立即推送，帮你提前规避风险。</p>
+      <h1 class="page-hero-title">机场跑路预警雷达</h1>
+      <p class="page-hero-desc">实时监控与收录失联、断连、高风险及确定跑路的服务商名单。遭遇预警时通过 Telegram 频道秒级推送，助你提前规避资金风险。</p>
+
+      <!-- 搜索框与分类 -->
+      <div style="margin-top: 2rem; position: relative">
+        <input
+          type="text"
+          id="status-search-input"
+          placeholder="🔍 输入机场名称或说明查询（如：跑路云 / 极光 / 专线 / 超时）..."
+          style="width: 100%; padding: 0.875rem 1.25rem 0.875rem 3rem; border-radius: 9999px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.9375rem; outline: none; transition: all 0.2s ease"
+        />
+        <span style="position: absolute; left: 1.125rem; top: 50%; transform: translateY(-50%); font-size: 1.125rem; color: var(--text-muted)">🔍</span>
+      </div>
+
+      <!-- 分类 Tab -->
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem" id="status-filters" role="tablist">
+        <button class="faq-filter-btn active" data-status="all" role="tab" aria-selected="true">全部公示 ({warningStatusList.length})</button>
+        <button class="faq-filter-btn" data-status="跑路" role="tab" aria-selected="false">🔴 确定跑路 ({warningStatusList.filter(i => i.status === '跑路').length})</button>
+        <button class="faq-filter-btn" data-status="风险" role="tab" aria-selected="false">🟡 极高风险 ({warningStatusList.filter(i => i.status === '风险').length})</button>
+        <button class="faq-filter-btn" data-status="解除" role="tab" aria-selected="false">🟢 已恢复正常 ({warningStatusList.filter(i => i.status === '解除').length})</button>
+      </div>
     </div>
   </section>
 
   <section class="section container-site">
-    <!-- 预警指南 -->
-    <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit, minmax(15rem, 1fr)); margin-bottom:2.5rem">
-      {[
-        { icon: '🚨', title: '跑路信号识别', items: ['官网突然无法访问', '客服长时间不响应', '论坛/TG 群组关闭', '节点大面积故障 24h+'] },
-        { icon: '🛡️', title: '规避风险技巧', items: ['尽量选月付套餐', '分散使用 2-3 家机场', '不要大额充值', '关注本站预警栏目'] },
-        { icon: '📋', title: '遭遇跑路怎么办', items: ['截图保存付款记录', '尝试信用卡拒付', '向相关平台举报', '及时切换备用机场'] },
-      ].map(card => (
-        <div class="card" style="padding:1.5rem">
-          <span style="font-size:1.5rem" aria-hidden="true">{card.icon}</span>
-          <h2 style="margin-top:.75rem; font-size:.9375rem; font-weight:700; color:var(--slate-900)">{card.title}</h2>
-          <ul style="margin-top:.75rem; list-style:disc; padding-left:1.125rem; color:var(--slate-600); font-size:.8125rem; line-height:2">
-            {card.items.map(item => <li>{item}</li>)}
-          </ul>
-        </div>
-      ))}
+    <!-- 预警避坑 3 大指南卡片 -->
+    <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-bottom: 3rem">
+      <div class="card" style="padding: 1.5rem; border-top: 3px solid #f43f5e">
+        <span style="font-size: 2rem" aria-hidden="true">🚨</span>
+        <h3 style="margin-top: 0.75rem; font-size: 1.0625rem; font-weight: 800; color: var(--text-main)">跑路前 5 大征兆识别</h3>
+        <ul style="margin-top: 0.75rem; list-style: disc; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.875rem; line-height: 1.9">
+          <li>突然推出夸张的「年付 3 折/终身套餐」大额回款</li>
+          <li>官网域名连续 24 小时打不开，未做备用重定向</li>
+          <li>官方 Telegram 交流群突然开启全员禁言或解散</li>
+          <li>80% 以上节点大面积 Timeout 超过 48 小时没有修复</li>
+          <li>客服工单停更，支付通道频繁被封锁</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding: 1.5rem; border-top: 3px solid #f59e0b">
+        <span style="font-size: 2rem" aria-hidden="true">🛡️</span>
+        <h3 style="margin-top: 0.75rem; font-size: 1.0625rem; font-weight: 800; color: var(--text-main)">资金避坑防损守则</h3>
+        <ul style="margin-top: 0.75rem; list-style: disc; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.875rem; line-height: 1.9">
+          <li><strong>坚持月付</strong>：切勿一次性充值 1-3 年大额长久套餐</li>
+          <li><strong>分散风险</strong>：主力机场与备用机场分开购买</li>
+          <li><strong>认准专线</strong>：优先选物理 IEPL 专线机场（如云图机场）</li>
+          <li><strong>远离诱饵</strong>：坚决远离 9.9 元无限流量包年资金盘</li>
+          <li>关注本站 Telegram 频道第一时间的防跑路预警</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding: 1.5rem; border-top: 3px solid #06b6d4">
+        <span style="font-size: 2rem" aria-hidden="true">📋</span>
+        <h3 style="margin-top: 0.75rem; font-size: 1.0625rem; font-weight: 800; color: var(--text-main)">遭遇跑路紧急止损方案</h3>
+        <ul style="margin-top: 0.75rem; list-style: disc; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.875rem; line-height: 1.9">
+          <li>立刻在客户端停用该机场订阅链接，防止个人数据受污染</li>
+          <li>使用本站 <a href="/free-node/" style="color: var(--brand-primary); font-weight: 700">每日免费应急节点</a> 暂时恢复上网</li>
+          <li>保存付款凭证，若使用信用卡可向银行申请 Chargeback 拒付</li>
+          <li>选择运营 3 年以上的成熟老牌专线机场更换</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- 预警名单表格 -->
-    <div class="compare-wrapper">
-      <div class="compare-table-head">
-        <h2 style="font-size:1rem; font-weight:700; color:var(--slate-900)">预警名单（示例占位数据）</h2>
-        <p style="font-size:.8rem; color:var(--slate-400); margin-top:.25rem">真实名单持续补充，以 TG 频道实时推送为准</p>
+    <!-- 预警动态数据表格 -->
+    <div class="compare-wrapper" style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden">
+      <div class="compare-table-head" style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem">
+        <div>
+          <h2 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main)">实时跑路与高风险机场监控列表</h2>
+          <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">监控数据每日动态核查，遇紧急跑路事件在 Telegram 频道同步广播。</p>
+        </div>
+        <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 0.8125rem; padding: 0.45rem 1rem" id="status-tg-btn">
+          📢 订阅预警推送 (@rumors6688)
+        </a>
       </div>
-      <div style="overflow-x:auto">
-        <table class="data-table">
+
+      <div style="overflow-x: auto">
+        <table class="data-table" id="status-table">
           <thead>
             <tr>
-              <th>机场名称</th>
-              <th>更新日期</th>
-              <th>状态</th>
-              <th>说明</th>
+              <th style="padding: 1rem 1.25rem; text-align: left">机场名称</th>
+              <th style="padding: 1rem 1.25rem; text-align: left">通报日期</th>
+              <th style="padding: 1rem 1.25rem; text-align: left">状态级别</th>
+              <th style="padding: 1rem 1.25rem; text-align: left">异常说明与征兆</th>
+              <th style="padding: 1rem 1.25rem; text-align: left">建议止损措施</th>
             </tr>
           </thead>
           <tbody>
-            {warningList.map(w => (
-              <tr>
-                <td style="font-weight:600">{w.name}</td>
-                <td style="color:var(--slate-400); font-size:.8125rem">{w.date}</td>
-                <td><span class={`badge ${statusColors[w.status]}`}>{w.status}</span></td>
-                <td style="font-size:.8125rem; color:var(--slate-600)">{w.reason}</td>
+            {warningStatusList.map(item => (
+              <tr class="status-row" data-status={item.status} data-name={item.name} data-reason={item.reason}>
+                <td style="padding: 1.125rem 1.25rem; font-weight: 800; color: var(--text-main); font-size: 0.9375rem">
+                  {item.name}
+                </td>
+                <td style="padding: 1.125rem 1.25rem; color: var(--text-muted); font-size: 0.8125rem; white-space: nowrap">
+                  {item.date}
+                </td>
+                <td style="padding: 1.125rem 1.25rem; white-space: nowrap">
+                  <span class={`badge ${statusBadges[item.status]?.badge ?? 'badge-brand'}`} style="font-size: 0.75rem; padding: 0.25rem 0.625rem">
+                    {statusBadges[item.status]?.icon} {item.status}
+                  </span>
+                </td>
+                <td style="padding: 1.125rem 1.25rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; max-width: 20rem">
+                  {item.reason}
+                </td>
+                <td style="padding: 1.125rem 1.25rem; font-size: 0.8125rem; color: var(--text-main); line-height: 1.7; max-width: 18rem">
+                  {item.solution}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      <!-- 搜索空状态 -->
+      <div id="status-empty" style="display: none; text-align: center; padding: 3rem; color: var(--text-muted)">
+        <p style="font-size: 2.5rem" aria-hidden="true">💡</p>
+        <p style="margin-top: 0.75rem; font-weight: 700; color: var(--text-main)">未找到匹配的机场预警记录</p>
+      </div>
     </div>
 
-    <div style="margin-top:1.5rem; text-align:center">
-      <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="status-tg-btn">
-        📢 订阅预警推送
-      </a>
+    <!-- 底部替代推荐 Banner -->
+    <div class="card" style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border-top: 3px solid var(--brand-primary); text-align: center">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main)">担心遭遇跑路？选择 100% 物理专线与诚实扣费的靠谱服务商</h3>
+      <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.875rem; max-width: 36rem; margin-inline: auto; line-height: 1.7">
+        查阅经过编辑团队长期自费实测的高评价机场。提供金融级物理 IEPL 专线与大带宽保障，坚决拒绝暗扣。
+      </p>
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap">
+        <a href="/brands/yuntu/" class="btn btn-primary" style="padding: 0.65rem 1.5rem">
+          查看云图机场 (金融级专线) →
+        </a>
+        <a href="/brands/shunyun/" class="btn btn-secondary" style="padding: 0.65rem 1.5rem">
+          查看瞬云机场 (高速大带宽) →
+        </a>
+      </div>
     </div>
   </section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<script>
+  // 实时搜索与状态筛选逻辑
+  const tabs = document.querySelectorAll('#status-filters .faq-filter-btn');
+  const rows = document.querySelectorAll<HTMLElement>('.status-row');
+  const searchInput = document.getElementById('status-search-input') as HTMLInputElement | null;
+  const empty = document.getElementById('status-empty');
+
+  let currentStatus = 'all';
+
+  function filterStatus() {
+    const query = searchInput?.value.toLowerCase().trim() ?? '';
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const status = row.dataset.status ?? '';
+      const name = (row.dataset.name ?? '').toLowerCase();
+      const reason = (row.dataset.reason ?? '').toLowerCase();
+
+      const matchStatus = currentStatus === 'all' || status === currentStatus;
+      const matchSearch = query === '' || name.includes(query) || reason.includes(query);
+
+      const show = matchStatus && matchSearch;
+      row.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    if (empty) empty.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      currentStatus = (tab as HTMLElement).dataset.status ?? 'all';
+      filterStatus();
+    });
+  });
+
+  searchInput?.addEventListener('input', filterStatus);
+</script>
