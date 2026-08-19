@@ -491,3 +491,94 @@ a {
   padding-block: 3.5rem 2rem;
   color: var(--text-muted);
 }
+
+/* FAQ 手风琴与问题库专属精美样式 */
+.accordion-item {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-trigger {
+  width: 100%;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.accordion-trigger:hover {
+  color: var(--brand-primary);
+}
+
+.accordion-icon {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  min-width: 1.25rem !important;
+  min-height: 1.25rem !important;
+  max-width: 1.25rem !important;
+  max-height: 1.25rem !important;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-muted);
+}
+
+.accordion-item.open .accordion-icon {
+  transform: rotate(180deg);
+  color: var(--brand-primary);
+}
+
+.accordion-content {
+  display: none;
+  padding-bottom: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.accordion-item.open .accordion-content {
+  display: block;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 筛选 Tab 按钮极客风 */
+.faq-filter-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.faq-filter-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--text-main);
+}
+
+.faq-filter-btn.active {
+  background: var(--brand-primary);
+  color: #ffffff;
+  border-color: var(--brand-primary);
+}
