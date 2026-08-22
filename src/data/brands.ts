@@ -85,6 +85,22 @@ export const brands: Brand[] = [
         features: ['每月 600G 流量', '同时在线 5 台设备', 'ChatGPT / Netflix / TikTok 解锁', '原生 IP 支持', '全节点 1 倍率', '工单 24H 快速回复'],
         highlight: '三年相对折扣约 25%，为您节省 ¥891.00',
       },
+      {
+        name: '【限时】50G不限时',
+        price: 78,
+        traffic: '50G (不限时)',
+        devices: 5,
+        features: ['一次性 50G 流量（不过期）', '同时在线 5 台设备', 'ChatGPT / Netflix / TikTok 全解锁', '原生 IP 支持', '全节点 1 倍率', '工单 24H 快速回复'],
+        highlight: '【限时特惠】一次性买断，流量永久有效',
+      },
+      {
+        name: '【限时】100G不限时',
+        price: 119,
+        traffic: '100G (不限时)',
+        devices: 5,
+        features: ['一次性 100G 流量（不过期）', '同时在线 5 台设备', 'ChatGPT / Netflix / TikTok 全解锁', '原生 IP 支持', '全节点 1 倍率', '工单 24H 快速回复'],
+        highlight: '【限时特惠】一次性买断，流量永久有效',
+      },
     ],
   },
   {

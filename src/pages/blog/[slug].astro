@@ -114,17 +114,17 @@ const htmlContent = renderMarkdown(article.content);
 
       <!-- 右侧导航与推荐边栏 -->
       <aside style="position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.25rem">
-        <!-- 实测推荐入口 -->
-        <div class="card" style="padding: 1.25rem">
-          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
-            🥇 推荐机场实测
+        <!-- 🏆 稳定机场推荐卡片 -->
+        <div class="card" style="padding: 1.25rem; border-top: 3px solid var(--brand-primary)">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.875rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            🏆 2026 稳定机场推荐
           </h3>
           
           <div style="display: flex; flex-direction: column; gap: 0.875rem">
             <a href="/brands/yuntu/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
               <div>
-                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场</span>
-                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">金融级专线 · ChatGPT 解锁</span>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场 (榜首)</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">金融级 IEPL 专线 · 全解锁</span>
               </div>
               <span class="badge badge-brand">¥25起</span>
             </a>
@@ -139,16 +139,32 @@ const htmlContent = renderMarkdown(article.content);
           </div>
 
           <a href="/compare/" class="btn btn-secondary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
-            查看完整对比表 →
+            全维度横向对比大表 →
           </a>
         </div>
 
-        <!-- 官方 TG 入口 -->
+        <!-- 📌 热门相关文章推荐 -->
+        <div class="card" style="padding: 1.25rem">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            📌 热门相关文章教程
+          </h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8125rem">
+            {articles.filter(a => a.slug !== article.slug).slice(0, 4).map(item => (
+              <li>
+                <a href={`/blog/${item.slug}/`} style="color: var(--text-main); font-weight: 600; text-decoration: none; transition: color 0.2s" onmouseover="this.style.color='var(--brand-primary)'" onmouseout="this.style.color='var(--text-main)'">
+                  📄 {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- 📢 官方 TG 入口 -->
         <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.15)); text-align: center">
           <p style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">订阅 TG 频道获取更多教程</p>
-          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">每日免费节点与跑路预警随时掌握</p>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">每日跑路预警与共享 ID 及时掌握</p>
           <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
-            📢 订阅 TG 频道
+            📢 订阅 TG 频道 (@rumors6688)
           </a>
         </div>
       </aside>

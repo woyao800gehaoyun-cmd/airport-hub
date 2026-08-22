@@ -150,11 +150,11 @@ const unlockItems = [
             {plans.map(p => (
               <div style="padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column">
                 <div style="display: flex; justify-content: space-between; align-items: center">
-                  <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main)">{p.name}套餐</h3>
-                  <span class="badge badge-brand">¥{p.price} / 月</span>
+                  <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main)">{p.name}</h3>
+                  <span class="badge badge-brand">{p.name.includes('限时') ? `¥${p.price} / 一次性` : `¥${p.price} / 月`}</span>
                 </div>
-                <div style="margin-top: 1rem; font-size: 1.75rem; font-weight: 900; color: var(--brand-primary)">
-                  {p.traffic} <span style="font-size: 0.875rem; font-weight: 500; color: var(--text-muted)">/ 月流量</span>
+                <div style="margin-top: 1rem; font-size: 1.5rem; font-weight: 900; color: var(--brand-primary)">
+                  {p.traffic.includes('不限时') ? p.traffic : `${p.traffic} / 月流量`}
                 </div>
                 <p style="font-size: 0.8125rem; color: var(--brand-cyan); margin-top: 0.25rem; font-weight: 700">
                   {p.highlight}
