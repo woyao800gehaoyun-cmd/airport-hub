@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getBrandBySlug } from '../../data/brands';
+import { articles } from '../../data/articles';
 
 const brand = getBrandBySlug('yuntu')!;
 const plans = brand.plans!;
@@ -200,8 +201,8 @@ const unlockItems = [
       </div>
 
       <!-- 右侧侧边栏得分与购买悬浮盒 -->
-      <div>
-        <div class="card" style="padding: 1.5rem; background: var(--bg-card); position: sticky; top: 5.5rem">
+      <div style="position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.25rem">
+        <div class="card" style="padding: 1.5rem; background: var(--bg-card)">
           <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
             📊 12 项维度综合实测拆解
           </h3>
@@ -220,12 +221,54 @@ const unlockItems = [
             ))}
           </div>
 
-          <div style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); text-align: center">
+          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); text-align: center">
             <span style="font-size: 0.75rem; color: var(--text-sub); display: block; margin-bottom: 0.75rem">官方安全通道 · 支持支付宝与微信</span>
             <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="display: block; width: 100%; text-align: center; padding: 0.75rem; font-size: 0.9375rem">
               🚀 立即注册云图机场
             </a>
           </div>
+        </div>
+
+        <!-- 🏆 对标推荐：瞬云机场 -->
+        <div class="card" style="padding: 1.25rem; border-top: 3px solid var(--brand-cyan)">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            ⚖️ 推荐对比机场
+          </h3>
+          <a href="/brands/shunyun/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+            <div>
+              <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">瞬云机场</span>
+              <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">ANYCAST 高速 · 4K 大带宽</span>
+            </div>
+            <span class="badge badge-cyan">¥20起</span>
+          </a>
+          <a href="/compare/" class="btn btn-secondary" style="width: 100%; margin-top: 0.875rem; justify-content: center; font-size: 0.8125rem">
+            横向参数对比表 →
+          </a>
+        </div>
+
+        <!-- 📌 热门相关教程/文章卡片 -->
+        <div class="card" style="padding: 1.25rem">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            📌 热门相关文章教程
+          </h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8125rem">
+            {articles.slice(0, 4).map(item => (
+              <li>
+                <a href={`/blog/${item.slug}/`} style="color: var(--text-main); font-weight: 600; text-decoration: none; transition: color 0.2s" onmouseover="this.style.color='var(--brand-primary)'" onmouseout="this.style.color='var(--text-main)'">
+                  📄 {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- 📢 官方 Telegram 频道卡片 -->
+        <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.15)); text-align: center">
+          <p style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">订阅 TG 频道获取优惠码</p>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">跑路预警雷达与共享 ID 及时掌握</p>
+          <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
+            📢 订阅 TG 频道 (@rumors6688)
+          </a>
         </div>
       </div>
 
