@@ -49,7 +49,7 @@ export const brands: Brand[] = [
     aiUnlock: true,
     trialDays: 0,
     score: 9.8,
-    url: 'https://guangnianti.com',
+    url: 'https://gnt001.gntvipaff.cc/#/?code=3Nq3FpHu',
     slug: 'guangnianti',
     features: [
       '⭐ 全节点全 IPLC 专线传输，高峰满速无卡顿',
