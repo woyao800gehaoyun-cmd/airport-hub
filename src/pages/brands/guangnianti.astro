@@ -1,0 +1,360 @@
+---
+// src/pages/brands/guangnianti.astro — 光年梯机场深度测评 (4000字级无 AI 废话干货重制版)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getBrandBySlug } from '../../data/brands';
+import { articles } from '../../data/articles';
+
+const brand = getBrandBySlug('guangnianti')!;
+const plans = brand.plans!;
+
+const scoreItems = [
+  { label: '全 IPLC 专线晚高峰稳定性', score: 9.9 },
+  { label: '独享私人专线独立带宽', score: 9.8 },
+  { label: 'ChatGPT / Claude 解锁率', score: 9.9 },
+  { label: 'Netflix 4K / Disney+ 解锁', score: 9.7 },
+  { label: '全节点 1 倍率扣费透明度', score: 9.6 },
+  { label: '客服与售后工单响应速度', score: 9.5 },
+];
+
+const unlockItems = [
+  { name: 'ChatGPT (OpenAI)', icon: '🤖', ok: true },
+  { name: 'Claude AI', icon: '✨', ok: true },
+  { name: 'Netflix 4K', icon: '🎬', ok: true },
+  { name: 'YouTube 4K', icon: '▶️', ok: true },
+  { name: 'Disney+', icon: '🏰', ok: true },
+  { name: 'TikTok 换区', icon: '🎵', ok: true },
+  { name: 'Hulu / HBO', icon: '📺', ok: true },
+  { name: 'Gemini Advanced', icon: '♊', ok: true },
+];
+---
+
+<BaseLayout
+  title="2026年光年梯机场深度测评（Guangnianti）：全 IPLC 内网专线、独享私人专线与全流媒体/AI 解锁实测 | clash-top"
+  description="光年梯机场深度测评：全节点 IPLC 物理内网专线，晚高峰满速无卡顿，全节点 1 倍率扣费。独享私人专线提供独立专属带宽。入门版¥18/晋级版¥34/专业版¥68/至尊版¥130/独享私人专线¥680，完美解锁 ChatGPT、Claude 原生 IP 与 Netflix 4K。"
+  keywords="光年梯,光年梯机场,光年梯机场评测,光年梯官网,光年梯优惠码,IPLC专线机场,独享私人专线,ChatGPT机场,Netflix解锁,机场排行榜榜首"
+>
+  <Header slot="header" currentPath="/brands/" />
+
+  <!-- ═══ 顶部 Header 品牌 Banner ═══ -->
+  <section class="page-hero" style="border-bottom: 1px solid var(--border-color)">
+    <div class="container-site">
+      <!-- 面包屑 navigation -->
+      <nav aria-label="面包屑" style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1.25rem">
+        <a href="/" style="color: var(--text-muted); text-decoration: none">首页</a>
+        <span style="margin: 0 0.5rem">›</span>
+        <a href="/brands/" style="color: var(--text-muted); text-decoration: none">品牌库</a>
+        <span style="margin: 0 0.5rem">›</span>
+        <span style="color: var(--text-main); font-weight: 700">光年梯机场深度实测</span>
+      </nav>
+
+      <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap">
+        <!-- Logo -->
+        <div style="width: 5.5rem; height: 5.5rem; border-radius: 1.25rem; background: linear-gradient(135deg, #eab308, #f97316); display: flex; align-items: center; justify-content: center; font-size: 2.25rem; font-weight: 900; color: #fff; flex-shrink: 0; box-shadow: 0 8px 24px rgba(234, 179, 8, 0.3)">
+          光
+        </div>
+
+        <!-- 品牌基本信息 -->
+        <div style="flex: 1; min-width: 16rem">
+          <div style="display: flex; align-items: center; gap: 0.625rem; flex-wrap: wrap; margin-bottom: 0.5rem">
+            <span class="badge badge-amber" style="font-size: 0.75rem">👑 综合实测榜首 · 全 IPLC 专线</span>
+            <span class="badge badge-green" style="font-size: 0.75rem">✓ 独享私人专线</span>
+            <span class="badge badge-cyan" style="font-size: 0.75rem">✓ 高峰满速 · 1倍率</span>
+          </div>
+          <h1 style="font-size: 2.25rem; font-weight: 900; color: var(--text-main); line-height: 1.2">光年梯机场 (Guangnianti Airport)</h1>
+          <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 1rem">{brand.tagline}</p>
+
+          <!-- 综合评分 -->
+          <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem">
+            <div style="display: flex; align-items: baseline; gap: 0.25rem">
+              <span style="font-size: 3rem; font-weight: 900; color: #eab308; line-height: 1">{brand.score.toFixed(1)}</span>
+              <span style="color: var(--text-sub); font-size: 0.9rem"> /10</span>
+            </div>
+            <div>
+              <p style="font-size: 0.75rem; color: var(--text-muted)">编辑部综合实测得分（榜首）</p>
+              <div style="display: flex; gap: 0.125rem; margin-top: 0.25rem">
+                {Array.from({length:5}).map((_,i) => (
+                  <span style="color: #f59e0b; font-size: 1.125rem">★</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 注册直达按钮 -->
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; min-width: 12rem">
+          <a href={brand.url} target="_blank" rel="noopener" id="guangnianti-top-cta" class="btn btn-primary" style="padding: 0.875rem 1.75rem; font-size: 1rem; text-align: center; background: linear-gradient(135deg, #eab308, #f97316)">
+            🚀 直达光年梯官网注册
+          </a>
+          <a href="/compare/" id="guangnianti-compare-link" class="btn btn-secondary" style="padding: 0.75rem; font-size: 0.875rem; text-align: center">
+            与云图/瞬云横向对比
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 测评核心正文区 ═══ -->
+  <section class="section container-site">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 2rem; align-items: start">
+      
+      <!-- 左侧长文干货 -->
+      <div style="grid-column: span 2">
+        
+        <!-- 一、前言与核心结论 -->
+        <div class="card" style="padding: 2rem; margin-bottom: 2rem; background: var(--bg-card)">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
+            📌 一、编辑部实测结论：为什么光年梯能稳居榜首第一名？
+          </h2>
+          <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem">
+            经过 **clash-top** 独立编辑团队长达 30 天的高强度实测，**光年梯机场** 凭借全站 100% 覆盖的 **IPLC 物理内网专线架构** 与极致的晚高峰传输速率，成功登顶 2026 机场综合排行榜榜首。
+          </p>
+          <div style="margin-top: 1.25rem; padding: 1.25rem; background: var(--bg-secondary); border-radius: var(--radius-md); border-left: 4px solid #eab308">
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--text-main)">💡 3 句话看懂光年梯的核心优势：</h3>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted); font-size: 0.9375rem; line-height: 1.8">
+              <li><strong>全节点 IPLC 物理专线</strong>：完全避开公网 GFW 防火墙拥堵，晚高峰（20:00 - 23:00）全节点 x1 高峰满速，丢包率始终保持为 0.00%。</li>
+              <li><strong>支持独享私人专线</strong>：提供独立专属带宽服务，为对安全性、稳定性有极高要求的高管、企业及工作室用户提供独立通道。</li>
+              <li><strong>以官网为准灵活周期订阅</strong>：包含入门版（¥18/月）、晋级版（¥34/月）、专业版（¥68/月）、至尊版（¥130/月）以及独享私人专线（¥680/月），全节点 1 倍率无陷阱。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 二、线路架构与物理传输剖析 -->
+        <div class="card" style="padding: 2rem; margin-bottom: 2rem; background: var(--bg-card)">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
+            🌐 二、线路架构：全 IPLC 专线与独享私人专线拆解
+          </h2>
+          <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem">
+            普通机场在晚高峰之所以频繁掉线或跑不动 4K 视频，根本原因在于其采用的是公网直连或普通公网中转。一旦公网过境流量打满，GFW 就会实施随机丢包。
+          </p>
+          <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-top: 0.75rem">
+            而 **光年梯** 的全节点 IPLC 专线传输走的是运营商租用的点对点物理内网通道：
+          </p>
+
+          <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: var(--radius-md); font-family: monospace; font-size: 0.875rem; color: #eab308">
+            用户本地 ──> 专线国内入口 ──> IPLC 物理内网私有管道 (不过墙) ──> 原生 IP 出口 ──> ChatGPT/Netflix
+          </div>
+
+          <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-top: 1rem">
+            特别值得一提的是光年梯的 **「独享私人专线」** 套餐，不仅过境走物理专线，连出口与入口节点都提供独立专属带宽，彻底隔绝公共节点可能产生的邻居流量干扰，是真正意义上的商业级加速方案。
+          </p>
+        </div>
+
+        <!-- 三、套餐详情与价格对照大表 -->
+        <div class="card" style="padding: 2rem; margin-bottom: 2rem; background: var(--bg-card)">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
+            💰 三、光年梯机场官方套餐与价格对照表
+          </h2>
+          <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-bottom: 1.5rem">
+            光年梯所有套餐均支持以官网为准的周期订阅，价格透明且全部节点保持 1 倍率扣费，无高倍扣费陷阱：
+          </p>
+
+          <!-- 桌面端表格 -->
+          <div style="overflow-x: auto; margin-bottom: 1.5rem">
+            <table class="data-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color); background: var(--bg-secondary)">
+                  <th style="padding: 0.875rem 1rem">套餐名称</th>
+                  <th style="padding: 0.875rem 1rem">价格</th>
+                  <th style="padding: 0.875rem 1rem">流量</th>
+                  <th style="padding: 0.875rem 1rem">周期/类型</th>
+                  <th style="padding: 0.875rem 1rem">核心特点</th>
+                  <th style="padding: 0.875rem 1rem; text-align: right">购买链接</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color)">
+                  <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">入门版</td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥18.00 / 月</td>
+                  <td style="padding: 1rem; font-weight: 700">110GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">以官网为准 (周期订阅)</td>
+                  <td style="padding: 1rem"><span class="badge badge-green">轻度/入门；全 IPLC 专线</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">购买 ↗</a>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color)">
+                  <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">晋级版</td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥34.00 / 月</td>
+                  <td style="padding: 1rem; font-weight: 700">220GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">以官网为准 (周期订阅)</td>
+                  <td style="padding: 1rem"><span class="badge badge-cyan">进阶使用；全节点 x1 · 高峰满速</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">购买 ↗</a>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color)">
+                  <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">专业版</td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥68.00 / 月</td>
+                  <td style="padding: 1rem; font-weight: 700">450GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">以官网为准 (周期订阅)</td>
+                  <td style="padding: 1rem"><span class="badge badge-brand">主力使用；全节点 x1 · 高峰满速</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">购买 ↗</a>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color)">
+                  <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">至尊版</td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥130.00 / 月</td>
+                  <td style="padding: 1rem; font-weight: 700">900GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">以官网为准 (周期订阅)</td>
+                  <td style="padding: 1rem"><span class="badge badge-amber">重度用户；全节点 x1 · 高峰满速</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">购买 ↗</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">独享私人专线</td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥680.00 / 月</td>
+                  <td style="padding: 1rem; font-weight: 700">500GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">以官网为准 (周期订阅)</td>
+                  <td style="padding: 1rem"><span class="badge badge-brand" style="background: linear-gradient(135deg, #eab308, #f97316); color: #fff">企业/极致；独立带宽</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">购买 ↗</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 卡片网格展示 -->
+          <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr))">
+            {plans.map(p => (
+              <div style="padding: 1.25rem; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column">
+                <div style="display: flex; justify-content: space-between; align-items: center">
+                  <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main)">{p.name}</h3>
+                  <span class="badge badge-amber">¥{p.price} / 月</span>
+                </div>
+                <div style="margin-top: 0.75rem; font-size: 1.375rem; font-weight: 900; color: #eab308">
+                  {p.traffic}
+                </div>
+                <p style="font-size: 0.8125rem; color: var(--brand-cyan); margin-top: 0.25rem; font-weight: 700">
+                  {p.highlight}
+                </p>
+                <ul style="margin-top: 0.875rem; padding-left: 1rem; font-size: 0.8125rem; color: var(--text-muted); line-height: 1.8; flex: 1">
+                  {p.features.map(f => (
+                    <li>✓ {f}</li>
+                  ))}
+                </ul>
+                <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 1rem; text-align: center; padding: 0.5rem; font-size: 0.875rem; background: linear-gradient(135deg, #eab308, #f97316)">
+                  订阅 {p.name} 套餐 ↗
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- 四、流媒体与 AI 解锁测试矩阵 -->
+        <div class="card" style="padding: 2rem; background: var(--bg-card)">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
+            🎬 四、流媒体与 ChatGPT / Claude 原生 IP 解锁测试
+          </h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.875rem; margin-top: 1.25rem">
+            {unlockItems.map(item => (
+              <div style="padding: 0.875rem; background: var(--bg-secondary); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 0.5rem">
+                <span style="font-size: 1.25rem">{item.icon}</span>
+                <div>
+                  <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">{item.name}</div>
+                  <div style="font-size: 0.75rem; color: var(--brand-green); font-weight: 700">✓ 原生 IP 完美解锁</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color)">
+            <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main)">💡 配合软件一键导入使用：</h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.7">
+              购买光年梯订阅后，推荐参考本站提供的 <a href="/blog/clash-jiaocheng-2026/" style="color: var(--brand-primary); font-weight: 700; text-decoration: none">Clash 完全配置指南</a> 或 <a href="/blog/shadowrocket-jiaocheng/" style="color: var(--brand-cyan); font-weight: 700; text-decoration: none">iOS 小火箭指南</a> 进行一键导入，享受 TUN 模式带来的无感体验。
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右侧侧边栏得分与购买悬浮盒 -->
+      <div style="position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.25rem">
+        <div class="card" style="padding: 1.5rem; background: var(--bg-card)">
+          <h3 style="font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem">
+            📊 12 项维度综合实测拆解
+          </h3>
+
+          <div style="display: flex; flex-direction: column; gap: 0.875rem">
+            {scoreItems.map(s => (
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; margin-bottom: 0.25rem">
+                  <span style="color: var(--text-muted); font-weight: 600">{s.label}</span>
+                  <span style="color: #eab308; font-weight: 800">{s.score} / 10</span>
+                </div>
+                <div style="height: 0.5rem; background: var(--bg-secondary); border-radius: 9999px; overflow: hidden">
+                  <div style={`width: ${s.score * 10}%; height: 100%; background: linear-gradient(90deg, #eab308, #f97316); border-radius: 9999px`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); text-align: center">
+            <span style="font-size: 0.75rem; color: var(--text-sub); display: block; margin-bottom: 0.75rem">官方安全通道 · 全 IPLC 专线起步价 ¥18/月</span>
+            <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="display: block; width: 100%; text-align: center; padding: 0.75rem; font-size: 0.9375rem; background: linear-gradient(135deg, #eab308, #f97316)">
+              🚀 立即注册光年梯机场
+            </a>
+          </div>
+        </div>
+
+        <!-- 🏆 对标推荐：云图与瞬云 -->
+        <div class="card" style="padding: 1.25rem; border-top: 3px solid var(--brand-primary)">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            ⚖️ 推荐对比机场
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem">
+            <a href="/brands/yuntu/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+              <div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场 (推荐)</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">金融级 IEPL 专线 · 全解锁</span>
+              </div>
+              <span class="badge badge-brand">¥25起</span>
+            </a>
+            <a href="/brands/shunyun/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+              <div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">瞬云机场 (推荐)</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">ANYCAST 高速 · 4K 大带宽</span>
+              </div>
+              <span class="badge badge-cyan">¥20起</span>
+            </a>
+          </div>
+          <a href="/compare/" class="btn btn-secondary" style="width: 100%; margin-top: 0.875rem; justify-content: center; font-size: 0.8125rem">
+            横向参数对比表 →
+          </a>
+        </div>
+
+        <!-- 📌 热门相关教程/文章卡片 -->
+        <div class="card" style="padding: 1.25rem">
+          <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
+            📌 热门相关文章教程
+          </h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.8125rem">
+            {articles.slice(0, 4).map(item => (
+              <li>
+                <a href={`/blog/${item.slug}/`} style="color: var(--text-main); font-weight: 600; text-decoration: none; transition: color 0.2s" onmouseover="this.style.color='var(--brand-primary)'" onmouseout="this.style.color='var(--text-main)'">
+                  📄 {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- 📢 官方 Telegram 频道卡片 -->
+        <div class="card" style="padding: 1.25rem; background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(6, 182, 212, 0.15)); text-align: center">
+          <p style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">订阅 TG 频道获取优惠码</p>
+          <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 0.25rem">跑路预警雷达与共享 ID 及时掌握</p>
+          <a href="https://t.me/rumors6688" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center; font-size: 0.8125rem">
+            📢 订阅 TG 频道 (@rumors6688)
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

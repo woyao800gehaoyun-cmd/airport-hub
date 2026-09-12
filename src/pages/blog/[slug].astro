@@ -106,7 +106,7 @@ const htmlContent = renderMarkdown(article.content);
           <div style="background: var(--bg-secondary); border-radius: 0.75rem; padding: 1.25rem; border: 1px solid var(--border-color)">
             <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem">💡 选购提示与快捷内链</h4>
             <p style="font-size: 0.8125rem; color: var(--text-sub); line-height: 1.7">
-              如果不确定选择哪家机场，推荐查阅 <a href="/brands/yuntu/">云图机场（金融级专线）</a> 或 <a href="/brands/shunyun/">瞬云机场（ANYCAST 高速）</a> 的实测数据，或者使用本站的 <a href="/compare/">全维度横向对比表</a> 进行筛选。
+              如果不确定选择哪家机场，推荐查阅 <a href="/brands/guangnianti/">光年梯机场（全 IPLC 专线）</a>、<a href="/brands/yuntu/">云图机场（金融级专线）</a> 或 <a href="/brands/shunyun/">瞬云机场（ANYCAST 高速）</a> 的实测数据，或者使用本站的 <a href="/compare/">全维度横向对比表</a> 进行筛选。
             </p>
           </div>
         </div>
@@ -115,15 +115,23 @@ const htmlContent = renderMarkdown(article.content);
       <!-- 右侧导航与推荐边栏 -->
       <aside style="position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.25rem">
         <!-- 🏆 稳定机场推荐卡片 -->
-        <div class="card" style="padding: 1.25rem; border-top: 3px solid var(--brand-primary)">
+        <div class="card" style="padding: 1.25rem; border-top: 3px solid #eab308">
           <h3 style="font-size: 0.875rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.875rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem">
             🏆 2026 稳定机场推荐
           </h3>
           
           <div style="display: flex; flex-direction: column; gap: 0.875rem">
+            <a href="/brands/guangnianti/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
+              <div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">光年梯机场 (榜首)</span>
+                <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">全 IPLC 专线 · 独享私人专线</span>
+              </div>
+              <span class="badge badge-amber">¥18起</span>
+            </a>
+
             <a href="/brands/yuntu/" style="display: flex; align-items: center; justify-content: space-between; text-decoration: none" class="card-hover">
               <div>
-                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场 (榜首)</span>
+                <span style="font-size: 0.875rem; font-weight: 700; color: var(--text-main)">云图机场</span>
                 <span style="display: block; font-size: 0.7rem; color: var(--text-sub)">金融级 IEPL 专线 · 全解锁</span>
               </div>
               <span class="badge badge-brand">¥25起</span>

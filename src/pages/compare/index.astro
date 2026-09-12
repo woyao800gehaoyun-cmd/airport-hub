@@ -23,8 +23,8 @@ const dimensions = [
 ---
 
 <BaseLayout
-  title="机场横向对比 2026 — 云图专线与瞬云 ANYCAST 维度比较 | clash-top"
-  description="统一维度横向对比实测机场：价格、节点数、协议类型、流媒体解锁、ChatGPT/Claude AI 支持，一张表看清所有差异，快速做出选购决策。"
+  title="机场横向对比 2026 — 光年梯 / 云图 / 瞬云多维度实测比较 | clash-top"
+  description="统一维度横向对比实测机场：光年梯全 IPLC 专线、云图金融级专线与瞬云 ANYCAST 高速，涵盖价格、节点数、协议类型、流媒体解锁与 ChatGPT/Claude 原生 IP 支持。"
 >
   <Header slot="header" currentPath="/compare/" />
 
@@ -108,8 +108,9 @@ const dimensions = [
 
       <div style="display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))">
         {[
-          { icon: '⚡', title: '重度办公 / AI / 极度看重稳定', desc: '选云图机场。全节点内网 IEPL 专线，晚高峰丢包率 0%，原生 IP 解锁 ChatGPT 与 Claude，工单 24 小时响应。', brand: '云图机场 (主推)', link: '/brands/yuntu/' },
-          { icon: '🎬', title: '大流量追剧 / 高清视频 / 性价比', desc: '选瞬云机场。ANYCAST 高速节点，不限速，流量每月自动重置，YouTube 4K 秒加载，月付仅需 ¥20。', brand: '瞬云机场 (次推)', link: '/brands/shunyun/' },
+          { icon: '👑', title: '极致物理专线 / 独享私人专线 / 榜首首选', desc: '选光年梯机场。全节点全 IPLC 物理专线，高峰满速不卡顿，支持独享私人专线与独立专属带宽，完美解锁 ChatGPT 与 4K 流媒体。', brand: '光年梯机场 (榜首)', link: '/brands/guangnianti/' },
+          { icon: '⚡', title: '重度办公 / AI 解锁 / 24H 稳定保证', desc: '选云图机场。全节点内网 IEPL 专线，晚高峰丢包率 0%，原生 IP 解锁 ChatGPT 与 Claude，工单 24 小时响应。', brand: '云图机场 (推荐)', link: '/brands/yuntu/' },
+          { icon: '🎬', title: '大流量追剧 / 高清视频 / 性价比', desc: '选瞬云机场。ANYCAST 高速节点，不限速，流量每月自动重置，YouTube 4K 秒加载，月付仅需 ¥20。', brand: '瞬云机场 (推荐)', link: '/brands/shunyun/' },
         ].map(card => (
           <div class="card card-hover" style="padding: 1.75rem; background: var(--bg-card)">
             <span style="font-size: 2.25rem" aria-hidden="true">{card.icon}</span>
