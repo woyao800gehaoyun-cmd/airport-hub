@@ -61,6 +61,22 @@ export const brands: Brand[] = [
     ],
     plans: [
       {
+        name: '年付限时套餐',
+        price: 89,
+        traffic: '50GB / 月',
+        devices: 999,
+        features: [
+          '¥89.00 / 年（折合每月仅需 ¥7.41）',
+          '每月 50GB 流量（每 30 天自动重置）',
+          '全程 IPLC 专线（最高可达 2.5Gbps 速率）',
+          '所有节点 1 倍率 · 晚高峰不限速',
+          '原生 IP，解锁 ChatGPT / TikTok / 流媒体',
+          '不限制同时在线客户端数量（多设备共享）',
+          '年付大促：1年8折 / 2年7折 / 3年6折 可叠加优惠码',
+        ],
+        highlight: '【爆款推荐】折合仅 ¥7.41/月！全程 2.5Gbps IPLC 专线，不限设备数！',
+      },
+      {
         name: '入门版',
         price: 18,
         traffic: '110GB/月',

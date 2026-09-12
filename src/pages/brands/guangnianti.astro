@@ -137,8 +137,54 @@ const unlockItems = [
           </div>
 
           <p style="color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-top: 1rem">
-            特别值得一提的是光年梯的 **「独享私人专线」** 套餐，不仅过境走物理专线，连出口与入口节点都提供独立专属带宽，彻底隔绝公共节点可能产生的邻居流量干扰，是真正意义上的商业级加速方案。
+            特别值得一提的是光年梯的 **「独享私人专线」** 套餐，不仅过境走物理专线，连出口与入口节点都提供独立专属带宽；以及近期重磅发售的 **「年付限时套餐」**，年付只需 ¥89.00（折合每月 ¥7.41），性价比冠绝全网。
           </p>
+
+          <!-- 💰 爆款专区：年付限时套餐深度解析 -->
+          <div style="margin-top: 1.5rem; padding: 1.75rem; background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(249, 115, 22, 0.1)); border: 2px solid #eab308; border-radius: var(--radius-md); position: relative">
+            <div style="position: absolute; top: -12px; right: 1.5rem; background: linear-gradient(135deg, #eab308, #f97316); color: #fff; font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.875rem; border-radius: 9999px; box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4)">
+              🔥 编辑部强烈推荐 · 年度性价比神仙套餐
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem">
+              <div>
+                <h3 style="font-size: 1.375rem; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem">
+                  <span>⚡ 光年梯「年付限时套餐」</span>
+                  <span class="badge badge-amber" style="font-size: 0.8125rem">¥89.00 / 年</span>
+                </h3>
+                <p style="margin-top: 0.5rem; font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7">
+                  折合每月仅需 <strong style="color: #eab308; font-size: 1.125rem">¥7.41</strong>，即可享用全程 **2.5Gbps 最高速率** 的物理 IPLC 专线，且 **不限制同时在线客户端数量**！
+                </p>
+              </div>
+              <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.625rem 1.5rem; font-size: 0.9375rem; background: linear-gradient(135deg, #eab308, #f97316); flex-shrink: 0">
+                立即抢购 ¥89/年 套餐 ↗
+              </a>
+            </div>
+
+            <!-- 5 大核心破局优势 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; margin-top: 1.25rem">
+              <div style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-color)">
+                <div style="font-weight: 800; color: var(--text-main); font-size: 0.875rem">⚡ 全程 2.5Gbps IPLC 专线</div>
+                <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">最高可达 2.5Gbps 速率，全节点 1 倍率，晚高峰绝不限速。</div>
+              </div>
+              <div style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-color)">
+                <div style="font-weight: 800; color: var(--text-main); font-size: 0.875rem">📱 不限在线客户端设备数</div>
+                <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">打破设备数限制！手机、电脑、平板、电视盒子全家同时连。</div>
+              </div>
+              <div style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-color)">
+                <div style="font-weight: 800; color: var(--text-main); font-size: 0.875rem">🔄 每 30 天自动重置 50GB</div>
+                <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">按购买日起算，每 30 天自动更新 50GB 额度，够用不浪费。</div>
+              </div>
+              <div style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-color)">
+                <div style="font-weight: 800; color: var(--text-main); font-size: 0.875rem">🤖 100% 原生 IP 解锁</div>
+                <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">原生 IP 支持，稳定解锁 ChatGPT、TikTok、Netflix 4K。</div>
+              </div>
+              <div style="padding: 1rem; background: var(--bg-card); border-radius: var(--radius-sm); border: 1px solid var(--border-color)">
+                <div style="font-weight: 800; color: var(--text-main); font-size: 0.875rem">🎁 多重折上折优惠</div>
+                <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.25rem">1年8折 / 2年7折 / 3年6折，可叠加专属优惠码折上折！</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 三、套餐详情与价格对照大表 -->
@@ -164,6 +210,18 @@ const unlockItems = [
                 </tr>
               </thead>
               <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color); background: rgba(234, 179, 8, 0.05)">
+                  <td style="padding: 1rem; font-weight: 900; color: var(--text-main)">
+                    <span style="color: #eab308">🔥 年付限时套餐</span>
+                  </td>
+                  <td style="padding: 1rem; font-weight: 900; color: #eab308">¥89.00 / 年<br/><span style="font-size: 0.7rem; color: var(--text-sub)">(折合 ¥7.41/月)</span></td>
+                  <td style="padding: 1rem; font-weight: 700">50GB / 月</td>
+                  <td style="padding: 1rem; color: var(--text-muted)">年付订阅 (每30天重置)</td>
+                  <td style="padding: 1rem"><span class="badge badge-amber" style="background: linear-gradient(135deg, #eab308, #f97316); color: #fff">爆款！2.5Gbps专线 · 不限设备数</span></td>
+                  <td style="padding: 1rem; text-align: right">
+                    <a href={brand.url} target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.35rem 0.875rem; font-size: 0.8125rem; background: linear-gradient(135deg, #eab308, #f97316)">抢购 ↗</a>
+                  </td>
+                </tr>
                 <tr style="border-bottom: 1px solid var(--border-color)">
                   <td style="padding: 1rem; font-weight: 800; color: var(--text-main)">入门版</td>
                   <td style="padding: 1rem; font-weight: 900; color: #eab308">¥18.00 / 月</td>
