@@ -49,7 +49,7 @@ function checkIcon(v: boolean) {
             </td>
             <td style="font-weight: 700">{b.priceFrom}</td>
             <td>
-              <span class="badge">{b.protocol.split('+')[0].trim()}</span>
+              <span class="badge">{b.protocol}</span>
             </td>
             <td set:html={checkIcon(b.streamUnlock)} />
             <td set:html={checkIcon(b.aiUnlock)} />
