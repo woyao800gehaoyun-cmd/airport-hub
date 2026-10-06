@@ -134,7 +134,7 @@ export const brands: Brand[] = [
     aiUnlock: true,
     trialDays: 0,
     score: 9.5,
-    url: 'https://vip.ytjcok.org/#/register?code=COsTypDq',
+    url: 'https://super.ytjcok.org/#/register?code=COsTypDq',
     slug: 'yuntu',
     features: [
       '⭐ 无脑下单即可，24H 保证稳定',
