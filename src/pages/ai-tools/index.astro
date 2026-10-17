@@ -1,0 +1,314 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const categories = [
+  {
+    id: 'chat',
+    icon: '💬',
+    label: '对话与写作',
+    desc: '问答、写作、翻译与日常工作',
+    tools: [
+      { name: 'ChatGPT', desc: '通用对话、写作、资料梳理与多模态任务。', url: 'https://chatgpt.com/', tag: '必备' },
+      { name: 'Claude', desc: '长文阅读、写作与复杂问题讨论。', url: 'https://claude.ai/', tag: '推荐' },
+      { name: 'Gemini', desc: 'Google 的通用 AI 助手与多模态问答入口。', url: 'https://gemini.google.com/' },
+      { name: 'Microsoft Copilot', desc: '微软的通用对话与搜索助手。', url: 'https://copilot.microsoft.com/' },
+      { name: 'Grok', desc: 'xAI 的对话、推理与内容生成工具。', url: 'https://grok.com/' },
+      { name: 'DeepSeek', desc: '中文问答、推理与代码辅助，国产优质模型。', url: 'https://chat.deepseek.com/', tag: '国产' },
+      { name: 'Kimi', desc: '中文长文阅读、搜索与日常问答。', url: 'https://www.kimi.com/', tag: '国产' },
+      { name: '通义千问 Qwen', desc: '阿里巴巴的通用对话与内容创作入口。', url: 'https://www.qwen.ai/', tag: '国产' },
+      { name: '豆包', desc: '字节跳动的中文对话与创作助手。', url: 'https://www.doubao.com/', tag: '国产' },
+      { name: '腾讯元宝', desc: '腾讯的中文问答、搜索与内容处理助手。', url: 'https://yuanbao.tencent.com/', tag: '国产' },
+      { name: 'Z.ai（智谱）', desc: 'GLM 模型的对话与智能体入口。', url: 'https://z.ai/chat', tag: '国产' },
+      { name: 'Mistral Le Chat', desc: 'Mistral 的通用对话与写作工具。', url: 'https://chat.mistral.ai/' },
+      { name: 'Meta AI', desc: 'Meta 的对话与创意助手。', url: 'https://www.meta.ai/' },
+      { name: 'Poe', desc: '在同一入口探索多个官方与社区机器人。', url: 'https://poe.com/' },
+      { name: 'Character.AI', desc: '角色对话与互动创作平台。', url: 'https://character.ai/' },
+    ],
+  },
+  {
+    id: 'search',
+    icon: '🔍',
+    label: '搜索与研究',
+    desc: '查资料、读论文、整理来源与知识库',
+    tools: [
+      { name: 'Perplexity', desc: '带来源线索的网页搜索与问题研究。', url: 'https://www.perplexity.ai/', tag: '推荐' },
+      { name: 'You.com', desc: 'AI 搜索与多模型研究入口。', url: 'https://you.com/' },
+      { name: 'NotebookLM', desc: '基于自有资料构建笔记、问答与摘要。', url: 'https://notebooklm.google.com/', tag: '推荐' },
+      { name: 'Genspark', desc: '聚合搜索、任务研究与内容整理。', url: 'https://www.genspark.ai/' },
+      { name: 'Elicit', desc: '论文检索、摘要与证据整理。', url: 'https://elicit.com/' },
+      { name: 'Consensus', desc: '围绕学术论文寻找研究结论。', url: 'https://consensus.app/' },
+      { name: 'Semantic Scholar', desc: '检索学术论文并发现相关研究。', url: 'https://www.semanticscholar.org/' },
+      { name: 'SciSpace', desc: '阅读和理解论文的研究工作台。', url: 'https://scispace.com/' },
+      { name: 'ResearchRabbit', desc: '从论文关系发现相关文献。', url: 'https://www.researchrabbit.ai/' },
+    ],
+  },
+  {
+    id: 'code',
+    icon: '💻',
+    label: '编程与开发',
+    desc: '代码补全、代理式开发和原型制作',
+    tools: [
+      { name: 'Cursor', desc: '集成 AI 对话与编辑能力的代码编辑器。', url: 'https://cursor.com/', tag: '必备' },
+      { name: 'GitHub Copilot', desc: 'IDE 与 GitHub 工作流中的编程辅助。', url: 'https://github.com/features/copilot', tag: '推荐' },
+      { name: 'Claude Code', desc: '在终端和编辑器中处理代码任务。', url: 'https://code.claude.com/docs/en/overview' },
+      { name: 'v0', desc: '通过自然语言制作网页和界面原型。', url: 'https://v0.app/' },
+      { name: 'Bolt', desc: '在浏览器里快速构建 Web 应用。', url: 'https://bolt.new/' },
+      { name: 'Lovable', desc: '用对话生成并迭代应用原型。', url: 'https://lovable.dev/' },
+      { name: 'Replit Agent', desc: '在浏览器内生成、修改和运行应用。', url: 'https://replit.com/ai' },
+      { name: 'Devin', desc: '面向软件任务的 AI 开发代理。', url: 'https://devin.ai/' },
+      { name: 'Gemini CLI', desc: 'Google 发布的终端 AI 编程工具。', url: 'https://github.com/google-gemini/gemini-cli' },
+      { name: 'JetBrains AI', desc: '在 JetBrains 开发工具中使用 AI 辅助。', url: 'https://www.jetbrains.com/ai/' },
+      { name: 'Amazon Q Developer', desc: 'AWS 开发与代码任务助手。', url: 'https://aws.amazon.com/q/developer/' },
+    ],
+  },
+  {
+    id: 'office',
+    icon: '📝',
+    label: '写作与办公',
+    desc: '文案、演示文稿、文档与团队工作流',
+    tools: [
+      { name: 'Notion AI', desc: '在笔记和工作区内撰写、整理与检索。', url: 'https://www.notion.com/product/ai', tag: '推荐' },
+      { name: 'Gamma', desc: '生成演示文稿和网页式内容。', url: 'https://gamma.app/', tag: '推荐' },
+      { name: 'Grammarly', desc: '英文写作修改、语气调整与校对。', url: 'https://www.grammarly.com/' },
+      { name: 'QuillBot', desc: '改写、摘要与语言校对。', url: 'https://quillbot.com/' },
+      { name: 'Canva Magic Studio', desc: '在 Canva 中制作图文、演示与视觉内容。', url: 'https://www.canva.com/magic/' },
+      { name: 'Microsoft 365 Copilot', desc: '在 Microsoft 365 应用中辅助文档与协作。', url: 'https://www.microsoft.com/microsoft-365/copilot/' },
+      { name: 'Gemini for Workspace', desc: 'Google Workspace 中的写作与协作功能。', url: 'https://workspace.google.com/solutions/ai/' },
+      { name: 'Jasper', desc: '面向营销团队的文案与内容工作流。', url: 'https://www.jasper.ai/' },
+      { name: 'Copy.ai', desc: '营销文案与业务流程自动化。', url: 'https://www.copy.ai/' },
+    ],
+  },
+  {
+    id: 'image',
+    icon: '🎨',
+    label: '图像与设计',
+    desc: '图像生成、编辑、品牌视觉与界面设计',
+    tools: [
+      { name: 'Midjourney', desc: '以提示词探索视觉概念与图像生成。', url: 'https://www.midjourney.com/', tag: '必备' },
+      { name: 'Adobe Firefly', desc: 'Adobe 的图像生成与创意编辑工具。', url: 'https://www.adobe.com/products/firefly.html' },
+      { name: 'Ideogram', desc: '图像生成、字体与海报方向探索。', url: 'https://ideogram.ai/' },
+      { name: 'Leonardo AI', desc: '图像生成、素材编辑与创作工作台。', url: 'https://leonardo.ai/' },
+      { name: 'Recraft', desc: '图形、插画与品牌视觉制作。', url: 'https://www.recraft.ai/' },
+      { name: 'Krea', desc: '图像生成、实时创作与视觉调整。', url: 'https://www.krea.ai/' },
+      { name: 'Figma Make', desc: '从提示词与设计稿创建交互原型。', url: 'https://www.figma.com/make/' },
+      { name: 'Stability AI', desc: '图像模型、创意工具与开发接口。', url: 'https://stability.ai/' },
+    ],
+  },
+  {
+    id: 'video',
+    icon: '🎬',
+    label: '视频与数字人',
+    desc: '视频生成、剪辑、口播和数字人',
+    tools: [
+      { name: 'Runway', desc: '视频生成与后期创作工作流。', url: 'https://runwayml.com/', tag: '推荐' },
+      { name: 'Pika', desc: '短视频生成与创意效果制作。', url: 'https://pika.art/' },
+      { name: 'Luma Dream Machine', desc: '从文字或图片探索视频镜头。', url: 'https://lumalabs.ai/dream-machine' },
+      { name: '可灵 Kling', desc: '快手旗下的 AI 视频创作平台。', url: 'https://kling.ai/', tag: '国产' },
+      { name: 'Google Flow', desc: 'Google 的图像与视频创意工作台。', url: 'https://flow.google.com/' },
+      { name: 'HeyGen', desc: '数字人、口播与视频翻译制作。', url: 'https://www.heygen.com/', tag: '推荐' },
+      { name: 'Synthesia', desc: '以数字人制作培训与讲解视频。', url: 'https://www.synthesia.io/' },
+    ],
+  },
+  {
+    id: 'audio',
+    icon: '🎵',
+    label: '音频与播客',
+    desc: '语音合成、音乐、播客与会议记录',
+    tools: [
+      { name: 'ElevenLabs', desc: '语音合成、配音与声音工具。', url: 'https://elevenlabs.io/', tag: '推荐' },
+      { name: 'Suno', desc: '根据描述生成并编辑音乐。', url: 'https://suno.com/' },
+      { name: 'Udio', desc: '歌曲生成、延展与混音创作。', url: 'https://www.udio.com/' },
+      { name: 'Descript', desc: '以文本方式编辑音视频和播客。', url: 'https://www.descript.com/' },
+      { name: 'Adobe Podcast', desc: '录音、语音增强与播客处理。', url: 'https://podcast.adobe.com/' },
+      { name: 'Murf', desc: '商业配音与语音生成工具。', url: 'https://murf.ai/' },
+      { name: 'Otter', desc: '会议转写、摘要与协作记录。', url: 'https://otter.ai/' },
+      { name: 'Fireflies.ai', desc: '会议录音整理、摘要和检索。', url: 'https://fireflies.ai/' },
+    ],
+  },
+  {
+    id: 'auto',
+    icon: '⚙️',
+    label: '自动化与开发',
+    desc: '智能体编排、本地模型与 API 接入',
+    tools: [
+      { name: 'Zapier AI', desc: '把 AI 步骤接入跨应用自动化流程。', url: 'https://zapier.com/ai' },
+      { name: 'Make', desc: '以可视化流程连接应用与 AI 服务。', url: 'https://www.make.com/' },
+      { name: 'n8n', desc: '可自托管的工作流与 AI 自动化平台。', url: 'https://n8n.io/' },
+      { name: 'Dify', desc: '构建 AI 应用、知识库和智能体流程。', url: 'https://dify.ai/', tag: '推荐' },
+      { name: 'Coze', desc: '可视化搭建智能体与应用。', url: 'https://www.coze.com/' },
+      { name: 'Flowise', desc: '以可视化方式搭建 LLM 工作流。', url: 'https://flowiseai.com/' },
+      { name: 'Hugging Face', desc: '模型、数据集和演示应用社区。', url: 'https://huggingface.co/' },
+      { name: 'Ollama', desc: '在本地运行和管理开放模型。', url: 'https://ollama.com/' },
+      { name: 'LM Studio', desc: '桌面本地模型下载、对话与 API 服务。', url: 'https://lmstudio.ai/' },
+      { name: 'OpenRouter', desc: '通过统一接口调用不同模型提供方。', url: 'https://openrouter.ai/' },
+    ],
+  },
+];
+
+const totalTools = categories.reduce((sum, c) => sum + c.tools.length, 0);
+---
+
+<BaseLayout
+  title="AI 工具导航 2026 — ChatGPT / Claude / Midjourney 等热门工具官网直达 | clash-top"
+  description="一站式 AI 工具导航，收录 ChatGPT、Claude、Gemini、DeepSeek、Midjourney、Runway、ElevenLabs 等 80 款热门 AI 工具官方入口，按对话、编程、图像、视频、音频分类直达，科学上网用户必备工具合集。"
+  keywords="AI工具导航,ChatGPT官网,Claude官网,Midjourney,AI绘图,AI写作,AI编程,AI视频,科学上网AI工具"
+>
+  <Header slot="header" currentPath="/ai-tools/" />
+
+  <!-- Hero -->
+  <section style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 3rem 0 2rem">
+    <div class="container-site" style="text-align: center">
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.25); border-radius: 2rem; padding: 0.35rem 1rem; margin-bottom: 1rem; font-size: 0.8rem; font-weight: 600; color: var(--brand-primary)">
+        🤖 AI 工具目录
+      </div>
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 900; margin: 0 0 0.75rem; line-height: 1.2">
+        AI 工具导航
+        <span class="gradient-text-neon"> 官网直达</span>
+      </h1>
+      <p style="color: var(--text-sub); max-width: 560px; margin: 0 auto 1.5rem; font-size: 1rem; line-height: 1.7">
+        收录 {totalTools} 款常用 AI 工具官方入口，覆盖对话、编程、图像、视频、音频与自动化，点击直接打开官网。
+      </p>
+      <!-- 分类快速跳转 -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem">
+        {categories.map(cat => (
+          <a href={`#${cat.id}`} style="display: inline-flex; align-items: center; gap: 0.35rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 2rem; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-decoration: none; transition: all 0.2s" class="cat-jump-btn">
+            <span>{cat.icon}</span>
+            <span>{cat.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 工具分类列表 -->
+  <section style="padding: 3rem 0">
+    <div class="container-site">
+      {categories.map(cat => (
+        <div id={cat.id} style="margin-bottom: 3.5rem; scroll-margin-top: 80px">
+          <!-- 分类标题 -->
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color)">
+            <span style="font-size: 1.75rem">{cat.icon}</span>
+            <div>
+              <h2 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: var(--text-main)">{cat.label}</h2>
+              <p style="font-size: 0.82rem; color: var(--text-sub); margin: 0.15rem 0 0">{cat.desc}</p>
+            </div>
+            <span style="margin-left: auto; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 1rem; padding: 0.2rem 0.65rem; font-size: 0.75rem; color: var(--text-sub); font-weight: 600; white-space: nowrap">
+              {cat.tools.length} 款
+            </span>
+          </div>
+
+          <!-- 工具卡片网格 -->
+          <div class="tools-grid">
+            {cat.tools.map(tool => (
+              <a
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="tool-card"
+              >
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem">
+                  <span style="font-size: 0.9375rem; font-weight: 700; color: var(--text-main)">{tool.name}</span>
+                  {tool.tag && (
+                    <span class={`tool-tag ${tool.tag === '必备' ? 'tag-purple' : tool.tag === '推荐' ? 'tag-blue' : 'tag-green'}`}>
+                      {tool.tag}
+                    </span>
+                  )}
+                </div>
+                <p style="font-size: 0.8125rem; color: var(--text-sub); margin: 0 0 0.75rem; line-height: 1.5; flex: 1">{tool.desc}</p>
+                <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-weight: 600; color: var(--brand-primary)">
+                  <span>打开官网</span>
+                  <span>↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- 底部说明 -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.5rem; margin-top: 1rem">
+        <h3 style="font-size: 1rem; font-weight: 700; margin: 0 0 0.5rem; color: var(--text-main)">⚠️ 使用前注意</h3>
+        <p style="font-size: 0.875rem; color: var(--text-sub); margin: 0; line-height: 1.7">
+          ChatGPT、Claude、Midjourney 等境外 AI 服务需要科学上网才能访问。建议使用专线机场以确保连接稳定，部分服务对 IP 地区有要求（如 ChatGPT 不支持香港节点）。本页链接直达产品官网，收录不代表功能或安全背书。
+        </p>
+        <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem">
+          <a href="/brands/" style="display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.25); border-radius: 0.5rem; padding: 0.4rem 0.85rem; font-size: 0.8125rem; font-weight: 600; color: var(--brand-primary); text-decoration: none">
+            🏆 查看机场推荐
+          </a>
+          <a href="/blog/tizi-tuijian-2026/" style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 0.4rem 0.85rem; font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); text-decoration: none">
+            📖 梯子推荐指南
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.875rem;
+    padding: 1.1rem 1.15rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .tool-card:hover {
+    border-color: var(--brand-primary);
+    background: rgba(139, 92, 246, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
+  }
+
+  .tool-tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.35rem;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tag-purple {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--brand-primary);
+  }
+
+  .tag-blue {
+    background: rgba(6, 182, 212, 0.12);
+    color: var(--brand-cyan);
+  }
+
+  .tag-green {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+  }
+
+  .cat-jump-btn:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    background: rgba(139, 92, 246, 0.06);
+  }
+
+  @media (max-width: 640px) {
+    .tools-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+  }
+</style>
